@@ -1,0 +1,92 @@
+
+html, body, div.container{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+    background-color: #181818;
+    font-family: "Inter", serif;
+    font-weight: bold;
+    color: #e6f0ff;
+
+}
+div.container {
+  display:grid;
+  grid-template-rows: 1fr 9fr;
+  grid-template-columns: 1fr 7fr;
+  grid-gap: 10px;
+}
+
+div.header {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  grid-gap: 0px;
+}
+
+div.categories{
+    grid-column: 2/3;
+    grid-row: 2/3;
+    text-align: center;
+}
+
+div.game-container {
+  display: flex;
+  grid-column: 2/3;
+  grid-row: 3/4;
+  text-align: center;
+}
+
+div.menu {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+
+
+h1, h2, h3, h4 {
+	text-align: center;
+}
+
+div.game {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(4, 150px);
+  grid-gap: 20px 10px;
+  margin: 10px;
+}
+
+div.grid-item {
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  font-size: 20px;
+  border-radius:20px;
+  padding: 50px 50px;
+  background-color: #1C1C1C;
+  border-style: dashed;
+  border-color: #474747;
+
+}
+
+
+
+.topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    border-radius: 30px;
+    font-size: 17px;
+    background-color: #282828;
+  }
+  
+    .topnav a, .topnav input[type=text] {
+      display: flex;
+      text-align: center;
+      width: 80%;
+      margin: 0;
+    }
+    
+    .topnav input[type=text] {
+      border: 1px solid #282828;  
+    }
+  
