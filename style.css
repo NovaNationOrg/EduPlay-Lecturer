@@ -11,6 +11,10 @@ button {
     border-width: 0px;
     background-color: transparent;
 }
+button-a{
+    font-family: "Fontdiner Swanky", serif;
+
+}
 body {
     background-color: #181818;
     font-family: "Inter", serif;
@@ -71,6 +75,15 @@ div.grid-item {
   background-color: #1C1C1C;
   border-style: dashed;
   border-color: #474747;
+
+}
+div.grid-item-a{
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.2), rgba(147, 51, 234, 0.4));
+    display: flex;
+    border: 1px solid;
+    border-color: #FF69B4;
+    border-radius:20px;
+    padding: 50px 50px;
 
 }
 
@@ -182,7 +195,6 @@ div.grid-item {
             pointer-events: none;
         }
 
-        /* Rest of the previous styles remain the same */
         .modal-container {
             position: relative;
             background-color: #1a1a1a;
@@ -214,7 +226,7 @@ div.grid-item {
 
         .modal-left {
             width: 50%;
-            padding: 2rem;
+            padding: 3rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -240,7 +252,7 @@ div.grid-item {
 
         .modal-right {
             width: 50%;
-            padding: 2rem;
+            padding: 3rem;
             display: flex;
             flex-direction: column;
             gap: 1rem;
