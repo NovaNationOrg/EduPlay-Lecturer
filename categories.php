@@ -22,26 +22,26 @@
             </div>
         </header>
         <main>
-            <div class="container">
+            <div class="game-container">
                 <div class="game-board">
-                    <div class="category">
+                    <div class="categories">
                         <?php 
-                            $categories = array("Category 1", "Category 2", "Category 3", "Category 4", "Category 5");
-                            $questions = array(100, 200, 300, 400, 500);
+                            $categories = array("Category 1", "Category 2", "Category 3", "Category 4", "Category 5");                           
                             for ($i = 0; $i < 5; $i++) {
                                 echo "<div class='category-title'><a href='categoryedit.php'>" . $categories[$i] . "</a></div>";
                             }
                         ?>
                     </div>
-                    
                     <div class="question">
                         <?php
-                            echo "<br>";
-                            for ($i = 0; $i < 5; $i++) {
-                                echo "<div class='question'><div class='question-value'>$" . $questions[$i] . "</div>";
+                        $questions = array(100, 200, 300, 400, 500);
+                        for ($i = 1; $i < 6; $i++) {
+                            for ($j = 0; $j < 5; $j++) {
+                                echo "<div class='questions'>$" . $i . "00</div>";
                             }
+                        }
                         ?>
-                    </div>
+                    </div>   
                 </div>
             </div>
         </main>
