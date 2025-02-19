@@ -16,7 +16,7 @@
         <header>
             <div class="head-nav">
                 <div class = "center">
-                    <a class="game-name" href="index.html">Jeopardy</a></li>
+                    <a class="game-name" href="#">Jeopardy</a></li>
                 </div>
                 <div class="left">
                     <a class="left-arrow" href="#"><span style="color: white;">&#129120;</span></a>
@@ -50,47 +50,60 @@
                         ?>
                     </div>  
                     <div id="modal" class="modal-overlay hidden">
-                        <!-- <form class="category-form" action="" method="post"> -->
-                            <div class="modal-container">
-                                <button class="close-button" id="closeButton"> X </button>
-                                <div class="modal-content">
-                                    <div class="modal-title">Categories</div>
-                                    <div class="dropdown-menus">
-                                        <div class="dropdown">
-                                            <button onclick="dropDownFunc()" class="dropdown-btn">Category 1<i class="fa fa-chevron-down" style="float: right"></i></button>
-                                            <div class="dropdown-content" id="dropdown-1" >
-                                                <div class="prev-content">Previous Games</div>
-                                                <div class="dropdown-list">
-                                                    
-                                                </div>
-                                            </div>      
-                                            <button onclick="dropDownFunc()" class="dropdown-btn">Category 2<i class="fa fa-chevron-down" style="float: right"></i></button>
-                                                <div class="dropdown-content" id="dropdown-2">
-                                                    <p>Hello Type Shit</p>
-                                                </div>
-                                            <button onclick="dropDownFunc()" class="dropdown-btn">Category 3<i class="fa fa-chevron-down" style="float: right"></i></button>
-                                                <div class="dropdown-content" id="dropdown-3">
-                                                    <p>Hello Type Shit</p>
-                                                </div>
-                                            <button onclick="dropDownFunc()" class="dropdown-btn">Category 4<i class="fa fa-chevron-down" style="float: right"></i></button>
-                                                <div class="dropdown-content" id="dropdown-4">
-                                                    <p>Hello Type Shit</p>
-                                                </div>
-                                            <button onclick="dropDownFunc()" class="dropdown-btn">Category 5<i class="fa fa-chevron-down" style="float: right"></i></button>
-                                                <div class="dropdown-content" id="dropdown-5">
-                                                    <p>Hello Type Shit</p>
-                                                </div>
-                                            <button onclick="dropDownFunc()" class="dropdown-btn">Category 6<i class="fa fa-chevron-down" style="float: right"></i></button>
-                                                <div class="dropdown-content" id="dropdown-6">
-                                                    <p>Hello Type Shit</p>
-                                                </div>                                         
-                                        </div>
+                        <div class="modal-container">
+                            <button class="close-button" id="closeButton"> X </button>
+                            <div class="modal-content">
+                                <div class="modal-title">Categories</div>
+                                <div class="dropdown-menus">
+                    <form class="category-form" action="#" method="post">
+                                    <div class="dropdown">
+                                        <button onclick="return dropDownFunc()" class="dropdown-btn">Category 1<i id="down-arrow" class="fa fa-chevron-down" style="float: right"></i></button>
+                                        <div class="dropdown-content" id="dropdown-1" >
+                                            <div class="prev-content">Previous Games</div>
+                                            <div class="dropdown-list">
+                                            <?php 
+                                                for ($i = 1; $i < 6; $i++) {
+                                            ?>
+                                                <div class="input-box">
+                                                    <label for="name"><?php echo $i; ?></label>
+                                                    <div class="input-fields">
+                                                        <input type="text" class="input" id="question<?php echo $i ?>" name="question<?php echo $i ?>" placeholder="Question">
+                                                        <input type="text" class="input" id="answer<?php echo $i ?>" name="answer<?php echo $i ?>" placeholder="Answer">
+                                                    </div>
+                                                </div>    
+                                            <?php
+                                                }
+                                            ?>
+                                            </div>
+                                        </div>      
+                                        <button onclick="return dropDownFunc()" class="dropdown-btn">Category 2<i class="fa fa-chevron-down" style="float: right"></i></button>
+                                            <div class="dropdown-content" id="dropdown-2">
+                                                <p>Lorem ipsum dolor sit amet</p>
+                                            </div>
+                                        <button onclick="return dropDownFunc()" class="dropdown-btn">Category 3<i class="fa fa-chevron-down" style="float: right"></i></button>
+                                            <div class="dropdown-content" id="dropdown-3">
+                                                <p>Lorem ipsum dolor sit amet</p>
+                                            </div>
+                                        <button onclick="return dropDownFunc()" class="dropdown-btn">Category 4<i class="fa fa-chevron-down" style="float: right"></i></button>
+                                            <div class="dropdown-content" id="dropdown-4">
+                                                <p>Lorem ipsum dolor sit amet</p>
+                                            </div>
+                                        <button onclick="return dropDownFunc()" class="dropdown-btn">Category 5<i class="fa fa-chevron-down" style="float: right"></i></button>
+                                            <div class="dropdown-content" id="dropdown-5">
+                                                <p>Lorem ipsum dolor sit amet</p>
+                                            </div>
+                                        <button onclick="return dropDownFunc()" class="dropdown-btn">Category 6<i class="fa fa-chevron-down" style="float: right"></i></button>
+                                            <div class="dropdown-content" id="dropdown-6">
+                                                <p>Lorem ipsum dolor sit amet</p>
+                                            </div>                                         
                                     </div>
-                                    <input type="submit" value="submit" class="dropdown-submits"></input>
+                    
                                 </div>
+                                <input type="submit" value="submit" class="dropdown-submits"></input>
+                            </form>
                             </div>
-                        <!-- </form> -->
-                      </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
