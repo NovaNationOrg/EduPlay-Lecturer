@@ -2,7 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+}
+
+* ::-webkit-scrollbar {
+    display: none;
 }
 
 body {
@@ -345,6 +348,10 @@ button.modalCategory:hover {
 
 .dropdown-submits:hover {
     background-color: #585858;
+}
+
+.dropdown-submits#submit-prev {
+    margin: 0 0 0 auto;
 }
 
 .show {

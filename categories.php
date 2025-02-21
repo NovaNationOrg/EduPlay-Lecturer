@@ -93,10 +93,11 @@
                                                         <?php
                                                             }
                                                         ?>
-                                                </div>    
+                                                </div>                                                   
                                             <?php
                                                 }
                                             ?>
+                                            <input class="dropdown-submits" id="submit-prev" name="submit-prev" type="submit" value="submit"></input>
                                             </div>
                                         </div>      
                                         <button onclick="return dropDownFunc()" class="dropdown-btn">Category 2<i class="fa fa-chevron-down" style="float: right"></i></button>
@@ -122,7 +123,7 @@
                                     </div>
                     
                                 </div>
-                                <input type="submit" value="submit" class="dropdown-submits"></input>
+                                <input type="submit" value="submit" id="submit-list" name="submit-list" class="dropdown-submits"></input>
                             </form>
                             </div>
                         </div>
