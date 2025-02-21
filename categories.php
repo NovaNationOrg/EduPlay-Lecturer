@@ -59,8 +59,8 @@
                                     <div class="dropdown">
                                         <button onclick="return dropDownFunc()" class="dropdown-btn">Category 1<i id="down-arrow" class="fa fa-chevron-down" style="float: right"></i></button>
                                         <div class="dropdown-content" id="dropdown-1" >
-                                            <div class="prev-content">Previous Games</div>
-                                            <div class="dropdown-list">
+                                            <button onclick="return dropDownPrev()" class="prev-content" id="dropdown-prev">Previous Games</button>
+                                            <div id="dropdown-list" class="dropdown-list">
                                             <?php 
                                                 for ($i = 1; $i < 6; $i++) {
                                             ?>
@@ -70,6 +70,29 @@
                                                         <input type="text" class="input" id="question<?php echo $i ?>" name="question<?php echo $i ?>" placeholder="Question">
                                                         <input type="text" class="input" id="answer<?php echo $i ?>" name="answer<?php echo $i ?>" placeholder="Answer">
                                                     </div>
+                                                </div>    
+                                            <?php
+                                                }
+                                            ?>
+                                            </div>
+                                            <!-- Previous Games -->
+                                            <div class="dropdown-prev-list" id="dropdown-prev-1">
+                                            <?php 
+                                                for ($i = 1; $i < 6; $i++) {
+                                            ?>
+                                                <div class="prev-box">
+                                                    <label for="input">Game <?php echo $i; ?> - Date</label>
+                                                        <?php 
+                                                            for ($j = 1; $j < 4; $j++) {
+                                                        ?>
+                                                        <div class="prev-fields">
+                                                            <input type="checkbox" class="checkboxes"><span class="checkmark"></span>
+                                                            <div class="checkbox-text" id="question-prev" name="question">Lorem ipsum dolor</div>
+                                                            <div class="checkbox-text" id="answer-prev" name="answer">Lorem ipsum dolor sit amet</div>
+                                                        </div>
+                                                        <?php
+                                                            }
+                                                        ?>
                                                 </div>    
                                             <?php
                                                 }

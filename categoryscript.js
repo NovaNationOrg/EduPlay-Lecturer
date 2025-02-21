@@ -11,6 +11,12 @@ function dropDownFunc() {
     return false;
 }
 
+function dropDownPrev() {
+    document.getElementById("dropdown-prev-1").classList.toggle("show");
+    document.getElementById("dropdown-list").classList.toggle("dont-show");
+    return false;
+}
+
 function closeModal() {
     modal.classList.add('hidden');
 }
