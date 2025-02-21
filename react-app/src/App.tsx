@@ -1,7 +1,12 @@
+import ReactDOM from "react-dom/client";
+
 import { useState, useEffect } from 'react'
 import './App.css'
-import QRCode from "react-qr-code";
-
+import QRCode from "react-qr-code"
+import {BrowserRouter, Outlet, Route, Routes} from "react-router-dom"
+import Clone from "./pages/clone"
+import Original from "./pages/original";
+import Layout from "./pages/layout";
 function App() {
   const [question,setQuestion] = useState('abc')
 
@@ -18,18 +23,21 @@ function App() {
   }
   return (
     <>
-      <h1>{question}</h1>
+      <BrowserRouter>
+      <Routes>
+        <Route path = "/" element={<Layout />}>
+        
+          <Route path ="Original" element = {<Original/>} />
+          <Route path="Clone" element={<Clone />} />
 
-      <div style={{ height: "auto", margin: "0 auto", maxWidth: 64, width: "100%" }}>
-      <QRCode
-        size={256}
-        style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-        value={question}
-        viewBox={`0 0 256 256`}
-      />
-</div>
+        </Route>
+      </Routes>
+      </BrowserRouter>
+
+      
     </>
   )
 }
 
 export default App
+
