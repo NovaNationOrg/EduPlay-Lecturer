@@ -1,0 +1,17 @@
+.input:disabled {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #ff00b7;
+    width: 150px;
+    color:beige;
+    font-size: 1.5em;
+    font-family: 'Risque';
+    margin-right: 10px;
+}
+h2 {
+    color: #000;
+    -webkit-text-stroke: 2px #ff13f0;
+}
+submit-list{
+    content-align: center;
+}

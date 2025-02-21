@@ -16,11 +16,11 @@
         <header>
             <div class="head-nav">
                 <div class = "center">
-                    <a class="game-name" href="#">Jeopardy</a></li>
+                    <h2> Jeopardy </h2>
                 </div>
-                <div class="left">
+                <!-- <div class="left">
                     <a class="left-arrow" href="#"><span style="color: white;">&#129120;</span></a>
-                </div>
+                </div> -->
             </div>
         </header>
         <main>
@@ -123,8 +123,9 @@
                                     </div>
                     
                                 </div>
-                                <input type="submit" value="submit" id="submit-list" name="submit-list" class="dropdown-submits"></input>
-                            </form>
+                                <br>
+                                <a href="/summary.php">Save</a>
+                                </form>
                             </div>
                         </div>
                     </div>

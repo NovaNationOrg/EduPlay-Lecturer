@@ -15,6 +15,14 @@ button-a{
     font-family: "Fontdiner Swanky", serif;
 
 }
+a:link {
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    color: white;
+    text-decoration: none;
+}
 body {
     background-color: #181818;
     font-family: "Inter", serif;

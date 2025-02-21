@@ -54,7 +54,7 @@ footer {
     display: flex;
 }
 
-.center a {
+h2 {
     color: #000;
     -webkit-text-stroke: 2px #ff13f0;
 }
@@ -411,3 +411,17 @@ button.modalCategory:hover {
 .rotate180 {
     transform: rotate(180deg);
 }
+
+a{
+        font-family: 'Risque';
+        font-size: 1.3em;
+        color: #fff;
+        border: none;
+        text-decoration: none;
+        background-color: #484747;
+        border-radius: 8px;
+        text-align: center;
+        width: 80px;
+        padding: 10px 10px; 
+        margin-left: 40%;
+    }
