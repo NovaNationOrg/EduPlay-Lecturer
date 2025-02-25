@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fontdiner+Swanky&display=swap');
+@import url("../styles/fonts/fonts.css");
 
 html, body, div.container{
 	height: 100%;
@@ -13,7 +13,7 @@ button {
     background-color: transparent;
 }
 button-a{
-    font-family: "Fontdiner Swanky", serif;
+    font-family: "Fontdiner Swanky";
 
 }
 a:link {
