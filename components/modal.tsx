@@ -33,11 +33,11 @@ const dropIn = {
   };
 
 const Modal: React.FC<ModalProps> = ({ handleClose }) => {
-    const [items, setItems] = useState(
-      [...Array(5)].map(() => (
-        { question: '', answer: '', setQuestion: () => {}, setAnswer: () => {} }
-      ))
-    );
+  const [items, setItems] = useState(
+    [...Array(5)].map(() => (
+      { question: '', answer: '', setQuestion: () => {}, setAnswer: () => {} }
+    ))
+);
 
 const updateItem = (index: number, field: 'question' | 'answer', value: string) => {
     const newItems = [...items];
@@ -47,6 +47,11 @@ const updateItem = (index: number, field: 'question' | 'answer', value: string) 
 
 const onSubmit = (e:FormEvent) => {
   e.preventDefault();
+
+  const formData = new FormData(e.target as HTMLFormElement)
+  const payload = Object.fromEntries(formData)
+
+  console.log(payload)
 }
 
     return (
@@ -59,28 +64,29 @@ const onSubmit = (e:FormEvent) => {
                 animate="visible"
                 exit="exit"
             >   
-                <div className="modal-container">
+                <div className="modal-container">                            
+                  <form className="dropdown-form" onSubmit={onSubmit} >
                     <button className="close-button" onClick={handleClose}> X </button>
                     <div className="modal-content">
                         <div className="modal-title">Categories</div>
                         <div className="dropdown-menus">
-                            <form className="dropdown-form" onSubmit={onSubmit} >
                                 <div className="dropdown-items">
-                                  {[...Array(6)].map((_, num) => (
+                                  {/* {[...Array(6)].map((_, num) => ( */}
                                     <DropdownComponent 
-                                      category={`Category ${num+1}`}
+                                      // category={`Category ${num+1}`}
+                                      category="Category 1"
                                       items={items.map((item, index) => ({
                                           ...item, 
                                           setQuestion: (value) => updateItem(index, 'question', value),
                                           setAnswer: (value) => updateItem(index, 'answer', value)
                                       }))} 
                                     /> 
-                                  ))}
+                                  {/* ))} */}
                                 </div>
-                                <Link to={"#"} className="save-link"><motion.button className="save-button" type="submit">Save</motion.button></Link>
-                            </form>
+                                <motion.button className="save-button" type="submit">Save</motion.button>
                         </div>
                     </div>
+                  </form>
                 </div>
           </motion.div>
       </Backdrop>
