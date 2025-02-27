@@ -1,0 +1,31 @@
+.header-title {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.jeopardy-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 50px;
+    width: 100%;
+    height: fit-content;
+    background-color: transparent;
+}
+
+.left {
+    position: absolute;
+    left: 40px;
+    text-align: left;
+}
+
+.left-arrow {
+    font-size: 2em;
+    color: #fff;
+    transition: all .3s ease-in-out;
+}
+
+.left-arrow:hover {
+    color: #dfdfdf;
+}
