@@ -6,18 +6,18 @@ import './App.css'
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import Clone from "./pages/clone"
 import Original from "./pages/original";
-import Layout from "./pages/layout";
+import Library from "./pages/library";
 import Jeopardy from "./pages/jeopardy";
 
 import "../src/styles/fonts/fonts.css";
-import "../src/styles/jeopardy.css"
+import "../src/styles/jeopardy/jeopardy.css"
 function App() {
   return (
     <>
       <BrowserRouter>
       <Routes>
         <Route path = "/" >
-          <Route index element = {<Layout/>} />
+          <Route index element = {<Library/>} />
           <Route path ="Original" element = {<Original/>} />
           <Route path="Clone" element={<Clone />} />
           <Route path="Jeopardy" element={<Jeopardy />} />

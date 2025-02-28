@@ -57,19 +57,19 @@ const onSubmit = (e:FormEvent) => {
       <Backdrop onClick={handleClose}>
             <motion.div
               onClick={(e) => e.stopPropagation()}  
-              className="modal "
+              className="jeopardy-modal "
               variants={dropIn}
               initial="hidden"
               animate="visible"
               exit="exit"
             >   
-                <div className="modal-container">                            
-                  <form className="dropdown-form" onSubmit={onSubmit} >
-                    <button className="close-button" onClick={handleClose}> X </button>
-                    <div className="modal-content">
-                        <div className="modal-title">Categories</div>
-                        <div className="dropdown-menus">
-                                <div className="dropdown-items">
+                <div className="jeopardy-modal-container">                            
+                  <form className="jeopardy-dropdown-form" onSubmit={onSubmit} >
+                    <button className="jeopardy-close-button" onClick={handleClose}> X </button>
+                    <div className="jeopardy-modal-content">
+                        <div className="jeopardy-modal-title">Categories</div>
+                        <div className="jeopardy-dropdown-menus">
+                                <div className="jeopardy-dropdown-items">
                                   <DropdownComponent 
                                     category={`Category ${sessionStorage.getItem("curr-category")}`}
                                     items={items.map((item, index) => ({
@@ -79,7 +79,7 @@ const onSubmit = (e:FormEvent) => {
                                     }))} 
                                   /> 
                                 </div>
-                                <motion.button className="save-button" type="submit">Save</motion.button>
+                                <motion.button className="jeopardy-save-button" type="submit">Save</motion.button>
                         </div>
                     </div>
                   </form>

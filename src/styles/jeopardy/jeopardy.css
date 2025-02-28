@@ -1,6 +1,6 @@
-@import url("/src/styles/headers.css");
-@import url("/src/styles/backdrop.css");
-@import url("/src/styles/modal.css");
+@import url("/src/styles/jeopardy/headers.css");
+@import url("/src/styles/jeopardy/backdrop.css");
+@import url("/src/styles/jeopardy/modal.css");
 
 .jeopardy {
     color: black;
@@ -11,7 +11,7 @@
     text-align: center;
 }
 
-.game-container {
+.jeopardy-game-container {
     max-width: 950px;
     padding: 30px;
     border: solid 2px #474747;
@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-.category-grid {
+.jeopardy-category-grid {
     display: grid;
     margin: 10px;
     grid-template-columns: repeat(6, 1fr);
@@ -30,14 +30,14 @@
     grid-gap: 10px;    
 } 
 
-.category {
+.jeopardy-category {
     font-size: 1.2em;
     border-radius:20px;
     background-color: #1C1C1C;
     text-align: center;
 }
 
-.categories { 
+.jeopardy-categories { 
     border-radius: 20px;
     text-align: center;
     text-decoration: none;
@@ -48,11 +48,11 @@
     transition: all .3 ease-in-out;
 }
 
-.categories:focus {
+.jeopardy-categories:focus {
     background-color: #ff13f0;
 }
 
-.question-grid {
+.jeopardy-question-grid {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(6, 1fr);
@@ -62,14 +62,14 @@
     color: #fff;
 }
 
-.quesion {
+.jeopardy-quesion {
     font-size: 1.2em;
     border-radius:20px;
     background-color: #1C1C1C;
     text-align: center;
 }
 
-.questions{
+.jeopardy-questions{
     border-radius: 15px;
     text-align: center;
     text-decoration: none;
@@ -78,7 +78,7 @@
     padding: 10px 30px;
 }
 
-.questions:focus {
+.jeopardy-questions:focus {
     background-color: #454545;
 }
 
