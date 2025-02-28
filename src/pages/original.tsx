@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import QRCode from "react-qr-code"
 function Original() {
-  const [question,setQuestion] = useState('abc')
+  const [question,setQuestion] = useState('uunasd')
 
   useEffect(() => {
     fetchQuestions()
