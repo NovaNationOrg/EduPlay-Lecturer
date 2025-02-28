@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 interface GameModalProps {
   isOpen: boolean;
@@ -30,9 +31,11 @@ const GameModal: React.FC<GameModalProps> = ({
         </button>
         <div className="modal-content">
           <div className="modal-left">
-            <button className="modal-button">
-              <a href="/categories.php">Play Now</a>
-            </button>
+            <Link  to={"/jeopardy"}>
+              <button className="modal-button">
+                Play Now
+              </button>
+            </Link>
             <button className="modal-button">Add to Favourites</button>
           </div>
           <div className="modal-right">

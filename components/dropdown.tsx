@@ -12,20 +12,20 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
     const [isVisible, setIsVisible] = useState(false);
 
     return (
-        <div className="dropdown-items">
+        <div className="jeopardy-dropdown-items">
             <motion.button 
                 onClick={() => setIsVisible(!isVisible)} 
-                className="dropdown-button" 
+                className="jeopardy-dropdown-button" 
                 whileTap={{ y: 1 }}
             >
                 {category}
                 <AnimatePresence initial={true}>
                     <motion.i>
-                        <FontAwesomeIcon id="down-arrow" className="down-arrow" icon={isVisible ? faChevronUp:faChevronDown}/>
+                        <FontAwesomeIcon id="down-arrow" className="jeopardy-down-arrow" icon={isVisible ? faChevronUp:faChevronDown}/>
                     </motion.i>
                 </AnimatePresence>
             </motion.button>
-            <div className="dropdown-content">
+            <div className="jeopardy-dropdown-content">
                 <AnimatePresence initial={false}>
                     {isVisible && (
                         <motion.div
@@ -33,15 +33,15 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                             animate={{ opacity: 1, scale: 1 }}
                             exit=   {{ opacity: 0, scale: 0 }}
                         >
-                        <motion.button className='prev-button'>Previous Games</motion.button>
-                        <div className="dropdown-list">
+                        <motion.button className='jeopardy-prev-button'>Previous Games</motion.button>
+                        <div className="jeopardy-dropdown-list">
                             {items.map((item, index) => (
-                                <div key={index} className="input-box">
+                                <div key={index} className="jeopardy-input-box">
                                     <label htmlFor={`question-${index}`}> {index + 1} </label>
-                                    <div className="input-fields">
+                                    <div className="jeopardy-input-fields">
                                         <input 
                                             type="text" 
-                                            className="input" 
+                                            className="jeopardy-input" 
                                             id={`question-${index}`} 
                                             name={`question-${index}`} 
                                             placeholder="Type your Question here" 
@@ -50,7 +50,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                                         />
                                         <input 
                                             type="text" 
-                                            className="input" 
+                                            className="jeopardy-input" 
                                             id={`answer-${index}`} 
                                             name={`answer-${index}`} 
                                             placeholder="Type your Answer here" 

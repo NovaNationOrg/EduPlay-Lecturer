@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./style.css"; 
-import ImageName from "react-app/src/assets/roleplay.png"
-import Library from "react-app/src/assets/bookshelf.png"
-import Home from "react-app/src/assets/house.png"
-import GameModal from "react-app/src/pages/gamemodal.tsx"
+import "./../styles/library.css"; 
+import ImageName from "/assets/images/roleplay.png"
+import Library from "/assets/images/bookshelf.png"
+import Home from "/assets/images/house.png"
+import GameModal from "./gamemodal"
 
 
 
@@ -58,13 +58,14 @@ const GameComponent: React.FC = () => {
 
       <div className="game-container">
         <div className="game">
-          <div className="grid-item-a">
             <button
               onClick={openModal}
+              className="jeopardy-button"
             >
-              Jeopardy!
-            </button>
-          </div>
+              <div className="grid-item-a">
+                  Jeopardy!
+              </div>
+          </button>
 
           <GameModal 
             isOpen={isModalOpen}

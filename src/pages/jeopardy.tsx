@@ -18,30 +18,29 @@ function Jeopardy () {
     const close = () => setModalOpen(false);
     return (
         <>
-        <header>
-            <Header headerText="Jeopardy" gameClass="jeopardy" />    
-        </header>
+        <Header headerText="Jeopardy" gameClass="jeopardy" />    
+    
         <main>
-            <div className="game-container">
-                <div className="category-grid">
+            <div className="jeopardy-game-container">
+                <div className="jeopardy-category-grid">
                     {jeopardy_grid.map((categories, index) => 
-                        <div className="category" key={index}>
+                        <div className="jeopardy-category" key={index}>
                             <motion.button
                                 whileHover={{ scale: 1.1, transition: {duration: .2} }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => (modalOpen ? close() : open(), setCategory(index+1))}
-                                className="categories" id="openModal" key={index}>{categories}
+                                className="jeopardy-categories" id="openModal" key={index}>{categories}
                             </motion.button>
                         </div>
                     )}
                 </div>
-                <div className="question-grid">
+                <div className="jeopardy-question-grid">
                 {[...Array(5)].map((_, row) => (
                      [...Array(6)].map((_, col) => (
-                        <div key={row+1+ ":" +col+1} className="question">
+                        <div key={row+1+ ":" +col+1} className="jeopardy-question">
                             <motion.button 
                             whileHover={{ scale: 1.1 }}
-                            className='questions'
+                            className='jeopardy-questions'
                             >
                                 ${row+1}00
                             </motion.button>
