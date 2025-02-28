@@ -3,11 +3,29 @@ import { motion } from "framer-motion";
 import Backdrop from "./backdrop";
 import DropdownComponent from './dropdown';
 import { db } from "../src/database/db";
+import { ToastContainer, toast } from 'react-toastify';
+import { useLiveQuery } from "dexie-react-hooks"
+import { JeopardyGame } from "../src/database/interfaces/jeopardy";
+
 /* Interfaces for use */
 
 interface ModalProps {
   handleClose: () => void;
   text: string;
+}
+
+const currTheme = sessionStorage.getItem("curr-category")
+
+
+interface questionAnswer{
+  question:string,
+  answer:string
+}
+const errorToast = (toastMessage:string,toastIO:string) =>{
+  toast(toastMessage ,{
+    toastId: toastIO
+  })
+
 }
 
 interface FormEvent extends React.FormEvent<HTMLFormElement> {}
@@ -32,24 +50,83 @@ const dropIn = {
   };
 
 const Modal: React.FC<ModalProps> = ({ handleClose }) => {
-  const [items, setItems] = useState(
-    [...Array(5)].map(() => (
-      { question: '', answer: '', setQuestion: () => {}, setAnswer: () => {} }
+  // const questionAnswerData = db.jeopardyData.where("theme").equals(currTheme!).toArray()
+
+  const [category,updateCategory] = useState("")
+  let questionAnswerData: JeopardyGame[] | undefined
+  if(sessionStorage.getItem("isPopulated")=="true"){
+    try {
+      questionAnswerData = useLiveQuery( () => db.jeopardyData.where("[game_id+theme]").equals(["jp1","default"]).toArray())
+      console.log(questionAnswerData)
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+  const updateItem = (index: number, field: 'question' | 'answer', value: string) => {
+    const newItems = [...items];
+    newItems[index][field] = value;
+    setItems(newItems);
+};
+  
+
+  let questionAnswer:questionAnswer[] = []
+  console.log(questionAnswerData == undefined)
+  if(questionAnswerData != undefined){
+    if(questionAnswerData.length > 0){
+      for(let i=0;i<5;i++){
+        questionAnswer.push({question: questionAnswerData[i].question,answer:questionAnswerData[i].answer})
+      }
+   }
+  }else{
+    
+    // for(let x=0;x<5;x++){
+    //   questionAnswer.push({question:"",answer:''})
+
+    // }
+  }
+
+  let [items, setItems] = useState( //#FIX find less inneficient solution
+    [...Array(5)].map((_value,index) => (
+      { question: "" , answer: "", setQuestion: () => {}, setAnswer: () => {} }
+      
     ))
-);
+  );
+  
+
+  
+  
+ 
+  
 
 async function addData(e:FormEvent) {
   e.preventDefault();
 
   try {
+
+    if(category==""){
+      errorToast("Please set a category!","cat-id")
+    }
+      
     for (const item of items) {
       const { question, answer } = item;
+      if(question == "" || answer == ""){
+        errorToast("Please complete all of the fields!!","quest-id")
+        return
+      }
+    }
+
+    db.jeopardyData.where("[game_id+theme]").equals(["jp1","default"]).delete() //#TODO: Make this depend on dynamic values
+    sessionStorage.setItem("isPopulated"+sessionStorage.getItem("curr-category"),"true")
+    for (let i =0;i< items.length;i++) { 
+      const { question, answer } = items[i];
       const id = await db.jeopardyData.add({
         question,
         answer,
         game_id: "jp1", // replace with appropriate value
-        theme: "default", // replace with appropriate value
-        points: 0 // replace with appropriate value
+        theme: category!, // replace with appropriate value
+        points: (i+1) * 100 // replace with appropriate value
       });
     }
   } catch (error) {
@@ -57,18 +134,17 @@ async function addData(e:FormEvent) {
   }
 }
 
-const updateItem = (index: number, field: 'question' | 'answer', value: string) => {
-    const newItems = [...items];
-    newItems[index][field] = value;
-    setItems(newItems);
+const categoryUpdate = (event: React.ChangeEvent<HTMLInputElement>) => {
+  updateCategory(event.target.value);
 };
 
 const onSubmit = (e:FormEvent) => {
   e.preventDefault();
 
+
   const formData = new FormData(e.target as HTMLFormElement)
   const payload = Object.fromEntries(formData)
-
+  
   console.log(payload)
 }
 
@@ -82,11 +158,12 @@ const onSubmit = (e:FormEvent) => {
               animate="visible"
               exit="exit"
             >   
-                <div className="jeopardy-modal-container">                            
+            <ToastContainer/> 
+                <div className="jeopardy-modal-container">              
                   <form className="jeopardy-dropdown-form" onSubmit={addData} >
                     <button className="jeopardy-close-button" onClick={handleClose}> X </button>
                     <div className="jeopardy-modal-content">
-                        <div className="jeopardy-modal-title">Categories</div>
+                        <div className="jeopardy-modal-title"><input onChange = {categoryUpdate} className = "jeopardy-modal-title" type="text" placeholder="Category"></input></div>
                         <div className="jeopardy-dropdown-menus">
                                 <div className="jeopardy-dropdown-items">
                                   <DropdownComponent 

@@ -1,20 +1,48 @@
 
 import { useState, useEffect } from 'react'
 import QRCode from "react-qr-code"
+import { useLiveQuery } from 'dexie-react-hooks'
+import { db } from "../database/db"
+
+
+// let gameData = useLiveQuery(
+//   async () => {
+//       const gameData = await db.jeopardyData
+//           .where('game_id')
+//           .equals("jp1")
+//           .toArray()
+
+//       return gameData
+//   }
+// )
+
+async function gatherQrData(){
+  
+  let jeopardyGameData =await db.jeopardyData.where("game_id").equals("jp1").toArray()
+  let qrPayload = ""
+  const themes = [...new Set(jeopardyGameData?.map(record => record.theme))]
+
+ 
+  for(let i=0;i < 29;i++){
+    if((i-2)%5==0){
+      qrPayload+=jeopardyGameData![i].theme + "\n"
+    }
+    else if(i%2==0){
+      qrPayload+=jeopardyGameData![i].answer + "\n"
+    }else{
+      qrPayload+=jeopardyGameData![i].question + "\n"
+    }
+  }
+  qrPayload+=jeopardyGameData![30].answer
+  return qrPayload
+}
+
 function Original() {
   const [question,setQuestion] = useState('uunasd')
-
-  useEffect(() => {
-    fetchQuestions()
-  },[])
   
-  const fetchQuestions = async () => {
-    const resposne = await fetch("http://127.0.0.1:5000/questions")
-    const data = await resposne.json()
-    setQuestion(data.questions)
-    console.log(data.questions)
+  // gatherQrData()
+  // setQuestion(gatherQrData)
 
-  }
   return (
     <>
       <h1>{question}</h1>

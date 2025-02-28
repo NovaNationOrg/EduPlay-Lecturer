@@ -9,7 +9,7 @@ import GameModal from "./gamemodal"
 
 const GameComponent: React.FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-
+  sessionStorage.clear()
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 

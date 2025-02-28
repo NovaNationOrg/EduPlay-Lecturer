@@ -10,7 +10,7 @@ interface DropdownComponentProps {
 
 const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }) => {
     const [isVisible, setIsVisible] = useState(false);
-
+     
     return (
         <div className="jeopardy-dropdown-items">
             <motion.button 
@@ -44,7 +44,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                                             className="jeopardy-input" 
                                             id={`question-${index}`} 
                                             name={`question-${index}`} 
-                                            placeholder="Type your Question here" 
+                                            placeholder={"Type your question here"} 
                                             value={item.question}
                                             onChange={(e) => item.setQuestion(e.target.value)}
                                         />
@@ -53,7 +53,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                                             className="jeopardy-input" 
                                             id={`answer-${index}`} 
                                             name={`answer-${index}`} 
-                                            placeholder="Type your Answer here" 
+                                            placeholder={"Thpe your answer here"} 
                                             value={item.answer}
                                             onChange={(e) => item.setAnswer(e.target.value)}
                                         />
