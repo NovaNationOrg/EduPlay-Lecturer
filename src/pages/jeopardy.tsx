@@ -7,6 +7,10 @@ const jeopardy_grid=[
     "Category 1", "Category 2", "Category 3", "Category 4", "Category 5", "Category 6", 
 ];
 
+function setCategory (index:number) {
+    sessionStorage.setItem("curr-category", index.toString());
+}
+
 function Jeopardy () {
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -21,23 +25,26 @@ function Jeopardy () {
             <div className="game-container">
                 <div className="category-grid">
                     {jeopardy_grid.map((categories, index) => 
-                        <div className="category">
+                        <div className="category" key={index}>
                             <motion.button
                                 whileHover={{ scale: 1.1, transition: {duration: .2} }}
                                 whileTap={{ scale: 0.95 }}
-                                onClick={() => (modalOpen ? close() : open())}
-                                className="categories" id="openModal" key={index}>{categories}</motion.button>
+                                onClick={() => (modalOpen ? close() : open(), setCategory(index+1))}
+                                className="categories" id="openModal" key={index}>{categories}
+                            </motion.button>
                         </div>
                     )}
                 </div>
                 <div className="question-grid">
-                {[...Array(5)].map((_, num) => (
-                     [...Array(6)].map((_) => (
-                        <div key={num+1} className="question">
+                {[...Array(5)].map((_, row) => (
+                     [...Array(6)].map((_, col) => (
+                        <div key={row+1+ ":" +col+1} className="question">
                             <motion.button 
                             whileHover={{ scale: 1.1 }}
                             className='questions'
-                            >${num+1}00</motion.button>
+                            >
+                                ${row+1}00
+                            </motion.button>
                         </div> 
                      ))
                 ))}

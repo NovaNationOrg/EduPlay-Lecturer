@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Backdrop from "./backdrop";
 import DropdownComponent from './dropdown';
-import { Link } from "react-router-dom";
 
 /* Interfaces for use */
 
@@ -57,12 +56,12 @@ const onSubmit = (e:FormEvent) => {
     return (
       <Backdrop onClick={handleClose}>
             <motion.div
-                onClick={(e) => e.stopPropagation()}  
-                className="modal "
-                variants={dropIn}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
+              onClick={(e) => e.stopPropagation()}  
+              className="modal "
+              variants={dropIn}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >   
                 <div className="modal-container">                            
                   <form className="dropdown-form" onSubmit={onSubmit} >
@@ -71,17 +70,14 @@ const onSubmit = (e:FormEvent) => {
                         <div className="modal-title">Categories</div>
                         <div className="dropdown-menus">
                                 <div className="dropdown-items">
-                                  {/* {[...Array(6)].map((_, num) => ( */}
-                                    <DropdownComponent 
-                                      // category={`Category ${num+1}`}
-                                      category="Category 1"
-                                      items={items.map((item, index) => ({
-                                          ...item, 
-                                          setQuestion: (value) => updateItem(index, 'question', value),
-                                          setAnswer: (value) => updateItem(index, 'answer', value)
-                                      }))} 
-                                    /> 
-                                  {/* ))} */}
+                                  <DropdownComponent 
+                                    category={`Category ${sessionStorage.getItem("curr-category")}`}
+                                    items={items.map((item, index) => ({
+                                        ...item, 
+                                        setQuestion: (value) => updateItem(index, 'question', value),
+                                        setAnswer: (value) => updateItem(index, 'answer', value)
+                                    }))} 
+                                  /> 
                                 </div>
                                 <motion.button className="save-button" type="submit">Save</motion.button>
                         </div>
