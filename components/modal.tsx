@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Backdrop from "./backdrop";
 import DropdownComponent from './dropdown';
-
+import { db } from "../src/database/db";
 /* Interfaces for use */
 
 interface ModalProps {
@@ -38,6 +38,25 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
     ))
 );
 
+async function addData(e:FormEvent) {
+  e.preventDefault();
+
+  try {
+    for (const item of items) {
+      const { question, answer } = item;
+      const id = await db.jeopardyData.add({
+        question,
+        answer,
+        game_id: "jp1", // replace with appropriate value
+        theme: "default", // replace with appropriate value
+        points: 0 // replace with appropriate value
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const updateItem = (index: number, field: 'question' | 'answer', value: string) => {
     const newItems = [...items];
     newItems[index][field] = value;
@@ -57,14 +76,14 @@ const onSubmit = (e:FormEvent) => {
       <Backdrop onClick={handleClose}>
             <motion.div
               onClick={(e) => e.stopPropagation()}  
-              className="jeopardy-modal "
+              className="jeopardy-modal"
               variants={dropIn}
               initial="hidden"
               animate="visible"
               exit="exit"
             >   
                 <div className="jeopardy-modal-container">                            
-                  <form className="jeopardy-dropdown-form" onSubmit={onSubmit} >
+                  <form className="jeopardy-dropdown-form" onSubmit={addData} >
                     <button className="jeopardy-close-button" onClick={handleClose}> X </button>
                     <div className="jeopardy-modal-content">
                         <div className="jeopardy-modal-title">Categories</div>

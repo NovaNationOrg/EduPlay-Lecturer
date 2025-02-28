@@ -5,7 +5,7 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 interface DropdownComponentProps {
     category: string;
-    items: { question: string; answer: string; setQuestion: (value: string) => void; setAnswer: (value: string) => void; }[];
+    items: { question: string; answer: string; setQuestion: (value: string) => void; setAnswer: (value: string) => void }[];
 }
 
 const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }) => {
