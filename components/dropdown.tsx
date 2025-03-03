@@ -53,7 +53,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                                             className="jeopardy-input" 
                                             id={`answer-${index}`} 
                                             name={`answer-${index}`} 
-                                            placeholder={"Thpe your answer here"} 
+                                            placeholder={"Type your answer here"} 
                                             value={item.answer}
                                             onChange={(e) => item.setAnswer(e.target.value)}
                                         />

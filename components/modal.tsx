@@ -14,9 +14,6 @@ interface ModalProps {
   text: string;
 }
 
-const currTheme = sessionStorage.getItem("curr-category")
-
-
 interface questionAnswer{
   question:string,
   answer:string
@@ -52,7 +49,7 @@ const dropIn = {
 const Modal: React.FC<ModalProps> = ({ handleClose }) => {
   // const questionAnswerData = db.jeopardyData.where("theme").equals(currTheme!).toArray()
 
-  const [category,updateCategory] = useState("")
+  const [category, updateCategory] = useState("")
   let questionAnswerData: JeopardyGame[] | undefined
   if(sessionStorage.getItem("isPopulated")=="true"){
     try {
@@ -95,18 +92,13 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
   );
   
 
-  
-  
- 
-  
-
 async function addData(e:FormEvent) {
   e.preventDefault();
-
+  const curr_category = Number (sessionStorage.getItem("curr-category"));
   try {
 
     if(category==""){
-      errorToast("Please set a category!","cat-id")
+      errorToast(`Category not set... setting as Category ${sessionStorage.getItem("curr-category")}`,"cat-id")
     }
       
     for (const item of items) {
@@ -117,7 +109,7 @@ async function addData(e:FormEvent) {
       }
     }
 
-    db.jeopardyData.where("[game_id+theme]").equals(["jp1","default"]).delete() //#TODO: Make this depend on dynamic values
+  db.jeopardyData.where("[game_id+category_num]").equals(["jp1", curr_category]).delete() //#TODO: Make this depend on dynamic values
     sessionStorage.setItem("isPopulated"+sessionStorage.getItem("curr-category"),"true")
     for (let i =0;i< items.length;i++) { 
       const { question, answer } = items[i];
@@ -126,7 +118,8 @@ async function addData(e:FormEvent) {
         answer,
         game_id: "jp1", // replace with appropriate value
         theme: category!, // replace with appropriate value
-        points: (i+1) * 100 // replace with appropriate value
+        points: (i+1) * 100, // replace with appropriate value
+        category_num: Number (sessionStorage.getItem("curr-category"))
       });
     }
   } catch (error) {
@@ -134,9 +127,19 @@ async function addData(e:FormEvent) {
   }
 }
 
+
+
 const categoryUpdate = (event: React.ChangeEvent<HTMLInputElement>) => {
-  updateCategory(event.target.value);
+    updateCategory(event.target.value);
 };
+
+const setCategory = (event: React.MouseEvent) => {
+  if (category == "") {
+    updateCategory(`Category ${sessionStorage.getItem("curr-category")}`)
+  } else {
+
+  }
+}
 
 const onSubmit = (e:FormEvent) => {
   e.preventDefault();
@@ -163,19 +166,19 @@ const onSubmit = (e:FormEvent) => {
                   <form className="jeopardy-dropdown-form" onSubmit={addData} >
                     <button className="jeopardy-close-button" onClick={handleClose}> X </button>
                     <div className="jeopardy-modal-content">
-                        <div className="jeopardy-modal-title"><input onChange = {categoryUpdate} className = "jeopardy-modal-title" type="text" placeholder="Category"></input></div>
+                        <input onChange = {categoryUpdate} className = "jeopardy-modal-title" type="text" placeholder={(`Category ${sessionStorage.getItem("curr-category")}`)}></input>
                         <div className="jeopardy-dropdown-menus">
-                                <div className="jeopardy-dropdown-items">
-                                  <DropdownComponent 
-                                    category={`Category ${sessionStorage.getItem("curr-category")}`}
-                                    items={items.map((item, index) => ({
-                                        ...item, 
-                                        setQuestion: (value) => updateItem(index, 'question', value),
-                                        setAnswer: (value) => updateItem(index, 'answer', value)
-                                    }))} 
-                                  /> 
-                                </div>
-                                <motion.button className="jeopardy-save-button" type="submit">Save</motion.button>
+                            <div className="jeopardy-dropdown-items">
+                              <DropdownComponent 
+                                category={`Category ${sessionStorage.getItem("curr-category")}`}
+                                items={items.map((item, index) => ({
+                                    ...item, 
+                                    setQuestion: (value) => updateItem(index, 'question', value),
+                                    setAnswer: (value) => updateItem(index, 'answer', value)
+                                }))} 
+                              /> 
+                            </div>
+                            <motion.button onClick={setCategory} whileTap = {{ y: 1}} className="jeopardy-save-button" type="submit">Save</motion.button>
                         </div>
                     </div>
                   </form>

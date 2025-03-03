@@ -5,4 +5,5 @@ export interface JeopardyGame {
     game_id: string;
     theme: string;
     points: number;
+    category_num: number;
 }

@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path = "/" >
           <Route index element = {<Library/>} />
-          <Route path ="Original" element = {<Original/>} />
+          <Route path="Original" element = {<Original/>} />
           <Route path="Clone" element={<Clone />} />
           <Route path="Jeopardy" element={<Jeopardy />} />
 
