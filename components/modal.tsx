@@ -18,7 +18,7 @@ interface questionAnswer{
   question:string,
   answer:string
 }
-const errorToast = (toastMessage:string,toastIO:string) =>{
+const generateToast = (toastMessage:string,toastIO:string) =>{
   toast(toastMessage ,{
     toastId: toastIO
   })
@@ -53,6 +53,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
   let questionAnswerData: JeopardyGame[] | undefined
   if(sessionStorage.getItem("isPopulated")=="true"){
     try {
+      // questionAnswerData = await db.jeopardyData.where("game_id+category-num").equals(["jp1",sessionStorage.getItem("curr-category")]).toArray()
       questionAnswerData = useLiveQuery( () => db.jeopardyData.where("[game_id+theme]").equals(["jp1","default"]).toArray())
       console.log(questionAnswerData)
     } catch (error) {
@@ -98,13 +99,13 @@ async function addData(e:FormEvent) {
   try {
 
     if(category==""){
-      errorToast(`Category not set... setting as Category ${sessionStorage.getItem("curr-category")}`,"cat-id")
+      generateToast(`Category not set... setting as Category ${sessionStorage.getItem("curr-category")}`,"cat-id")
     }
       
     for (const item of items) {
       const { question, answer } = item;
       if(question == "" || answer == ""){
-        errorToast("Please complete all of the fields!!","quest-id")
+        generateToast("Please complete all of the fields!!","quest-id")
         return
       }
     }
@@ -112,6 +113,7 @@ async function addData(e:FormEvent) {
   db.jeopardyData.where("[game_id+category_num]").equals(["jp1", curr_category]).delete() //#TODO: Make this depend on dynamic values
     sessionStorage.setItem("isPopulated"+sessionStorage.getItem("curr-category"),"true")
     for (let i =0;i< items.length;i++) { 
+      generateToast("Data has been saved", "saved-data-toast")
       const { question, answer } = items[i];
       const id = await db.jeopardyData.add({
         question,

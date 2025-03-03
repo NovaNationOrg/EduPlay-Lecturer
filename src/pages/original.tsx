@@ -1,11 +1,9 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import QRCode from "react-qr-code"
-import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from "../database/db"
-import Jeopardy from './jeopardy'
 import { JeopardyGame } from '../database/interfaces/jeopardy'
-
+import "../styles/jeopardy/qrPage.css"
 
 async function gatherQrData(){
   
@@ -28,7 +26,6 @@ async function gatherQrData(){
 
   let qrPayload = ""
   qrPayload+="_jp_\njp01\n"
-  const themes = [...new Set(jeopardyGameData?.map(record => record.theme))]
 
 
   for(let i=0; i<jeopardyGameData.length; i++) {
@@ -61,21 +58,17 @@ function Original() {
     };
     fetchData();
 
-  
-  // gatherQrData()
-  // setQuestion(gatherQrData)
 
   return (
     <>
       <h1 className='qr-title'>Scan QR Code To Play</h1>
-      {/* <h1 className='qr-title'>{question}</h1> */}
-
-      <div style={{ height: "auto", margin: "50px auto", maxWidth: "100%", width: "100%" }}>
+      <div className='qr-container' >
       <QRCode
         size={256}
         style={{ height: "auto", maxWidth: "100%", width: "100%" }}
         value={question}
         viewBox={`0 0 256 256`}
+        className=''
       />
 
 </div>

@@ -45,7 +45,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                                             id={`question-${index}`} 
                                             name={`question-${index}`} 
                                             placeholder={"Type your question here"} 
-                                            value={item.question}
+                                            defaultValue={item.question}
                                             onChange={(e) => item.setQuestion(e.target.value)}
                                         />
                                         <input 
@@ -54,7 +54,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                                             id={`answer-${index}`} 
                                             name={`answer-${index}`} 
                                             placeholder={"Type your answer here"} 
-                                            value={item.answer}
+                                            defaultValue={item.answer}
                                             onChange={(e) => item.setAnswer(e.target.value)}
                                         />
                                     </div>
