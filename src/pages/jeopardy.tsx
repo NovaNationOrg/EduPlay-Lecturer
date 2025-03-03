@@ -21,7 +21,6 @@ function allCategories(){
 }
 function Jeopardy () {
     const [modalOpen, setModalOpen] = useState(false);
-    const[categoriesFilled,updateFilledCategories] = useState("")
     const test = allCategories()
    
      
