@@ -86,7 +86,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
   }
 
   let [items, setItems] = useState( //#FIX find less inneficient solution
-    [...Array(5)].map((_value,index) => (
+    [...Array(5)].map((_value) => (
       { question: "" , answer: "", setQuestion: () => {}, setAnswer: () => {} }
       
     ))
@@ -115,7 +115,7 @@ async function addData(e:FormEvent) {
     for (let i =0;i< items.length;i++) { 
       generateToast("Data has been saved", "saved-data-toast")
       const { question, answer } = items[i];
-      const id = await db.jeopardyData.add({
+      await db.jeopardyData.add({
         question,
         answer,
         game_id: "jp1", // replace with appropriate value
@@ -135,7 +135,7 @@ const categoryUpdate = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateCategory(event.target.value);
 };
 
-const setCategory = (event: React.MouseEvent) => {
+const setCategory = () => {
   if (category == "") {
     updateCategory(`Category ${sessionStorage.getItem("curr-category")}`)
   } else {
@@ -143,15 +143,15 @@ const setCategory = (event: React.MouseEvent) => {
   }
 }
 
-const onSubmit = (e:FormEvent) => {
-  e.preventDefault();
+// const onSubmit = (e:FormEvent) => {
+//   e.preventDefault();
 
 
-  const formData = new FormData(e.target as HTMLFormElement)
-  const payload = Object.fromEntries(formData)
+//   const formData = new FormData(e.target as HTMLFormElement)
+//   const payload = Object.fromEntries(formData)
   
-  console.log(payload)
-}
+//   console.log(payload)
+// }
 
     return (
       <Backdrop onClick={handleClose}>
