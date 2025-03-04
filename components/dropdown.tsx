@@ -5,12 +5,12 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 interface DropdownComponentProps {
     category: string;
-    items: { question: string; answer: string; setQuestion: (value: string) => void; setAnswer: (value: string) => void; }[];
+    items: { question: string; answer: string; setQuestion: (value: string) => void; setAnswer: (value: string) => void }[];
 }
 
 const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }) => {
     const [isVisible, setIsVisible] = useState(false);
-
+     
     return (
         <div className="jeopardy-dropdown-items">
             <motion.button 
@@ -44,8 +44,8 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                                             className="jeopardy-input" 
                                             id={`question-${index}`} 
                                             name={`question-${index}`} 
-                                            placeholder="Type your Question here" 
-                                            value={item.question}
+                                            placeholder={"Type your question here"} 
+                                            defaultValue={item.question}
                                             onChange={(e) => item.setQuestion(e.target.value)}
                                         />
                                         <input 
@@ -53,8 +53,8 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                                             className="jeopardy-input" 
                                             id={`answer-${index}`} 
                                             name={`answer-${index}`} 
-                                            placeholder="Type your Answer here" 
-                                            value={item.answer}
+                                            placeholder={"Type your answer here"} 
+                                            defaultValue={item.answer}
                                             onChange={(e) => item.setAnswer(e.target.value)}
                                         />
                                     </div>

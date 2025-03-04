@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Header from "../../components/header.tsx"
 import { motion, AnimatePresence } from "framer-motion"
 import Modal from "../../components/modal.tsx"
+import { Link } from 'react-router-dom';
 
 const jeopardy_grid=[
     "Category 1", "Category 2", "Category 3", "Category 4", "Category 5", "Category 6", 
@@ -11,8 +12,18 @@ function setCategory (index:number) {
     sessionStorage.setItem("curr-category", index.toString());
 }
 
+function allCategories(){
+    for(let i=0;i < 6;i++){
+        if(sessionStorage.getItem("isPopulated"+(i+1))== null)
+            return false
+    }
+    return true
+}
 function Jeopardy () {
     const [modalOpen, setModalOpen] = useState(false);
+    const test = allCategories()
+   
+     
 
     const open = () => setModalOpen(true);
     const close = () => setModalOpen(false);
@@ -60,6 +71,13 @@ function Jeopardy () {
                     }
                 </AnimatePresence>
             </div>
+            {
+                test
+                ?<Link className="join-area" to={"/original"}>
+                <button className="join-button" 
+                   >Begin</button></Link>
+                :<div></div>
+            }
         </main>
         </>
     )
