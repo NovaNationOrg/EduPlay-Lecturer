@@ -8,6 +8,7 @@ import Clone from "./pages/clone"
 import Original from "./pages/original";
 import Library from "./pages/library";
 import Jeopardy from "./pages/jeopardy";
+import CSV from "./pages/csv-import-func";
 
 import "../src/styles/fonts/fonts.css";
 import "../src/styles/jeopardy/jeopardy.css"
@@ -21,6 +22,7 @@ function App() {
           <Route path="Original" element = {<Original/>} />
           <Route path="Clone" element={<Clone />} />
           <Route path="Jeopardy" element={<Jeopardy />} />
+          <Route path="CSV" element={<CSV />} />
 
         </Route>
       </Routes>

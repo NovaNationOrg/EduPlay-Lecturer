@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./../styles/library.css"; 
 import ImageName from "/assets/images/roleplay.png"
 import Library from "/assets/images/bookshelf.png"
@@ -43,6 +44,11 @@ const GameComponent: React.FC = () => {
       </div>
 
       <div className="menu">
+        <Link  to={"/csv"}>
+              <button className="modal-button">
+                Import questions
+              </button>
+        </Link>
         <br />
         <br />
         <img src={Home} alt="Image" width={40} height={40} />
