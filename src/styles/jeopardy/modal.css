@@ -4,7 +4,7 @@
 
 .jeopardy-modal {
     width: clamp(50%, 700px, 50%);
-    max-height: 700px;    
+    max-height: 700px;
 
     border-radius: 12px;
     display: flex;
@@ -16,8 +16,8 @@
 
 .jeopardy-modal-container {
     width: 100%;
-    justify-items: center; 
-    position: relative; 
+    justify-items: center;
+    position: relative;
     background-color: #1a1a1a;
     border-radius: 8px;
     overflow: scroll;
@@ -63,7 +63,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+
 }
 
 .jeopardy-dropdown-form {
@@ -78,7 +78,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: left;
-    
+
     gap: 1rem;
 }
 
@@ -101,14 +101,14 @@
 
 .jeopardy-dropdown-button:focus,
 .jeopardy-dropdown-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
 i .jeopardy-down-arrow {
     float: right;
 }
 
-.jeopardy-dropdown-content{
+.jeopardy-dropdown-content {
     flex-direction: column;
     width: 100%;
 }
@@ -134,7 +134,7 @@ i .jeopardy-down-arrow {
 
 .jeopardy-prev-button:focus,
 .jeopardy-prev-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
 
@@ -170,11 +170,11 @@ i .jeopardy-down-arrow {
 }
 
 .jeopardy-input-fields {
-    display: flex; 
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 15px; 
+    padding: 15px;
 }
 
 .jeopardy-input {
@@ -218,6 +218,7 @@ i .jeopardy-down-arrow {
     background-color: #585858;
 }
 
+
 /* ------- Save Button ------- */
 
 .jeopardy-save-button {
@@ -233,7 +234,7 @@ i .jeopardy-down-arrow {
     justify-content: center;
     align-items: center;
     width: 80px;
-    padding: 10px 10px; 
+    padding: 10px 10px;
     margin-top: 20px;
     margin-bottom: 20px;
     transition: all 0.3s ease-in-out;
@@ -255,4 +256,130 @@ i .jeopardy-down-arrow {
 
 .jeopardy-save-link:hover {
     color: #000;
+}
+
+/* Review */
+
+.review-close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: rgba(255, 255, 255, 0.7);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.5rem;
+    transition: all .2s ease-in-out;
+}
+
+.jeopardy-start-button {
+    font-family: 'Risque';
+    font-size: 2em;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    background-color: #484747;
+    border-radius: 8px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.jeopardy-review-modal {
+    width: clamp(50%, 1200px, 60%);
+
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #1a1a1a;
+    justify-content: center;
+}
+
+.page-arrow {
+    width: clamp(50%, 1200px, 60%);
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.left-arrow,
+.right-arrow {
+    margin-left: 1em;
+    margin-right: 1em;
+    cursor: pointer;
+    width: 4vw;
+    height: auto;
+}
+
+.left-arrow {
+    justify-content: flex-end;
+}
+
+.right-arrow {
+    justify-content: flex-end;
+}
+
+.review-category-name {
+    width: inherit;
+    height: fit-content;
+    background-color: #1a1a1a;
+    justify-content: space-around;
+    font-family: Risque;
+    font-size: 36px;
+    margin-top: 6%;
+    margin-left: 15%;
+    align-self: self-start;
+}
+
+.question-answer-block {
+    width: 100%;
+    display: flex;
+    height: fit-content;
+    background-color: #1a1a1a;
+    justify-content: space-around;
+    font-family: Risque;
+    font-size: 36px;
+    padding: 10px;
+}
+
+.question-answer-text {
+    width: 100%;
+    display: flex;
+
+    height: fit-content;
+    justify-content: space-around;
+}
+
+.underline-text {
+    display: inline-block;
+    background-color: #fff;
+    margin-right: 30px;
+}
+
+.text-block {
+    background-color: #1a1a1a;
+    width: 17vw;
+    border-bottom: 2px solid white;
+}
+
+.text-block-tag {
+    background-color: #1a1a1a;
+    width: 17vw;
+    font-size: 16px;
+}
+
+.header-block {
+    background-color: #1a1a1a;
+    width: 1%;
+    margin-left: 10%;
 }

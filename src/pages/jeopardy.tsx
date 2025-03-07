@@ -2,7 +2,10 @@ import { useState } from 'react'
 import Header from "../../components/header.tsx"
 import { motion, AnimatePresence } from "framer-motion"
 import Modal from "../../components/modal.tsx"
-import { Link } from 'react-router-dom';
+import ReviewModal from '../../components/review-modal';
+// import { useLiveQuery } from 'dexie-react-hooks';
+// import { db } from '../database/db.ts';
+import ListData from '../../components/review-list';
 
 const jeopardy_grid = [
     "Category 1", "Category 2", "Category 3", "Category 4", "Category 5", "Category 6",
@@ -12,19 +15,28 @@ function setCategory(index: number) {
     sessionStorage.setItem("curr-category", index.toString());
 }
 
-function isCompletedForm() {
+function isFormCompleted() {
     for (let i = 0; i < 6; i++) {
         if (sessionStorage.getItem("isPopulated" + (i + 1)) == null)
             return false
     }
     return true
 }
+
 function Jeopardy() {
     const [modalOpen, setModalOpen] = useState(false);
-    const completedForm = isCompletedForm()
+    const [reviewModalOpen, setModalState] = useState(false)
+
+    const completedForm = isFormCompleted()
 
     const open = () => setModalOpen(true);
     const close = () => setModalOpen(false);
+
+    const reviewOpen = () => setModalState(true);
+    const reviewClose = () => setModalState(false);
+
+    // sessionStorage.setItem("review-page", "0")
+
     return (
         <>
             <Header headerText="Jeopardy" gameClass="jeopardy" />
@@ -64,22 +76,25 @@ function Jeopardy() {
                         mode="wait"
                         onExitComplete={() => null}
                     >
-                        {modalOpen &&
-                            <Modal handleClose={close} text="hello" />
-                        }
+                        {modalOpen && <Modal handleClose={close} text="hello" />}
                     </AnimatePresence>
                 </div>
                 {
                     completedForm
-                        ? <Link className="join-area" to={"/original"}>
-                            <button className="join-button"
-                            >Begin</button></Link>
+                        ? <div className="join-area">
+                            <button className="join-button" onClick={() => { reviewOpen() }}>
+                                Review</button>
+                            {completedForm &&
+                                <ReviewModal isOpen={reviewModalOpen} handleClose={reviewClose}>
+                                    <ListData></ListData>
+                                </ReviewModal>
+                            }
+                        </div>
                         : <div></div>
                 }
             </main>
         </>
     )
 }
-
 
 export default Jeopardy

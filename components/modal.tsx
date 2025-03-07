@@ -18,11 +18,11 @@ interface questionAnswer {
   question: string,
   answer: string
 }
+
 const generateToast = (toastMessage: string, toastIO: string) => {
   toast(toastMessage, {
     toastId: toastIO
   })
-
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -61,7 +61,6 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
     } catch (error) {
       console.log(error)
     }
-
   }
 
   const updateItem = (index: number, field: 'question' | 'answer', value: string) => {
@@ -69,7 +68,6 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
     newItems[index][field] = value;
     setItems(newItems);
   };
-
 
   const questionAnswer: questionAnswer[] = []
   console.log(questionAnswerData == undefined)
@@ -91,10 +89,8 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     [...Array(5)].map((_value) => (
       { question: "", answer: "", setQuestion: () => { }, setAnswer: () => { } }
-
     ))
   );
-
 
   async function addData(e: FormEvent) {
     e.preventDefault();
@@ -131,8 +127,6 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
       console.error(error);
     }
   }
-
-
 
   const categoryUpdate = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateCategory(event.target.value);
@@ -190,6 +184,5 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
     </Backdrop>
   );
 };
-
 
 export default Modal;
