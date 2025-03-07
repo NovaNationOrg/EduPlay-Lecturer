@@ -295,6 +295,7 @@ i .jeopardy-down-arrow {
 
 .jeopardy-review-modal {
     width: clamp(50%, 1200px, 60%);
+    height: fit-content;
 
     border-radius: 12px;
     display: flex;
@@ -323,6 +324,11 @@ i .jeopardy-down-arrow {
 
 .left-arrow {
     justify-content: flex-end;
+}
+
+.empty-arrow {
+    justify-content: flex-end;
+    cursor: none;
 }
 
 .right-arrow {

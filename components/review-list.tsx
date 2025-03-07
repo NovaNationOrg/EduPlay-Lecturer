@@ -63,7 +63,7 @@ export default function ListData() {
     if (currentPage === 1) {
         paginationArrow =
             <div className="page-arrow">
-                <div className="left-arrow"></div>
+                <div className="empty-arrow"></div>
                 <img className="right-arrow" src={rightArrow} alt="right-arrow" onClick={incrementCurrentPage} />
             </div>
     }
