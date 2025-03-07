@@ -1,4 +1,4 @@
-import { ChangeEvent, useState} from "react";
+import { ChangeEvent, useState } from "react";
 import { parse } from "csv-parse/browser/esm/sync";
 import { ToastContainer, toast } from 'react-toastify';
 import { addJeopardyGame } from "../database/scripts/jeopardy-import";
@@ -38,7 +38,7 @@ export default function GameSelectionCSVProcessor() {
   const handleGameChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const gameId = e.target.value;
     setSelectedGame(gameId);
-    
+
     if (file) {
       processFile(file, gameId);
     }
@@ -48,7 +48,7 @@ export default function GameSelectionCSVProcessor() {
     if (!e.target.files) {
       return;
     }
-    
+
     const uploadedFile = e.target.files[0];
     setFile(uploadedFile);
     setFilename(uploadedFile.name);
@@ -56,7 +56,7 @@ export default function GameSelectionCSVProcessor() {
     if (selectedGame) {
       processFile(uploadedFile, selectedGame);
 
-    } 
+    }
     else {
       generateToast("Please select a game type first", "error-game-selection");
     }
@@ -64,18 +64,18 @@ export default function GameSelectionCSVProcessor() {
 
   const processFile = (fileToProcess: File, gameId: string) => {
     const reader = new FileReader();
-    
+
     reader.onload = (evt) => {
       if (!evt?.target?.result) {
         setStatus('fail');
         generateToast("Failed to read file contents", "error-file-read");
         return;
       }
-      
+
       try {
         const { result } = evt.target;
         let records;
-        
+
         if (gameId === "game1") {
           records = parse(result as string, {
             columns: ["category", "question", "answer"],
@@ -84,28 +84,29 @@ export default function GameSelectionCSVProcessor() {
             skip_empty_lines: true,
             from_line: 2
           });
-        } 
-        
+        }
+
         const required_records = 30;
 
         const recordsWithId = records.map((record: any, index: number) => ({
           id: (index + 1).toString(),
           ...record
         }));
-        
+
         if (recordsWithId.length !== required_records) {
           setStatus('invalid_count');
           generateToast(`CSV must contain exactly ${required_records} records (6 categories × 5 questions). Found: ${recordsWithId.length}`, "error-record-count");
           return;
         }
-        
+
         setCsvData(recordsWithId);
         setStatus('success');
+        addJeopardyGame(recordsWithId);
         generateToast(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, "success-process");
         console.log(`Parsed CSV data for ${gameId}:`, recordsWithId);
-        
-      } 
-      
+
+      }
+
       catch (error) {
         console.error("Error parsing CSV:", error);
         setStatus('fail');
@@ -115,21 +116,19 @@ export default function GameSelectionCSVProcessor() {
     };
 
     reader.readAsText(fileToProcess);
-    addJeopardyGame(csvData)
-    
   };
 
-  return (  
+  return (
     <div className="game-csv">
-      <ToastContainer/>
-      
+      <ToastContainer />
+
       <div className="controls">
         <div className="select-container">
           <label htmlFor="select-game">Select game:</label>
           <hr></hr>
-          <select 
-            id="select-game" 
-            value={selectedGame} 
+          <select
+            id="select-game"
+            value={selectedGame}
             onChange={handleGameChange}
             className="select-game"
           >
@@ -141,19 +140,19 @@ export default function GameSelectionCSVProcessor() {
             ))}
           </select>
         </div>
-        
+
         <div className="upload-file-container">
           <label className="upload-file-button">
             Upload file
-            <input 
-              type="file" 
-              accept=".csv" 
-              onChange={handleFileUpload} 
+            <input
+              type="file"
+              accept=".csv"
+              onChange={handleFileUpload}
               disabled={!selectedGame}
             />
           </label>
         </div>
-        </div>
+      </div>
 
       {status === 'success' && (
         <>
@@ -181,12 +180,12 @@ export default function GameSelectionCSVProcessor() {
 
             </table>
           </div>
-          
+
         </>
-        
+
       )}
     </div>
 
-    );
-  
+  );
+
 }
