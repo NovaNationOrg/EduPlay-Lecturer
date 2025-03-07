@@ -27,17 +27,17 @@
     grid-template-columns: repeat(6, 1fr);
     align-items: center;
     justify-items: center;
-    grid-gap: 10px;    
-} 
+    grid-gap: 10px;
+}
 
 .jeopardy-category {
     font-size: 1.2em;
-    border-radius:20px;
+    border-radius: 20px;
     background-color: #1C1C1C;
     text-align: center;
 }
 
-.jeopardy-categories { 
+.jeopardy-categories {
     border-radius: 20px;
     text-align: center;
     text-decoration: none;
@@ -64,12 +64,12 @@
 
 .jeopardy-quesion {
     font-size: 1.2em;
-    border-radius:20px;
+    border-radius: 20px;
     background-color: #1C1C1C;
     text-align: center;
 }
 
-.jeopardy-questions{
+.jeopardy-questions {
     border-radius: 15px;
     text-align: center;
     text-decoration: none;
@@ -82,5 +82,16 @@
     background-color: #454545;
 }
 
+.join-area {
+    display: flex;
+    justify-content: center;
+    margin: 3%;
+}
 
+.join-button {
+    align-content: center;
+    align-self: center;
 
+    margin-left: auto;
+    margin-right: auto;
+}
