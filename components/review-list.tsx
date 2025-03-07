@@ -14,11 +14,13 @@ export default function ListData() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const jpLists: JeopardyGame[][] = [[]]
     let categoryData: JeopardyGame[] | undefined
-
+    const game_id = sessionStorage.getItem("game_id")!
     for (let i = 0; i <= 5; i++) {
         // eslint-disable-next-line react-hooks/rules-of-hooks
+        const num = i+1
+        
         categoryData = useLiveQuery(() =>
-            db.jeopardyData.where("category_num").equals(i + 1).toArray()
+            db.jeopardyData.where("[game_id+category_num]").equals([game_id,num]).toArray()
         );
 
         if (categoryData != undefined)

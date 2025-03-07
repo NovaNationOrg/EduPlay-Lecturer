@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { generateUUID } from '../../components/uuid-generator';
 
 interface GameModalProps {
   isOpen: boolean;
@@ -9,6 +10,10 @@ interface GameModalProps {
   category: string;
   time: string;
   players: string;
+}
+
+function setGameCode(){
+  sessionStorage.setItem("game_id","jp"+generateUUID())
 }
 
 const GameModal: React.FC<GameModalProps> = ({ 
@@ -32,7 +37,7 @@ const GameModal: React.FC<GameModalProps> = ({
         <div className="modal-content">
           <div className="modal-left">
             <Link  to={"/jeopardy"}>
-              <button className="modal-button">
+              <button className="modal-button" onClick={setGameCode}>
                 Play Now
               </button>
             </Link>

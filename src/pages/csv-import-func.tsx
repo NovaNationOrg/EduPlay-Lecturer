@@ -2,6 +2,9 @@ import { ChangeEvent, useState } from "react";
 import { parse } from "csv-parse/browser/esm/sync";
 import { ToastContainer, toast } from 'react-toastify';
 import { addJeopardyGame } from "../database/scripts/jeopardy-import";
+import { Link } from "react-router-dom";
+import {generateUUID} from "../../components/uuid-generator";
+
 
 
 export type Jeopardy = {
@@ -16,13 +19,20 @@ type Game = {
   name: string;
 };
 
+
+
 export default function GameSelectionCSVProcessor() {
   const [csvData, setCsvData] = useState<Jeopardy[]>([]);
   const [, setFilename] = useState("");
   const [status, setStatus] = useState<'initial' | 'success' | 'fail' | 'invalid_count'>('initial');
   const [selectedGame, setSelectedGame] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
+  const [gameId,setGameID] = useState("")
 
+
+  function prepareCode(){
+    sessionStorage.setItem("game_id","jp"+gameId)
+  }
 
   const gameOptions: Game[] = [
     { id: "game1", name: "Jeopardy" },
@@ -101,7 +111,9 @@ export default function GameSelectionCSVProcessor() {
 
         setCsvData(recordsWithId);
         setStatus('success');
-        addJeopardyGame(recordsWithId);
+        const gameID = generateUUID()
+        addJeopardyGame(recordsWithId,gameID);
+        setGameID(gameID)
         generateToast(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, "success-process");
         console.log(`Parsed CSV data for ${gameId}:`, recordsWithId);
 
@@ -151,6 +163,11 @@ export default function GameSelectionCSVProcessor() {
               disabled={!selectedGame}
             />
           </label>
+          {status =="success" &&
+            <Link to ="/original">
+            <button onClick={prepareCode}>Generate Code</button>
+            </Link>
+          }
         </div>
       </div>
 

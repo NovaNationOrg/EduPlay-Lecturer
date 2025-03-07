@@ -1,4 +1,3 @@
-import MyUUID from "../../../components/uuid-generator";
 import { Jeopardy } from "../../pages/csv-import-func";
 // import {toast } from 'react-toastify';
 import { db } from "../db";
@@ -9,11 +8,11 @@ const date = new Date();
 //    toastId: toastIO
 //     });
 //   };
-export async function addJeopardyGame(jeopardyContent: Jeopardy[]) {
+export async function addJeopardyGame(jeopardyContent: Jeopardy[],gameID:string) {
 
     let category_num = 0
 
-    const gameID = MyUUID
+    
 
     await db.gameList.add({
         game_code: "_jp_",
