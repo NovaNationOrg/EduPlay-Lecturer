@@ -2,6 +2,8 @@ import { useLiveQuery } from "dexie-react-hooks"
 import { JSX, useEffect, useState } from "react"
 import { db } from "../src/database/db";
 import { JeopardyGame } from "../src/database/interfaces/jeopardy";
+import leftArrow from "../assets/images/jeopardy/left-arrow.png";
+import rightArrow from "../assets/images/jeopardy/right-arrow.png";
 
 export default function ListData() {
 
@@ -59,21 +61,21 @@ export default function ListData() {
     if (currentPage === 1) {
         paginationArrow =
             <div className="page-arrow">
-                <img className="right-arrow" src="../assets/images/jeopardy/right-arrow.png" alt="right-arrow" onClick={incrementCurrentPage} />
+                <img className="right-arrow" src={rightArrow} alt="right-arrow" onClick={incrementCurrentPage} />
             </div>
     }
     else
         if (currentPage === 6) {
             paginationArrow =
                 <div className="page-arrow">
-                    <img className="left-arrow" src="../assets/images/jeopardy/left-arrow.png" alt="left-arrow" onClick={decrementCurrentPage} />
+                    <img className="left-arrow" src={leftArrow} alt="left-arrow" onClick={decrementCurrentPage} />
                 </div>
         }
         else {
             paginationArrow =
                 <div className="page-arrow">
-                    <img className="left-arrow" src="../assets/images/jeopardy/left-arrow.png" alt="left-arrow" onClick={decrementCurrentPage} />
-                    <img className="right-arrow" src="../assets/images/jeopardy/right-arrow.png" alt="right-arrow" onClick={incrementCurrentPage} />
+                    <img className="left-arrow" src={leftArrow} alt="left-arrow" onClick={decrementCurrentPage} />
+                    <img className="right-arrow" src={rightArrow} alt="right-arrow" onClick={incrementCurrentPage} />
                 </div>
         }
 
