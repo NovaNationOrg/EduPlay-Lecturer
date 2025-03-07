@@ -4,11 +4,10 @@ import QRCode from "react-qr-code"
 import { db } from "../database/db"
 import { JeopardyGame } from '../database/interfaces/jeopardy'
 import "../styles/jeopardy/qrPage.css"
-import MyUUID from '../../components/uuid-generator';
 
 async function gatherQrData() {
 
-  const jeopardyGameDatas = await db.jeopardyData.where("game_id").equals("jp1").toArray()
+  const jeopardyGameDatas = await db.jeopardyData.where("game_id").equals(sessionStorage.getItem("game_id")!).toArray()
   const jeopardyGameData: JeopardyGame[] = []
 
   jeopardyGameData.push(...jeopardyGameDatas)
@@ -25,11 +24,9 @@ async function gatherQrData() {
 
   console.log(jeopardyGameData)
 
-  if (sessionStorage.getItem("uuid") != null)
-    sessionStorage.setItem("uuid", MyUUID)
 
   let qrPayload = ""
-  qrPayload += "_jp_\njp" + MyUUID + "\n"
+  qrPayload += "_jp_\njp" + sessionStorage.getItem("game_id") + "\n"
 
   for (let i = 0; i < jeopardyGameData.length; i++) {
     console.log(jeopardyGameData[i].question)

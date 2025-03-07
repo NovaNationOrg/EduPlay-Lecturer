@@ -56,7 +56,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
     try {
       // questionAnswerData = await db.jeopardyData.where("game_id+category-num").equals(["jp1",sessionStorage.getItem("curr-category")]).toArray()
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      questionAnswerData = useLiveQuery(() => db.jeopardyData.where("[game_id+theme]").equals(["jp1", "default"]).toArray())
+      questionAnswerData = useLiveQuery(() => db.jeopardyData.where("[game_id+theme]").equals([sessionStorage.getItem("game_id")!, sessionStorage.getItem("curr-category")!]).toArray())
       console.log(questionAnswerData)
     } catch (error) {
       console.log(error)
@@ -109,7 +109,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
         }
       }
 
-      db.jeopardyData.where("[game_id+category_num]").equals(["jp1", curr_category]).delete() //#TODO: Make this depend on dynamic values
+      db.jeopardyData.where("[game_id+category_num]").equals([sessionStorage.getItem("game_id")!, curr_category]).delete() //#TODO: Make this depend on dynamic values
       sessionStorage.setItem("isPopulated" + sessionStorage.getItem("curr-category"), "true")
       for (let i = 0; i < items.length; i++) {
         generateToast("Data has been saved", "saved-data-toast")
@@ -117,7 +117,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
         await db.jeopardyData.add({
           question,
           answer,
-          game_id: "jp1", // replace with appropriate value
+          game_id: sessionStorage.getItem("game_id")!, // replace with appropriate value
           theme: category!, // replace with appropriate value
           points: (i + 1) * 100, // replace with appropriate value
           category_num: Number(sessionStorage.getItem("curr-category"))
