@@ -348,7 +348,7 @@ i .jeopardy-down-arrow {
     background-color: #1a1a1a;
     justify-content: space-around;
     font-family: Risque;
-    font-size: 36px;
+    font-size: 1.3em;
     padding: 10px;
 }
 
@@ -362,7 +362,7 @@ i .jeopardy-down-arrow {
 
 .underline-text {
     display: inline-block;
-    background-color: #fff;
+    background-color: #1a1a1a;
     margin-right: 30px;
 }
 
@@ -375,7 +375,7 @@ i .jeopardy-down-arrow {
 .text-block-tag {
     background-color: #1a1a1a;
     width: 17vw;
-    font-size: 16px;
+    font-size: 0.8em;
 }
 
 .header-block {
