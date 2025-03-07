@@ -17,10 +17,10 @@ export default function ListData() {
     const game_id = sessionStorage.getItem("game_id")!
     for (let i = 0; i <= 5; i++) {
         // eslint-disable-next-line react-hooks/rules-of-hooks
-        const num = i+1
-        
+        const num = i + 1
+
         categoryData = useLiveQuery(() =>
-            db.jeopardyData.where("[game_id+category_num]").equals([game_id,num]).toArray()
+            db.jeopardyData.where("[game_id+category_num]").equals([game_id, num]).toArray()
         );
 
         if (categoryData != undefined)
@@ -63,6 +63,7 @@ export default function ListData() {
     if (currentPage === 1) {
         paginationArrow =
             <div className="page-arrow">
+                <div className="empty-arrow"></div>
                 <img className="right-arrow" src={rightArrow} alt="right-arrow" onClick={incrementCurrentPage} />
             </div>
     }
