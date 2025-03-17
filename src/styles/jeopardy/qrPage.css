@@ -7,3 +7,10 @@
     background-color: white;
     border-radius: 25px;
 }
+
+.qr-grid{
+    display: grid;
+    grid-template-columns: 40vw 40vw;
+    gap: 1.3vw;
+
+}
