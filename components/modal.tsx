@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Backdrop from "./backdrop";
 import DropdownComponent from './dropdown';
@@ -19,7 +19,8 @@ interface questionAnswer {
   answer: string
 }
 
-const generateToast = (toastMessage: string, toastIO: string) => {
+const generateToast = (toastMessage: string, toastIO: string) => 
+  {
   toast(toastMessage, {
     toastId: toastIO
   })
@@ -96,10 +97,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
     e.preventDefault();
     const curr_category = Number(sessionStorage.getItem("curr-category"));
     try {
-
-      if (category == "") {
-        generateToast(`Category not set... setting as Category ${sessionStorage.getItem("curr-category")}`, "cat-id")
-      }
+        const categoryToSave = category || `Category ${sessionStorage.getItem("curr-category")}`;
 
       for (const item of items) {
         const { question, answer } = item;
@@ -118,7 +116,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
           question,
           answer,
           game_id: sessionStorage.getItem("game_id")!, // replace with appropriate value
-          theme: category!, // replace with appropriate value
+          theme: categoryToSave!, // replace with appropriate value
           points: (i + 1) * 100, // replace with appropriate value
           category_num: Number(sessionStorage.getItem("curr-category"))
         });
@@ -148,6 +146,30 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
   //   console.log(payload)
   // }
 
+  useEffect(() => {
+  const fetchCategoryName = async () => {
+    try {
+      const gameId = sessionStorage.getItem("game_id");
+      const categoryNum = sessionStorage.getItem("curr-category");
+      
+      if (gameId && categoryNum) {
+        const data = await db.jeopardyData
+          .where("[game_id+category_num]")
+          .equals([gameId, Number(categoryNum)])
+          .first();
+          
+        if (data && data.theme) {
+          updateCategory(data.theme);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching category name:", error);
+    }
+  };
+  
+  fetchCategoryName();
+}, []);
+
   return (
     <Backdrop onClick={handleClose}>
       <motion.div
@@ -163,7 +185,13 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
           <form className="jeopardy-dropdown-form" onSubmit={addData} >
             <button className="jeopardy-close-button" onClick={handleClose}> X </button>
             <div className="jeopardy-modal-content">
-              <input onChange={categoryUpdate} className="jeopardy-modal-title" type="text" placeholder={(`Category ${sessionStorage.getItem("curr-category")}`)}></input>
+            <input 
+              value={category} 
+              onChange={categoryUpdate} 
+              className="jeopardy-modal-title" 
+              type="text" 
+              placeholder={(`Category ${sessionStorage.getItem("curr-category")}`)}
+            ></input>
               <div className="jeopardy-dropdown-menus">
                 <div className="jeopardy-dropdown-items">
                   <DropdownComponent
