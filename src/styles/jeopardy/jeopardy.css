@@ -1,0 +1,97 @@
+@import url("/src/styles/jeopardy/headers.css");
+@import url("/src/styles/jeopardy/backdrop.css");
+@import url("/src/styles/jeopardy/modal.css");
+
+.jeopardy {
+    color: black;
+    font-family: "Fontdiner Swanky";
+    font-size: 3.5em;
+    color: #000;
+    -webkit-text-stroke: 2px #ff13f0;
+    text-align: center;
+}
+
+.jeopardy-game-container {
+    max-width: 950px;
+    padding: 30px;
+    border: solid 2px #474747;
+    border-radius: 13px;
+    background-color: #1C1C1C;
+    justify-content: center;
+    align-items: center;
+}
+
+.jeopardy-category-grid {
+    display: grid;
+    margin: 10px;
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+    justify-items: center;
+    grid-gap: 10px;
+}
+
+.jeopardy-category {
+    font-size: 1.2em;
+    border-radius: 20px;
+    background-color: #1C1C1C;
+    text-align: center;
+}
+
+.jeopardy-categories {
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    /* width: 200px; */
+    padding: 20px;
+    margin: 5px;
+    transition: all .3 ease-in-out;
+}
+
+.jeopardy-categories:focus {
+    background-color: #ff13f0;
+}
+
+.jeopardy-question-grid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    align-items: center;
+    justify-items: center;
+    color: #fff;
+}
+
+.jeopardy-quesion {
+    font-size: 1.2em;
+    border-radius: 20px;
+    background-color: #1C1C1C;
+    text-align: center;
+}
+
+.jeopardy-questions {
+    border-radius: 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    /* width: 200px; */
+    padding: 10px 30px;
+}
+
+.jeopardy-questions:focus {
+    background-color: #454545;
+}
+
+.join-area {
+    display: flex;
+    justify-content: center;
+    margin: 3%;
+}
+
+.join-button {
+    align-content: center;
+    align-self: center;
+
+    margin-left: auto;
+    margin-right: auto;
+}
