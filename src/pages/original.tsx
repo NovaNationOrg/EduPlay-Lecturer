@@ -32,7 +32,7 @@ async function gatherQrData() {
     qrCounter[qrNumber] += jeopardyGameData![i].answer + "\n"
 
     if(qrCounter[qrNumber].length >= qrBuffer){
-      qrCounter.push("_jp_\njp" + game_id + ":" + (qrNumber + 2 )+ "|" + (qrNumber + 2)  +"\n")
+      qrCounter.push("_jp_\n" + game_id + ":" + (qrNumber + 2 )+ "|" + (qrNumber + 2)  +"\n")
       qrNumber = updateQrNumber(qrCounter,qrNumber)
     }  
     
