@@ -1,51 +1,48 @@
 
 import { useState } from 'react'
-import QRCode from "react-qr-code"
 import { db } from "../database/db"
 import { JeopardyGame } from '../database/interfaces/jeopardy'
 import "../styles/jeopardy/qrPage.css"
+import QrCodeGenerator from "../../components/qr-codes"
 
+function updateQrNumber(qrPayloads:string[],qrNumber:number){
+
+  for(let i=0; i < qrPayloads.length;i++)
+    qrPayloads[i] = qrPayloads[i].replace("|" + (qrNumber+1), "|" + (qrNumber+2))
+ 
+  return ++qrNumber
+}
 async function gatherQrData() {
 
   const jeopardyGameDatas = await db.jeopardyData.where("game_id").equals(sessionStorage.getItem("game_id")!).toArray()
   const jeopardyGameData: JeopardyGame[] = []
+  const qrBuffer = 1000
 
   jeopardyGameData.push(...jeopardyGameDatas)
 
-  jeopardyGameData.sort((a, b) => {
-    if (a.category_num < b.category_num) {
-      return -1;
-    }
-    if (a.category_num > b.category_num) {
-      return 1;
-    }
-    return 0;
-  })
-
-  console.log(jeopardyGameData)
-
-
-  let qrPayload = ""
-  qrPayload += "_jp_\njp" + sessionStorage.getItem("game_id") + "\n"
-
-  for (let i = 0; i < jeopardyGameData.length; i++) {
-    console.log(jeopardyGameData[i].question)
-  }
-
+  let qrCounter = [""], qrNumber = 0
+   
+  const game_id = sessionStorage.getItem("game_id")
+  qrCounter[qrNumber] += "_jp_\n" + game_id + ":1|1\n"
   for (let i = 0; i < 29; i++) {
     if (i % 5 == 0) {
-      qrPayload += jeopardyGameData![i].theme + "\n"
+      qrCounter[qrNumber] += jeopardyGameData![i].theme + "\n"
     }
-    qrPayload += jeopardyGameData![i].question + "\n"
-    qrPayload += jeopardyGameData![i].answer + "\n"
+    qrCounter[qrNumber] += jeopardyGameData![i].question + "\n"
+    qrCounter[qrNumber] += jeopardyGameData![i].answer + "\n"
 
+    if(qrCounter[qrNumber].length >= qrBuffer){
+      qrCounter.push("_jp_\n" + game_id + ":" + (qrNumber + 2 )+ "|" + (qrNumber + 2)  +"\n")
+      qrNumber = updateQrNumber(qrCounter,qrNumber)
+    }  
+    
   }
-  qrPayload += jeopardyGameData![29].question + "\n"
-  qrPayload += jeopardyGameData![29].answer
+  qrCounter[qrNumber] += jeopardyGameData![29].question + "\n"
+  qrCounter[qrNumber] += jeopardyGameData![29].answer
 
 
-  console.log(qrPayload)
-  return qrPayload
+  return qrCounter.join("|_|")
+
 }
 
 function Original() {
@@ -57,19 +54,11 @@ function Original() {
   };
   fetchData();
 
-
   return (
     <>
-      <h1 className='qr-title'>Scan QR Code To Play</h1>
-      <div className='qr-container' >
-        <QRCode
-          size={256}
-          style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-          value={question}
-          viewBox={`0 0 256 256`}
-          className=''
-        />
-
+      <h1 className='qr-title'>Scan QR Code(s) To Play</h1>
+      <div className='qr-grid'>
+        <QrCodeGenerator payload={question} />
       </div>
     </>
   )
