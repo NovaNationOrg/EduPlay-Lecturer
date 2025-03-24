@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Backdrop from "./backdrop";
 import DropdownComponent from './dropdown';
 import { db } from "../src/database/db";
-import { ToastContainer, toast } from 'react-toastify';
+import {Toaster,toast} from 'sonner'
 import { useLiveQuery } from "dexie-react-hooks"
 import { JeopardyGame } from "../src/database/interfaces/jeopardy";
 
@@ -14,19 +14,6 @@ interface ModalProps {
   text: string;
 }
 
-interface questionAnswer {
-  question: string,
-  answer: string
-}
-
-const generateToast = (toastMessage: string, toastIO: string) => 
-  {
-  toast(toastMessage, {
-    toastId: toastIO
-  })
-}
-
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface FormEvent extends React.FormEvent<HTMLFormElement> { }
 
 const dropIn = {
@@ -49,14 +36,12 @@ const dropIn = {
 };
 
 const Modal: React.FC<ModalProps> = ({ handleClose }) => {
-  // const questionAnswerData = db.jeopardyData.where("theme").equals(currTheme!).toArray()
 
   const [category, updateCategory] = useState("")
   let questionAnswerData: JeopardyGame[] | undefined
   if (sessionStorage.getItem("isPopulated") == "true") {
     try {
-      // questionAnswerData = await db.jeopardyData.where("game_id+category-num").equals(["jp1",sessionStorage.getItem("curr-category")]).toArray()
-      // eslint-disable-next-line react-hooks/rules-of-hooks
+   
       questionAnswerData = useLiveQuery(() => db.jeopardyData.where("[game_id+theme]").equals([sessionStorage.getItem("game_id")!, sessionStorage.getItem("curr-category")!]).toArray())
       console.log(questionAnswerData)
     } catch (error) {
@@ -70,24 +55,8 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
     setItems(newItems);
   };
 
-  const questionAnswer: questionAnswer[] = []
-  console.log(questionAnswerData == undefined)
-  if (questionAnswerData != undefined) {
-    if (questionAnswerData.length > 0) {
-      for (let i = 0; i < 5; i++) {
-        questionAnswer.push({ question: questionAnswerData[i].question, answer: questionAnswerData[i].answer })
-      }
-    }
-  } else {
 
-    // for(let x=0;x<5;x++){
-    //   questionAnswer.push({question:"",answer:''})
-
-    // }
-  }
-
-  const [items, setItems] = useState( //#FIX find less inneficient solution
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [items, setItems] = useState(
     [...Array(5)].map((_value) => (
       { question: "", answer: "", setQuestion: () => { }, setAnswer: () => { } }
     ))
@@ -102,7 +71,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
       for (const item of items) {
         const { question, answer } = item;
         if (question == "" || answer == "") {
-          generateToast("Please complete all of the fields!!", "quest-id")
+          toast.warning("Please complete all of the fields!!", {id: "quest-id"})
           return
         }
       }
@@ -110,14 +79,14 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
       db.jeopardyData.where("[game_id+category_num]").equals([sessionStorage.getItem("game_id")!, curr_category]).delete() //#TODO: Make this depend on dynamic values
       sessionStorage.setItem("isPopulated" + sessionStorage.getItem("curr-category"), "true")
       for (let i = 0; i < items.length; i++) {
-        generateToast("Data has been saved", "saved-data-toast")
+        toast.success("Data has been saved", {id: "saved-data-toast"})
         const { question, answer } = items[i];
         await db.jeopardyData.add({
           question,
           answer,
-          game_id: sessionStorage.getItem("game_id")!, // replace with appropriate value
-          theme: categoryToSave!, // replace with appropriate value
-          points: (i + 1) * 100, // replace with appropriate value
+          game_id: sessionStorage.getItem("game_id")!, 
+          theme: categoryToSave!, 
+          points: (i + 1) * 100, 
           category_num: Number(sessionStorage.getItem("curr-category"))
         });
       }
@@ -135,16 +104,6 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
       updateCategory(`Category ${sessionStorage.getItem("curr-category")}`)
     } else { /* empty */ }
   }
-
-  // const onSubmit = (e:FormEvent) => {
-  //   e.preventDefault();
-
-
-  //   const formData = new FormData(e.target as HTMLFormElement)
-  //   const payload = Object.fromEntries(formData)
-
-  //   console.log(payload)
-  // }
 
   useEffect(() => {
   const fetchCategoryName = async () => {
@@ -180,7 +139,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
         animate="visible"
         exit="exit"
       >
-        <ToastContainer />
+        <Toaster richColors position="top-right" />
         <div className="jeopardy-modal-container">
           <form className="jeopardy-dropdown-form" onSubmit={addData} >
             <button className="jeopardy-close-button" onClick={handleClose}> X </button>

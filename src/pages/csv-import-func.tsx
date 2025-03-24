@@ -1,11 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import { parse } from "csv-parse/browser/esm/sync";
-import { ToastContainer, toast } from 'react-toastify';
 import { addJeopardyGame } from "../database/scripts/jeopardy-import";
 import { Link } from "react-router-dom";
 import {generateUUID} from "../../components/uuid-generator";
-
-
+import { Toaster , toast} from "sonner";
 
 export type Jeopardy = {
   id: string;
@@ -18,8 +16,6 @@ type Game = {
   id: string;
   name: string;
 };
-
-
 
 export default function GameSelectionCSVProcessor() {
   const [csvData, setCsvData] = useState<Jeopardy[]>([]);
@@ -41,7 +37,7 @@ export default function GameSelectionCSVProcessor() {
 
   const generateToast = (toastMessage: string, toastIO: string) => {
     toast(toastMessage, {
-      toastId: toastIO
+      id: toastIO
     });
   };
 
@@ -132,7 +128,7 @@ export default function GameSelectionCSVProcessor() {
 
   return (
     <div className="game-csv">
-      <ToastContainer />
+      <Toaster />
 
       <div className="controls">
         <div className="select-container">
