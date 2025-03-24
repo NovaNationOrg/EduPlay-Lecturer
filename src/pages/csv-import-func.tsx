@@ -35,11 +35,6 @@ export default function GameSelectionCSVProcessor() {
 
   ];
 
-  const generateToast = (toastMessage: string, toastIO: string) => {
-    toast(toastMessage, {
-      id: toastIO
-    });
-  };
 
   const handleGameChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const gameId = e.target.value;
@@ -64,7 +59,7 @@ export default function GameSelectionCSVProcessor() {
 
     }
     else {
-      generateToast("Please select a game type first", "error-game-selection");
+      toast.warning("Please select a game type first", {id:"error-game-selection"});
     }
   };
 
@@ -74,7 +69,7 @@ export default function GameSelectionCSVProcessor() {
     reader.onload = (evt) => {
       if (!evt?.target?.result) {
         setStatus('fail');
-        generateToast("Failed to read file contents", "error-file-read");
+        toast.error("Failed to read file contents", {id:"error-file-read"});
         return;
       }
 
@@ -101,7 +96,7 @@ export default function GameSelectionCSVProcessor() {
 
         if (recordsWithId.length !== required_records) {
           setStatus('invalid_count');
-          generateToast(`CSV must contain exactly ${required_records} records (6 categories × 5 questions). Found: ${recordsWithId.length}`, "error-record-count");
+          toast.warning(`CSV must contain exactly ${required_records} records (6 categories × 5 questions). Found: ${recordsWithId.length}`, {id:"error-record-count"});
           return;
         }
 
@@ -110,7 +105,7 @@ export default function GameSelectionCSVProcessor() {
         const gameID = generateUUID()
         addJeopardyGame(recordsWithId,gameID);
         setGameID(gameID)
-        generateToast(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, "success-process");
+        toast.success(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, {id:"success-process"});
         console.log(`Parsed CSV data for ${gameId}:`, recordsWithId);
 
       }
@@ -118,7 +113,7 @@ export default function GameSelectionCSVProcessor() {
       catch (error) {
         console.error("Error parsing CSV:", error);
         setStatus('fail');
-        generateToast("Failed to parse CSV file. Please check the format and try again.", "error-parse");
+        toast.error("Failed to parse CSV file. Please check the format and try again.", {id:"error-parse"});
 
       }
     };
@@ -128,7 +123,7 @@ export default function GameSelectionCSVProcessor() {
 
   return (
     <div className="game-csv">
-      <Toaster />
+      <Toaster richColors position="top-right" />
 
       <div className="controls">
         <div className="select-container">
