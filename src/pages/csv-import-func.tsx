@@ -1,11 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import { parse } from "csv-parse/browser/esm/sync";
-import { ToastContainer, toast } from 'react-toastify';
 import { addJeopardyGame } from "../database/scripts/jeopardy-import";
 import { Link } from "react-router-dom";
 import {generateUUID} from "../../components/uuid-generator";
-
-
+import { Toaster , toast} from "sonner";
 
 export type Jeopardy = {
   id: string;
@@ -18,8 +16,6 @@ type Game = {
   id: string;
   name: string;
 };
-
-
 
 export default function GameSelectionCSVProcessor() {
   const [csvData, setCsvData] = useState<Jeopardy[]>([]);
@@ -39,11 +35,6 @@ export default function GameSelectionCSVProcessor() {
 
   ];
 
-  const generateToast = (toastMessage: string, toastIO: string) => {
-    toast(toastMessage, {
-      toastId: toastIO
-    });
-  };
 
   const handleGameChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const gameId = e.target.value;
@@ -68,7 +59,7 @@ export default function GameSelectionCSVProcessor() {
 
     }
     else {
-      generateToast("Please select a game type first", "error-game-selection");
+      toast.warning("Please select a game type first", {id:"error-game-selection"});
     }
   };
 
@@ -78,7 +69,7 @@ export default function GameSelectionCSVProcessor() {
     reader.onload = (evt) => {
       if (!evt?.target?.result) {
         setStatus('fail');
-        generateToast("Failed to read file contents", "error-file-read");
+        toast.error("Failed to read file contents", {id:"error-file-read"});
         return;
       }
 
@@ -105,7 +96,7 @@ export default function GameSelectionCSVProcessor() {
 
         if (recordsWithId.length !== required_records) {
           setStatus('invalid_count');
-          generateToast(`CSV must contain exactly ${required_records} records (6 categories × 5 questions). Found: ${recordsWithId.length}`, "error-record-count");
+          toast.warning(`CSV must contain exactly ${required_records} records (6 categories × 5 questions). Found: ${recordsWithId.length}`, {id:"error-record-count"});
           return;
         }
 
@@ -114,7 +105,7 @@ export default function GameSelectionCSVProcessor() {
         const gameID = generateUUID()
         addJeopardyGame(recordsWithId,gameID);
         setGameID(gameID)
-        generateToast(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, "success-process");
+        toast.success(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, {id:"success-process"});
         console.log(`Parsed CSV data for ${gameId}:`, recordsWithId);
 
       }
@@ -122,7 +113,7 @@ export default function GameSelectionCSVProcessor() {
       catch (error) {
         console.error("Error parsing CSV:", error);
         setStatus('fail');
-        generateToast("Failed to parse CSV file. Please check the format and try again.", "error-parse");
+        toast.error("Failed to parse CSV file. Please check the format and try again.", {id:"error-parse"});
 
       }
     };
@@ -132,7 +123,7 @@ export default function GameSelectionCSVProcessor() {
 
   return (
     <div className="game-csv">
-      <ToastContainer />
+      <Toaster richColors position="top-right" />
 
       <div className="controls">
         <div className="select-container">
