@@ -14,7 +14,7 @@ function updateQrNumber(qrPayloads:string[],qrNumber:number){
 }
 async function gatherQrData() {
 
-  const jeopardyGameDatas = await db.jeopardyData.where("game_id").equals(sessionStorage.getItem("game_id")!).toArray()
+  const jeopardyGameDatas = await db.jeopardyData.where("game_id").equals(localStorage.getItem("jp_game_id")!).toArray()
   const jeopardyGameData: JeopardyGame[] = []
   const qrBuffer = 1000
 
@@ -22,7 +22,7 @@ async function gatherQrData() {
 
   let qrCounter = [""], qrNumber = 0
    
-  const game_id = sessionStorage.getItem("game_id")
+  const game_id = localStorage.getItem("jp_game_id")
   qrCounter[qrNumber] += "_jp_\n" + game_id + ":1|1\n"
   for (let i = 0; i < 29; i++) {
     if (i % 5 == 0) {

@@ -39,10 +39,10 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
 
   const [category, updateCategory] = useState("")
   let questionAnswerData: JeopardyGame[] | undefined
-  if (sessionStorage.getItem("isPopulated") == "true") {
+  if (localStorage.getItem("jp_isPopulated") == "true") {
     try {
    
-      questionAnswerData = useLiveQuery(() => db.jeopardyData.where("[game_id+theme]").equals([sessionStorage.getItem("game_id")!, sessionStorage.getItem("curr-category")!]).toArray())
+      questionAnswerData = useLiveQuery(() => db.jeopardyData.where("[game_id+theme]").equals([localStorage.getItem("jp_game_id")!, sessionStorage.getItem("curr-category")!]).toArray())
       console.log(questionAnswerData)
     } catch (error) {
       console.log(error)
@@ -76,15 +76,15 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
         }
       }
 
-      db.jeopardyData.where("[game_id+category_num]").equals([sessionStorage.getItem("game_id")!, curr_category]).delete() //#TODO: Make this depend on dynamic values
-      sessionStorage.setItem("isPopulated" + sessionStorage.getItem("curr-category"), "true")
+      db.jeopardyData.where("[game_id+category_num]").equals([localStorage.getItem("jp_game_id")!, curr_category]).delete() //#TODO: Make this depend on dynamic values
+      localStorage.setItem("jp_isPopulated" + sessionStorage.getItem("curr-category"), "true")
       for (let i = 0; i < items.length; i++) {
         toast.success("Data has been saved", {id: "saved-data-toast"})
         const { question, answer } = items[i];
         await db.jeopardyData.add({
           question,
           answer,
-          game_id: sessionStorage.getItem("game_id")!, 
+          game_id: localStorage.getItem("jp_game_id")!, 
           theme: categoryToSave!, 
           points: (i + 1) * 100, 
           category_num: Number(sessionStorage.getItem("curr-category"))
@@ -108,7 +108,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
   useEffect(() => {
   const fetchCategoryName = async () => {
     try {
-      const gameId = sessionStorage.getItem("game_id");
+      const gameId = localStorage.getItem("jp_game_id");
       const categoryNum = sessionStorage.getItem("curr-category");
       
       if (gameId && categoryNum) {

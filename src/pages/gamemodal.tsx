@@ -13,7 +13,7 @@ interface GameModalProps {
 }
 
 function setGameCode(){
-  sessionStorage.setItem("game_id","jp"+generateUUID())
+  localStorage.setItem("jp_game_id","jp"+generateUUID())
 }
 
 const GameModal: React.FC<GameModalProps> = ({ 

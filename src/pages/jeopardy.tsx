@@ -17,7 +17,7 @@ function setCategory(index: number) {
 
 function isFormCompleted() {
     for (let i = 0; i < 6; i++) {
-        if (sessionStorage.getItem("isPopulated" + (i + 1)) == null)
+        if (localStorage.getItem("jp_isPopulated" + (i + 1)) == null)
             return false
     }
     return true

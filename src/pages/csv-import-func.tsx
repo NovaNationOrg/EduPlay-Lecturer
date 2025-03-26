@@ -27,7 +27,7 @@ export default function GameSelectionCSVProcessor() {
 
 
   function prepareCode(){
-    sessionStorage.setItem("game_id","jp"+gameId)
+    localStorage.setItem("jp_game_id","jp"+gameId)
   }
 
   const gameOptions: Game[] = [
