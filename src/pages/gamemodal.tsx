@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { generateUUID } from '../../components/uuid-generator';
-
+import {handleDraft} from "../../components/draft-handler"
 interface GameModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -13,7 +12,7 @@ interface GameModalProps {
 }
 
 function setGameCode(){
-  localStorage.setItem("jp_game_id","jp"+generateUUID())
+  handleDraft("_jp_")
 }
 
 const GameModal: React.FC<GameModalProps> = ({ 

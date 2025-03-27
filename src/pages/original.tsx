@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { db } from "../database/db"
 import { JeopardyGame } from '../database/interfaces/jeopardy'
 import "../styles/jeopardy/qrPage.css"
@@ -12,9 +12,21 @@ function updateQrNumber(qrPayloads:string[],qrNumber:number){
  
   return ++qrNumber
 }
-async function gatherQrData() {
 
-  const jeopardyGameDatas = await db.jeopardyData.where("game_id").equals(localStorage.getItem("jp_game_id")!).toArray()
+function clearLocalStorage(){
+    const game_code = localStorage.getItem("game_code")
+    if(game_code == undefined)
+      return
+    for(let i=0;i < Number(localStorage.getItem(game_code+"num_categories"));i++){
+      localStorage.removeItem(game_code+"isPopulated"+(i+1))
+    }
+    localStorage.removeItem(game_code+"populated_count")
+    localStorage.removeItem(game_code+"num_categories")
+    localStorage.removeItem("game_code")
+}
+async function gatherQrData() {
+  
+  const jeopardyGameDatas = await db.jeopardyData.where("game_id").equals(localStorage.getItem("_jp_game_id")!).toArray()
   const jeopardyGameData: JeopardyGame[] = []
   const qrBuffer = 1000
 
@@ -22,7 +34,7 @@ async function gatherQrData() {
 
   let qrCounter = [""], qrNumber = 0
    
-  const game_id = localStorage.getItem("jp_game_id")
+  const game_id = localStorage.getItem("_jp_game_id")
   qrCounter[qrNumber] += "_jp_\n" + game_id + ":1|1\n"
   for (let i = 0; i < 29; i++) {
     if (i % 5 == 0) {
@@ -53,6 +65,10 @@ function Original() {
     setQuestion(data);
   };
   fetchData();
+
+  useEffect(()=>{
+    clearLocalStorage()
+  },[])
 
   return (
     <>
