@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { db } from "../src/database/db";
-// import { JeopardyGame } from "../src/database/interfaces/jeopardy";
+import { Link } from 'react-router-dom';
 
 interface DropdownComponentProps {
     category: string;
@@ -89,7 +89,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0 }}
                         >
-                        <motion.button className='jeopardy-prev-button'>Previous Games</motion.button>
+                        <Link to = "/PreviousGames"><motion.button className='jeopardy-prev-button'>Previous Games</motion.button></Link>
                         <div className="jeopardy-dropdown-list">
                             {items.map((item, index) => (
                                 <div key={index} className="jeopardy-input-box">
