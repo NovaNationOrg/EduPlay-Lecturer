@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 import Backdrop from "./backdrop";
 import DropdownComponent from './dropdown';
 import { db } from "../src/database/db";
-import {Toaster,toast} from 'sonner'
+import {toast} from 'sonner'
 import { useLiveQuery } from "dexie-react-hooks"
 import { JeopardyGame } from "../src/database/interfaces/jeopardy";
+import { deleteJeopardyCategory } from "../src/database/scripts/jeopardy-import";
 
 /* Interfaces for use */
 
@@ -36,13 +37,13 @@ const dropIn = {
 };
 
 const Modal: React.FC<ModalProps> = ({ handleClose }) => {
-
+  
   const [category, updateCategory] = useState("")
   let questionAnswerData: JeopardyGame[] | undefined
-  if (sessionStorage.getItem("isPopulated") == "true") {
+  if (localStorage.getItem("_jp_isPopulated") == "true") {
     try {
    
-      questionAnswerData = useLiveQuery(() => db.jeopardyData.where("[game_id+theme]").equals([sessionStorage.getItem("game_id")!, sessionStorage.getItem("curr-category")!]).toArray())
+      questionAnswerData = useLiveQuery(() => db.jeopardyData.where("[game_id+theme]").equals([localStorage.getItem("_jp_game_id")!, sessionStorage.getItem("curr-category")!]).toArray())
       console.log(questionAnswerData)
     } catch (error) {
       console.log(error)
@@ -76,15 +77,16 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
         }
       }
 
-      db.jeopardyData.where("[game_id+category_num]").equals([sessionStorage.getItem("game_id")!, curr_category]).delete() //#TODO: Make this depend on dynamic values
-      sessionStorage.setItem("isPopulated" + sessionStorage.getItem("curr-category"), "true")
+      deleteJeopardyCategory(localStorage.getItem("_jp_game_id")!,curr_category)
+      localStorage.setItem("_jp_isPopulated" + sessionStorage.getItem("curr-category"), "true")
+      const game_code = localStorage.getItem("game_code")
       for (let i = 0; i < items.length; i++) {
         toast.success("Data has been saved", {id: "saved-data-toast"})
         const { question, answer } = items[i];
         await db.jeopardyData.add({
           question,
           answer,
-          game_id: sessionStorage.getItem("game_id")!, 
+          game_id: localStorage.getItem(game_code+"game_id")!, 
           theme: categoryToSave!, 
           points: (i + 1) * 100, 
           category_num: Number(sessionStorage.getItem("curr-category"))
@@ -108,7 +110,7 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
   useEffect(() => {
   const fetchCategoryName = async () => {
     try {
-      const gameId = sessionStorage.getItem("game_id");
+      const gameId = localStorage.getItem("_jp_game_id");
       const categoryNum = sessionStorage.getItem("curr-category");
       
       if (gameId && categoryNum) {
@@ -139,7 +141,6 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
         animate="visible"
         exit="exit"
       >
-        <Toaster richColors position="top-right" />
         <div className="jeopardy-modal-container">
           <form className="jeopardy-dropdown-form" onSubmit={addData} >
             <button className="jeopardy-close-button" onClick={handleClose}> X </button>
