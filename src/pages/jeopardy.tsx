@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import Header from "../../components/header.tsx"
 import { motion, AnimatePresence } from "framer-motion"
 import Modal from "../../components/modal.tsx"
@@ -41,9 +40,6 @@ function Jeopardy() {
     return (
         <>
             <Header headerText="Jeopardy" gameClass="jeopardy" />
-            <div className="prev-games">
-                <Link to="/PreviousGames"><motion.button className="prev-button">Previous Games</motion.button></Link>
-            </div>
             <main>
                 <div className="jeopardy-game-container">
                     <div className="jeopardy-category-grid">
