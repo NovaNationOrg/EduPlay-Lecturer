@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from "../../components/header.tsx"
 import { motion, AnimatePresence } from "framer-motion"
 import Modal from "../../components/modal.tsx"
 import ReviewModal from '../../components/review-modal';
-// import { useLiveQuery } from 'dexie-react-hooks';
-// import { db } from '../database/db.ts';
 import ListData from '../../components/review-list';
+import { Toaster } from 'sonner';
+import { generateDraftToast } from '../../components/draft-handler.tsx';
 
 const jeopardy_grid = [
     "Category 1", "Category 2", "Category 3", "Category 4", "Category 5", "Category 6",
@@ -17,8 +17,10 @@ function setCategory(index: number) {
 
 function isFormCompleted() {
     for (let i = 0; i < 6; i++) {
-        if (sessionStorage.getItem("isPopulated" + (i + 1)) == null)
+        if (localStorage.getItem("_jp_isPopulated" + (i + 1)) == null){
+            localStorage.setItem("_jp_populated_count",i.toString())
             return false
+        }
     }
     return true
 }
@@ -27,6 +29,7 @@ function Jeopardy() {
     const [modalOpen, setModalOpen] = useState(false);
     const [reviewModalOpen, setModalState] = useState(false)
 
+    
     const completedForm = isFormCompleted()
 
     const open = () => setModalOpen(true);
@@ -35,11 +38,16 @@ function Jeopardy() {
     const reviewOpen = () => setModalState(true);
     const reviewClose = () => setModalState(false);
 
-    // sessionStorage.setItem("review-page", "0")
+    useEffect(()=>{
+        localStorage.setItem("_jp_num_categories","6")
+        if(localStorage.getItem("_jp_in_draftable") != null)
+            generateDraftToast()
+    },[])
 
     return (
         <>
             <Header headerText="Jeopardy" gameClass="jeopardy" />
+            <Toaster richColors position="top-right" />
             <main>
                 <div className="jeopardy-game-container">
                     <div className="jeopardy-category-grid">

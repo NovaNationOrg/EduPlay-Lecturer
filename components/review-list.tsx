@@ -14,7 +14,7 @@ export default function ListData() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const jpLists: JeopardyGame[][] = [[]]
     let categoryData: JeopardyGame[] | undefined
-    const game_id = sessionStorage.getItem("game_id")!
+    const game_id = localStorage.getItem("_jp_game_id")!
     for (let i = 0; i <= 5; i++) {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const num = i + 1

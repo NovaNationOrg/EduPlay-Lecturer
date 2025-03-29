@@ -18,7 +18,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const gameId = sessionStorage.getItem("game_id");
+                const gameId = localStorage.getItem("_jp_game_id");
                 const categoryNum = sessionStorage.getItem("curr-category");
                 
                 if (gameId && categoryNum) {
