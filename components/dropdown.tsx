@@ -89,7 +89,6 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ category, items }
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0 }}
                         >
-                        <motion.button className='jeopardy-prev-button'>Previous Games</motion.button>
                         <div className="jeopardy-dropdown-list">
                             {items.map((item, index) => (
                                 <div key={index} className="jeopardy-input-box">

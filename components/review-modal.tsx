@@ -14,12 +14,17 @@ const ReviewModal: React.FC<ModalProps> = ({ isOpen, handleClose, children }) =>
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const navigate = useNavigate();
 
+    function handleTransition() {
+        localStorage.setItem("first_load", "true")
+        navigate("/original")
+    }
+
     return (
         <Backdrop onClick={handleClose}>
             <div className="jeopardy-review-modal" onClick={(e) => e.stopPropagation()}>
                 {children}
                 <motion.button
-                    onClick={() => navigate("/original")}
+                    onClick={() => handleTransition()}
                     whileTap={{ y: 1 }}
                     className="jeopardy-start-button"
                     type="submit"

@@ -15,14 +15,16 @@ function updateQrNumber(qrPayloads:string[],qrNumber:number){
 
 function clearLocalStorage(){
     const game_code = localStorage.getItem("game_code")
-    if(game_code == undefined)
+    const first_load = localStorage.getItem("first_load")
+
+    if(first_load == undefined)
       return
     for(let i=0;i < Number(localStorage.getItem(game_code+"num_categories"));i++){
       localStorage.removeItem(game_code+"isPopulated"+(i+1))
     }
     localStorage.removeItem(game_code+"populated_count")
     localStorage.removeItem(game_code+"num_categories")
-    localStorage.removeItem("game_code")
+    localStorage.removeItem("first_load")
 }
 async function gatherQrData() {
   
