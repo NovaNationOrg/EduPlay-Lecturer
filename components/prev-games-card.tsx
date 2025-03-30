@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { GameList } from "./../components/gamelist";
 
 interface PreviousGameProps{
     game_code:string,
@@ -6,29 +7,26 @@ interface PreviousGameProps{
     title_date:Date
 }
 
+const dateFormat: Intl.DateTimeFormatOptions = { 
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'long'  
+};
+        
 export function PreviousGameCard({game_code,game_id,title_date}:PreviousGameProps){
 
-function setupGame(){
-    localStorage.setItem(game_code+"game_id",game_id)
-    localStorage.setItem("game_code",game_code)
-}
+    function setupGame(){
+        localStorage.setItem(game_code+"game_id",game_id)
+        localStorage.setItem("game_code",game_code)
+    }
 
-if (game_code == "_jp_"){
+    const formattedDate = new Date(title_date).toLocaleDateString('en-US', dateFormat);
+    const gameType = game_code as keyof typeof GameList;
+
     return(
-        <div className = "">
-            <Link to="/original"><button className={game_code} onClick={setupGame}>Jeopardy On {title_date.toLocaleDateString('en-GB', { 
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                weekday: 'long' 
-                })}</button>
-            </Link>
+        <div className="previous-cards-container">
+            <Link to="/original"><button className="jeopardy-prev-card" onClick={setupGame}>{GameList[gameType]} On { formattedDate }</button></Link>
         </div>
     )
-} else{
-    return(
-        <>
-            <h2>There are no Jeopardy Games available</h2>
-        </>
-    )
-}}
+}

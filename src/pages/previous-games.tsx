@@ -8,7 +8,6 @@ export type Jeopardy = {
 };
 
 export default function Prev_Games() {
-    // console.log("Previous Games Page")
     return (
         <>
             <PreviousGamesList />
