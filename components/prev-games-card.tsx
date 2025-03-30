@@ -25,8 +25,8 @@ export function PreviousGameCard({game_code,game_id,title_date}:PreviousGameProp
     const gameType = game_code as keyof typeof GameList;
 
     return(
-        <div className="previous-cards-container">
-            <Link to="/original"><button className="jeopardy-prev-card" onClick={setupGame}>{GameList[gameType]} On { formattedDate }</button></Link>
-        </div>
+        <>
+            <Link to="/original"><button className = {`${game_code}-prev-card`} onClick={setupGame}>{GameList[gameType]} On { formattedDate }</button></Link>
+        </>
     )
 }

@@ -1,0 +1,23 @@
+
+.previous-games-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+._jp_-prev-card{    
+    background: linear-gradient(#9131ff,#fab028);  
+    background-size: 1px 150px;
+    transition: all .5s ease-out;  
+    border-radius: 10px;  
+    border: 1px solid #000;  
+    cursor:pointer;  
+    margin: 30px;
+    padding:30px;
+}
+
+._jp_-prev-card:hover {
+    background-position: 50%;  
+    border: 1px solid #ff13f0;
+}
