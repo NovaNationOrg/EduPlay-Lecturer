@@ -4,6 +4,8 @@ import { addJeopardyGame } from "../database/scripts/jeopardy-import";
 import { Link } from "react-router-dom";
 import {generateUUID} from "../../components/uuid-generator";
 import { Toaster , toast} from "sonner";
+import "./../styles/csv-import.css"; 
+
 
 export type Jeopardy = {
   id: string;
