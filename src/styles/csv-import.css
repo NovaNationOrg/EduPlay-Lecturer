@@ -61,16 +61,16 @@ hr {
 .upload-file-button {
     display: inline-block;
     background-color: #4f46e5;
-    color: #16162a;    
+    color: #ffffff;    
     padding: 12px 20px;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s;
     text-align: center;
-    width: 60%;
+    width: 65%;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 
@@ -81,11 +81,11 @@ hr {
 
 .upload-file-container button {
     display: block;
-    width: 60%;
+    width: 65%;
     margin-top: 15px;
     padding: 12px 20px;
     background-color: #a884fc;
-    color: #16162a;
+    color: #ffffff;
     border: none;
     border-radius: 50px;
     font-size: 1.1rem;
@@ -93,7 +93,7 @@ hr {
     cursor: pointer;
     transition: all 0.3s;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 
