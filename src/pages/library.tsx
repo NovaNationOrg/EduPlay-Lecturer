@@ -49,6 +49,13 @@ const GameComponent: React.FC = () => {
                 Import questions
               </button>
         </Link>
+        <br/>
+        <br/>
+        <Link to = "/PreviousGames">
+              <button className="modal-button">
+                Previous Games
+              </button>
+        </Link>
         <br />
         <br />
         <img src={Home} alt="Image" width={40} height={40} />

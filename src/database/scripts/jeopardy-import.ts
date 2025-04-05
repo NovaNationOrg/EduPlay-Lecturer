@@ -11,9 +11,6 @@ const date = new Date();
 export async function addJeopardyGame(jeopardyContent: Jeopardy[],gameID:string) {
 
     let category_num = 0
-
-    
-
     await db.gameList.add({
         game_code: "_jp_",
         game_id: "jp" + gameID,
@@ -36,4 +33,12 @@ export async function addJeopardyGame(jeopardyContent: Jeopardy[],gameID:string)
 
     }
 
+}
+
+export function deleteJeopardyGame(game_id:string){
+    db.jeopardyData.where("game_id").equals(game_id).delete() 
+}
+
+export function deleteJeopardyCategory(game_id:string,category:number){
+      db.jeopardyData.where("[game_id+category_num]").equals([game_id, category]).delete() //#TODO: Make this depend on dynamic values
 }
