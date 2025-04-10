@@ -1,4 +1,4 @@
-import "../src/styles/jeopardy/jeopardy.css"
+import "../styles/jeopardy/jeopardy.css"
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
