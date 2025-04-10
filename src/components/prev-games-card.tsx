@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { GameList } from "./../components/gamelist";
+import { GameList } from "./gamelist";
 
 interface PreviousGameProps{
     game_code:string,

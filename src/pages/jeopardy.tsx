@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import Header from "../../components/header.tsx"
+import Header from "../components/header.tsx"
 import { motion, AnimatePresence } from "framer-motion"
-import Modal from "../../components/modal.tsx"
-import ReviewModal from '../../components/review-modal';
-import ListData from '../../components/review-list';
+import Modal from "../components/modal.tsx"
+import ReviewModal from '../components/review-modal.tsx';
+import ListData from '../components/review-list.tsx';
 import { Toaster } from 'sonner';
-import { generateDraftToast } from '../../components/draft-handler.tsx';
+import { generateDraftToast } from '../components/draft-handler.tsx';
 
 const jeopardy_grid = [
     "Category 1", "Category 2", "Category 3", "Category 4", "Category 5", "Category 6",

@@ -5,7 +5,7 @@ import './App.css'
 // import QRCode from "react-qr-code"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import Clone from "./pages/clone"
-import Original from "./pages/original";
+import Original from "./pages/qr-page";
 import Library from "./pages/library";
 import Jeopardy from "./pages/jeopardy";
 import CSV from "./pages/csv-import-func";

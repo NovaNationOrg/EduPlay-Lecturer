@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Backdrop from "./backdrop";
 import DropdownComponent from './dropdown';
-import { db } from "../src/database/db";
+import { db } from "../database/db";
 import {toast} from 'sonner'
 import { useLiveQuery } from "dexie-react-hooks"
-import { JeopardyGame } from "../src/database/interfaces/jeopardy";
-import { deleteJeopardyCategory } from "../src/database/scripts/jeopardy-import";
+import { JeopardyGame } from "../database/interfaces/jeopardy";
+import { deleteJeopardyCategory } from "../database/scripts/jeopardy-import";
 
 /* Interfaces for use */
 

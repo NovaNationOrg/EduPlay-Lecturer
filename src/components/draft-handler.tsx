@@ -1,6 +1,6 @@
-import {generateUUID} from "../components/uuid-generator";
+import {generateUUID} from "./uuid-generator";
 import {toast} from "sonner"
-import { deleteJeopardyGame } from "../src/database/scripts/jeopardy-import";
+import { deleteJeopardyGame } from "../database/scripts/jeopardy-import";
 
 export function handleDraft(game_code:string){
     if(Number(localStorage.getItem(game_code+"populated_count")) == 0)

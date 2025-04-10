@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { db } from "../database/db"
 import { JeopardyGame } from '../database/interfaces/jeopardy'
 import "../styles/jeopardy/qrPage.css"
-import QrCodeGenerator from "../../components/qr-codes"
+import QrCodeGenerator from "../components/qr-codes"
 
 function updateQrNumber(qrPayloads:string[],qrNumber:number){
 

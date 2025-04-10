@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import {handleDraft} from "../../components/draft-handler"
+import {handleDraft} from "../components/draft-handler"
 interface GameModalProps {
   isOpen: boolean;
   onClose: () => void;

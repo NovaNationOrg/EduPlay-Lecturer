@@ -1,7 +1,7 @@
 import { useLiveQuery } from "dexie-react-hooks"
 import { JSX, useEffect, useState } from "react"
-import { db } from "../src/database/db";
-import { JeopardyGame } from "../src/database/interfaces/jeopardy";
+import { db } from "../database/db";
+import { JeopardyGame } from "../database/interfaces/jeopardy";
 import leftArrow from "../assets/images/jeopardy/left-arrow.png";
 import rightArrow from "../assets/images/jeopardy/right-arrow.png";
 
