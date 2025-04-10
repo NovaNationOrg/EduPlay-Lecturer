@@ -4,24 +4,14 @@ import "./../styles/library.css";
 import ImageName from "/assets/images/roleplay.png"
 import Library from "/assets/images/bookshelf.png"
 import Home from "/assets/images/house.png"
-import GameModal from "./gamemodal"
+import GameList from "../components/game-list";
 
 
 
 const GameComponent: React.FC = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
   sessionStorage.clear()
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeModal();
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+ 
 
   return (
     <div className="container">
@@ -45,14 +35,14 @@ const GameComponent: React.FC = () => {
 
       <div className="menu">
         <Link  to={"/csv"}>
-              <button className="modal-button">
+              <button className="sidebar-button">
                 Import questions
               </button>
         </Link>
         <br/>
         <br/>
         <Link to = "/PreviousGames">
-              <button className="modal-button">
+              <button className="sidebar-button">
                 Previous Games
               </button>
         </Link>
@@ -71,30 +61,7 @@ const GameComponent: React.FC = () => {
 
       <div className="game-container">
         <div className="game">
-            <button
-              onClick={openModal}
-              className="jeopardy-button"
-            >
-              <div className="grid-item-a">
-                  Jeopardy!
-              </div>
-          </button>
-
-          <GameModal 
-            isOpen={isModalOpen}
-            onClose={closeModal}
-            gameTitle="Jeopardy"
-            gameDescription="This is a brief summary on the game! Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-            category="Trivia"
-            time="20 mins"
-            players="Unlimited"
-            />
-
-          {[...Array(15)].map((_, index) => (
-            <div key={index} className="grid-item">
-              <div>COMING SOON</div>
-            </div>
-          ))}
+          <GameList />
         </div>
       </div>
     </div>

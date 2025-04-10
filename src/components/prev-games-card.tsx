@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { GameList } from "./gamelist";
+import { GameMapping } from "./game-mapping";
 
 interface PreviousGameProps{
     game_code:string,
@@ -22,11 +22,11 @@ export function PreviousGameCard({game_code,game_id,title_date}:PreviousGameProp
     }
 
     const formattedDate = new Date(title_date).toLocaleDateString('en-US', dateFormat);
-    const gameType = game_code as keyof typeof GameList;
+    const gameType = game_code as keyof typeof GameMapping;
 
     return(
         <>
-            <Link to="/original"><button className = {`${game_code}-prev-card`} onClick={setupGame}>{GameList[gameType]} On { formattedDate }</button></Link>
+            <Link to="/original"><button className = {`${game_code}-prev-card`} onClick={setupGame}>{GameMapping[gameType]} On { formattedDate }</button></Link>
         </>
     )
 }

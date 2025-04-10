@@ -8,11 +8,14 @@ interface GameModalProps {
   gameDescription: string;
   category: string;
   time: string;
-  players: string;
+  gameTheme: string;
 }
 
 function setGameCode(){
-  handleDraft("_jp_")
+  const game_code = sessionStorage.getItem("current_game")
+  handleDraft(game_code!)
+  sessionStorage.removeItem("current_game")
+
 }
 
 const GameModal: React.FC<GameModalProps> = ({ 
@@ -22,11 +25,12 @@ const GameModal: React.FC<GameModalProps> = ({
   gameDescription,
   category,
   time,
-  players
+  gameTheme
 }) => {
     
   if (!isOpen) return null;
   
+  sessionStorage.setItem("current_game",gameTheme)
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
@@ -34,18 +38,17 @@ const GameModal: React.FC<GameModalProps> = ({
           X
         </button>
         <div className="modal-content">
-          <div className="modal-left">
-            <Link  to={"/jeopardy"}>
-              <button className="modal-button" onClick={setGameCode}>
+          <div className={`${gameTheme}-modal-left`}>
+            <Link  to={`/${gameTitle.toLowerCase()}`}>
+              <button className={`${gameTheme}-modal-button`} onClick={setGameCode}>
                 Play Now
               </button>
             </Link>
-            <button className="modal-button">Add to Favourites</button>
+            <button className={`${gameTheme}-modal-button`}>Add to Favourites</button>
           </div>
           <div className="modal-right">
             <h2
-              className="game-title"
-              style={{ fontSize: "30px", fontFamily: "Fontdiner Swanky" }}
+              className={`${gameTheme}-game-title`}
             >
               {gameTitle}
             </h2>
@@ -63,7 +66,7 @@ const GameModal: React.FC<GameModalProps> = ({
               </div>
               <div className="meta-item">
                 <span className="meta-icon">&#128101;</span>
-                <span>{players}</span>
+                <span>Unlimited</span>
               </div>
             </div>
           </div>
