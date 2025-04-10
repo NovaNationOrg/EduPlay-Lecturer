@@ -157,7 +157,7 @@ export default function GameSelectionCSVProcessor() {
             />
           </label>
           {status =="success" &&
-            <Link to ="/original">
+            <Link to ="/qr-page">
             <button onClick={prepareCode}>Generate Code</button>
             </Link>
           }

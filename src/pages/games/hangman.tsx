@@ -1,4 +1,8 @@
 
 export default function Hangman(){
-    return(<></>)
+    return(<>
+        <form>
+            
+        </form>
+    </>)
 }

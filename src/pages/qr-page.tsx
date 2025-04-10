@@ -59,7 +59,7 @@ async function gatherQrData() {
 
 }
 
-function Original() {
+function QrPage() {
   const [question, setQuestion] = useState("");
 
   const fetchData = async () => {
@@ -82,5 +82,5 @@ function Original() {
   )
 }
 
-export default Original
+export default QrPage
 

@@ -1,8 +1,7 @@
 import './App.css'
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import Original from "./pages/qr-page";
+import QrPage from "./pages/qr-page";
 import Library from "./pages/library";
-import Jeopardy from "./pages/games/jeopardy";
 import CSV from "./pages/csv-import-func";
 import Prev_Games from './pages/previous-games';
 import gameRoutes from './routes/game-routes';
@@ -15,7 +14,7 @@ function App() {
       <Routes>
         <Route path = "/" >
           <Route index element = {<Library/>} />
-          <Route path="Original" element = {<Original/>} />
+          <Route path="qr-page" element = {<QrPage/>} />
           {gameRoutes}
           <Route path="CSV" element={<CSV />} />
           <Route path="PreviousGames" element={<Prev_Games />} />

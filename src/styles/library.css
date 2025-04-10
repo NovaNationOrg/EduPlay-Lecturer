@@ -87,8 +87,7 @@ div.game {
 }
 
 /* Library Main Button Stylings */
-._jp_-button , ._hg_-button{
-    background: linear-gradient(135deg, rgba(30, 58, 138, 0.2), rgba(147, 51, 234, 0.4));
+._jp_-button , ._hm_-button{
     border-radius:20px;
     transition: all 1s ease;
     height: inherit;
@@ -102,7 +101,7 @@ div.game {
     font-family: "Fontdiner Swanky";
 }
 
-._hg_-button {
+._hm_-button {
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,105,0.4453431030615371) 35%, rgba(0,212,255,1) 100%);
     font-family: "Wood";
 }
@@ -113,8 +112,8 @@ div.game {
     border: 1px solid #ff69b4;
 }
 
-._hg_-button:hover {
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,105,0.4453431030615371) 35%, rgba(0,212,255,1) 100%);
+._hm_-button:hover {
+    background: linear-gradient(101deg, rgba(2,0,36,1) 0%, rgba(9,121,105,0.4453431030615371) 35%, rgba(0,212,255,1) 100%);
     border: 1px solid rgba(0,212,255,1);
 }
 
@@ -206,9 +205,6 @@ footer {
     height: fit-content;
 }  
 
-.sidebar-button{
-    
-}
 h1 {
     color: #fff;
     text-align: center;
@@ -267,7 +263,7 @@ h1 {
 
 /* Library Modal Styles */
 
-._jp_-modal-left, ._hg_-modal-left {
+._jp_-modal-left, ._hm_-modal-left {
     width: 50%;
     padding: 3rem;
     display: flex;
@@ -281,12 +277,12 @@ h1 {
     background: linear-gradient(135deg, rgba(30, 58, 138, 0.2), rgba(147, 51, 234, 0.4));
 }
 
-._hg_-modal-left {
+._hm_-modal-left {
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,105,0.4453431030615371) 35%, rgba(0,212,255,1) 100%);
 }
 
 /* Modal BUtton Stylings */
-._jp_-modal-button , ._hg_-modal-button, .sidebar-button{
+._jp_-modal-button , ._hm_-modal-button, .sidebar-button{
     width: 100%;
     padding: 0.75rem 1.5rem;
     border-radius: 9999px;
@@ -300,16 +296,16 @@ h1 {
     color: #c084fc;
 }
 
-._hg_-modal-button {
+._hm_-modal-button {
     border: 1px solid #0e4a85;
     color: #7da2fa;
 }
 
-._jp_-modal-button:hover, .sidebar-button {
+._jp_-modal-button:hover, .sidebar-button:hover {
     background-color: rgba(168, 85, 247, 0.2);
 }
 
-._hg_-modal-button:hover {
+._hm_-modal-button:hover {
     background-color: rgba(76, 159, 255, 0.2);
     border: 1px solid rgba(0,212,255,1);
 
@@ -325,7 +321,7 @@ h1 {
 }
 
 /* Modal Title Stylings*/
-._jp_-game-title , ._hg_-game-title{
+._jp_-game-title , ._hm_-game-title{
     font-size: 2.25rem;
     font-size: "30px";
     font-family : "Fontdiner Swanky";
@@ -337,11 +333,11 @@ h1 {
     font-family : "Fontdiner Swanky";
     background: linear-gradient(to right, #c084fc, #ec4899);
     -webkit-background-clip: text;
-    background-clip: text;
+    background-clip: text;  
     color: transparent;
 }
 
-._hg_-game-title {
+._hm_-game-title {
     font-family : "Wood";
     background: linear-gradient( rgba(9,121,105,0.4453431030615371) 35%, rgba(0,212,255,1) 100%);
     -webkit-background-clip: text;
