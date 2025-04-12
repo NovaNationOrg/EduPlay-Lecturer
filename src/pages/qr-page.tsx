@@ -34,28 +34,28 @@ async function gatherQrData() {
 
   jeopardyGameData.push(...jeopardyGameDatas)
 
-  let qrCounter = [""], qrNumber = 0
+  let qrPayload = [""], qrNumber = 0
    
   const game_id = localStorage.getItem("_jp_game_id")
-  qrCounter[qrNumber] += "_jp_\n" + game_id + ":1|1\n"
+  qrPayload[qrNumber] += "_jp_\n" + game_id + ":1|1\n"
   for (let i = 0; i < 29; i++) {
     if (i % 5 == 0) {
-      qrCounter[qrNumber] += jeopardyGameData![i].theme + "\n"
+      qrPayload[qrNumber] += jeopardyGameData![i].theme + "\n"
     }
-    qrCounter[qrNumber] += jeopardyGameData![i].question + "\n"
-    qrCounter[qrNumber] += jeopardyGameData![i].answer + "\n"
+    qrPayload[qrNumber] += jeopardyGameData![i].question + "\n"
+    qrPayload[qrNumber] += jeopardyGameData![i].answer + "\n"
 
-    if(qrCounter[qrNumber].length >= qrBuffer){
-      qrCounter.push("_jp_\n" + game_id + ":" + (qrNumber + 2 )+ "|" + (qrNumber + 2)  +"\n")
-      qrNumber = updateQrNumber(qrCounter,qrNumber)
+    if(qrPayload[qrNumber].length >= qrBuffer){
+      qrPayload.push("_jp_\n" + game_id + ":" + (qrNumber + 2 )+ "|" + (qrNumber + 2)  +"\n")
+      qrNumber = updateQrNumber(qrPayload,qrNumber)
     }  
     
   }
-  qrCounter[qrNumber] += jeopardyGameData![29].question + "\n"
-  qrCounter[qrNumber] += jeopardyGameData![29].answer
+  qrPayload[qrNumber] += jeopardyGameData![29].question + "\n"
+  qrPayload[qrNumber] += jeopardyGameData![29].answer
 
 
-  return qrCounter.join("|_|")
+  return qrPayload.join("|_|")
 
 }
 
@@ -67,7 +67,7 @@ function QrPage() {
     setQuestion(data);
   };
   fetchData();
-
+  
   useEffect(()=>{
     clearLocalStorage()
   },[])

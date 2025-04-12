@@ -2,11 +2,6 @@ import {JSX, useState} from 'react'
 import { GameMapping } from './game-mapping'
 import GameModal from '../pages/gamemodal'
 
-// export default function prepareGameList(){
-//     const gameListing = gameList()
-//     return gameListing
-    
-// }
 
 
 
@@ -30,7 +25,7 @@ function mapGame(gameinfo:string,game_code:string){
     const game_title = gameArray[0]
     const gameElement = (
         <div key={game_title + ":" + game_code} className='button-container'> 
-            <button onClick={openModal} className={`${game_code}-button`}>
+            <button onClick={openModal} className={`library-game ${game_code}-button`}>
             <div className= {`${game_code}-grid-item`}> {game_title}! </div>
             </button>
             <GameModal isOpen={isModalOpen}onClose={closeModal} gameTitle={game_title} gameDescription={gameArray[1]} category={gameArray[2]} time={`${gameArray[3]} mins`} gameTheme= {game_code} />

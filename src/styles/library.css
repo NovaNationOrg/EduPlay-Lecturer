@@ -87,7 +87,7 @@ div.game {
 }
 
 /* Library Main Button Stylings */
-._jp_-button , ._hm_-button{
+.library-game {
     border-radius:20px;
     transition: all 1s ease;
     height: inherit;
@@ -263,7 +263,7 @@ h1 {
 
 /* Library Modal Styles */
 
-._jp_-modal-left, ._hm_-modal-left {
+.library-modal-left{
     width: 50%;
     padding: 3rem;
     display: flex;
@@ -282,7 +282,7 @@ h1 {
 }
 
 /* Modal BUtton Stylings */
-._jp_-modal-button , ._hm_-modal-button, .sidebar-button{
+.library-modal-button, .sidebar-button{
     width: 100%;
     padding: 0.75rem 1.5rem;
     border-radius: 9999px;

@@ -18,11 +18,13 @@ function prepareGame(game_code:string){
         localStorage.removeItem(game_code+"isPopulated" + (i+1))
     }
     initialiseStorage(game_code)
+    window.location.reload()
 }
 
 function initialiseStorage(game_code:string){
     localStorage.setItem("game_code",game_code)
     localStorage.setItem(game_code+"game_id",game_code+generateUUID())
+    localStorage.setItem(game_code+"populated_count","0")
 }
 
 function dismissToast(){

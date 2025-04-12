@@ -1,13 +1,8 @@
 import { Jeopardy } from "../../pages/csv-import-func";
-// import {toast } from 'react-toastify';
 import { db } from "../db";
 
 const date = new Date();
-// const generateToast = (toastMessage: string, toastIO: string) => {
-//    toast(toastMessage, {
-//    toastId: toastIO
-//     });
-//   };
+
 export async function addJeopardyGame(jeopardyContent: Jeopardy[],gameID:string) {
 
     let category_num = 0

@@ -38,13 +38,13 @@ const GameModal: React.FC<GameModalProps> = ({
           X
         </button>
         <div className="modal-content">
-          <div className={`${gameTheme}-modal-left`}>
+          <div className={`library-modal-left ${gameTheme}-modal-left`}>
             <Link  to={`/${gameTitle.toLowerCase()}`}>
-              <button className={`${gameTheme}-modal-button`} onClick={setGameCode}>
+              <button className={`library-modal-button ${gameTheme}-modal-button`} onClick={setGameCode}>
                 Play Now
               </button>
             </Link>
-            <button className={`${gameTheme}-modal-button`}>Add to Favourites</button>
+            <button className={`library-modal-button ${gameTheme}-modal-button`}>Add to Favourites</button>
           </div>
           <div className="modal-right">
             <h2
