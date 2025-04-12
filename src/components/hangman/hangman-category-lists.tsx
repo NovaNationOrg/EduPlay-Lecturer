@@ -16,10 +16,7 @@ export default function HMCategoryLists(){
             game_id:game_id
         }).toArray())   
 
-    let categoryCount = useLiveQuery(
-        () => db.hangmanCategories.where({
-            game_id:game_id
-        }).count())
+    let categoryCount = categoryLists ? categoryLists.length : 0
     
     categoryCount = categoryCount?categoryCount:0
     localStorage.setItem("_hm_num_categories",categoryCount.toString())
@@ -43,7 +40,7 @@ export default function HMCategoryLists(){
         <div className="category-list-container">
             {
             categoryLists?.map( list =>(
-                <HMCategoryItems list_id={list.id} category_number = {list.category_number} category={list.category}/>
+                <HMCategoryItems key={list.id + ":" + list.category_number} list_id={list.id} category_number = {list.category_number} category={list.category}/>
             ))
             }
             <div>

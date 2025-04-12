@@ -2,6 +2,7 @@ import { useLiveQuery } from "dexie-react-hooks"
 import { db } from "../../database/db"
 import { useState } from "react"
 import { toast } from "sonner"
+import HMQuestionItem from "./hangman-category-question"
 
 interface HMCategoryItemsProps{
     list_id:number
@@ -40,21 +41,12 @@ export default function HMCategoryItems({list_id,category,category_number}:HMCat
     }
 
     const populated = (questionItems != undefined && questionItems.length!=0)
-    console.log(populated)
     localStorage.setItem(game_code+"isPopulated"+category_number,String(populated))
     
     
     function createItem(item_id:number,question:string){
-        return(<>
-            <input key ={item_id + question} type="text" defaultValue={question} onChange ={(e) => updateNewQuestionValue(e.target.value)}
-             onKeyUp={(ev) => {
-                if (ev.key === 'Enter') {
-                  db.hangmanItems.update(item_id,{question})
-                }
-              }}
-            />
-            <a onClick={() => {removeQuestion(item_id)}}>-</a>
-        </>
+        return(
+          <HMQuestionItem key ={item_id + question} item_id={item_id} question={question} />
         )
     }
 
@@ -68,16 +60,12 @@ export default function HMCategoryItems({list_id,category,category_number}:HMCat
         updateNewQuestionValue("")
     }
 
-    function removeQuestion(id:number){
-      db.hangmanItems.delete(id)
-      toast.error("Question Removed",{id:"question-removed-toast"})
-    }
 
   function handleCategoryUpdate() {
     try {
       db.hangmanCategories.update(list_id,{category:categoryString})
 
-    } catch (error) {
+    } catch (error) { 
       console.log(error)
     }
     toast.success("Category Updated",{id:"category-update-toast"})
