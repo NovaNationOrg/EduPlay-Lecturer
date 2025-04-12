@@ -22,6 +22,7 @@ export default function HMCategoryLists(){
     
     const game_id = localStorage.getItem("_hm_game_id")
     const [newCategory,updateNewCategoryValue] = useState("")
+    const [readyTrigger,enactReadyTrigger] = useState(0.1)
 
     const categoryLists = useLiveQuery(
         () => db.hangmanCategories.where({
@@ -30,6 +31,9 @@ export default function HMCategoryLists(){
 
     let categoryCount = categoryLists ? categoryLists.length : 0
 
+    function buttonRefresh(){
+        enactReadyTrigger(readyTrigger + 0.001)
+    }
    
  
     
@@ -73,7 +77,7 @@ export default function HMCategoryLists(){
                 >
                 {
                 categoryLists?.map( list =>(
-                    <HMCategoryItems key={list.id + ":" + list.category_number} list_id={list.id} category_number = {list.category_number} category={list.category}/>
+                    <HMCategoryItems key={list.id + ":" + list.category_number} list_id={list.id} category_number = {list.category_number} category={list.category} triggerParent ={buttonRefresh}/>
                 ))
                 }
                 </AnimatePresence>
@@ -94,7 +98,7 @@ export default function HMCategoryLists(){
             </div>
 
             {
-                gameReady(categoryCount) == true && ( //Fix conditional rednering to actually work here
+                gameReady(categoryCount) == true && categoryCount!=0 && ( //Fix conditional rednering to actually work here
                     <button className="hangman-ready-button" onClick={()=>{handleTransition()}}>Generate Code</button>
                 )   
             }

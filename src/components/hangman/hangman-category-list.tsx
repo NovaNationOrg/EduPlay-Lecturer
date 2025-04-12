@@ -10,10 +10,11 @@ interface HMCategoryItemsProps{
     list_id:number
     category:string
     category_number:number
+    triggerParent: React.Dispatch<React.SetStateAction<number>>
 }
 
 
-export default function HMCategoryItems({list_id,category,category_number}:HMCategoryItemsProps){
+export default function HMCategoryItems({list_id,category,category_number, triggerParent: triggerParent}:HMCategoryItemsProps){
 
     const [newQuestion,updateNewQuestionValue] = useState("")
     const [categoryString, updateCategory] = useState(category)
@@ -36,15 +37,22 @@ export default function HMCategoryItems({list_id,category,category_number}:HMCat
       const populatedCount = Number(localStorage.getItem("_hm_populated_count"))
       localStorage.setItem(game_code+"populated_count",(populatedCount-1).toString())
       localStorage.setItem(game_code+"isPopulated"+category_number,"false")
+      triggerParent(category_number)
+
     } 
 
     if((questionItems != undefined &&  questionItems.length!=0) && localStorage.getItem(game_code+"isPopulated"+category_number)=="false"){
       const populatedCount = Number(localStorage.getItem("_hm_populated_count"))
       localStorage.setItem(game_code+"populated_count",(populatedCount+1).toString())
       localStorage.setItem(game_code+"isPopulated"+category_number,"true")
+      triggerParent(category_number)
+
     }
 
     const populated = (questionItems != undefined && questionItems.length!=0)
+    if(questionItems==undefined)
+      triggerParent(category_number)
+
     localStorage.setItem(game_code+"isPopulated"+category_number,String(populated))
 
     
@@ -80,8 +88,10 @@ export default function HMCategoryItems({list_id,category,category_number}:HMCat
   }
 
   function removeCategory(category_id:number){
+      console.log(game_code+"isPopulated"+category_number)
       db.hangmanCategories.delete(category_id)
       db.hangmanCategories.bulkDelete(categoryIdList)//Fix this 
+      localStorage.removeItem(game_code+"isPopulated"+category_number)
       toast.error("Category Deleted")
   }
 
@@ -96,7 +106,9 @@ export default function HMCategoryItems({list_id,category,category_number}:HMCat
                     if (ev.key === 'Enter') 
                       handleCategoryUpdate() 
                     }}/>
-                    <a onClick={() => {removeCategory(list_id)}}>-</a>
+                    { category_number == Number(localStorage.getItem(game_code+"num_categories")) &&
+                      <a onClick={() => {removeCategory(list_id)}}>-</a>
+                    }
                 </div>
               </MotionLI>
             
