@@ -61,7 +61,7 @@ async function handleHangmanPayload(game_code:string,game_id:string){
     qrPayload[qrNumber] += game_code+"\n" + game_id + ":1|1\n"
     for(let i=0;i < hangmanCategories.length; i++){
         const questions = await db.hangmanItems.where("[category_id+category_number]").equals([hangmanCategories[i].id,hangmanCategories[i].category_number]).toArray()
-        qrPayload[qrNumber] += hangmanCategories[i].category + "\n"
+        qrPayload[qrNumber] += hangmanCategories[i].category + ":" + questions.length + "\n"
         for(let x=0;x < questions.length;x++){
             qrPayload[qrNumber] += questions[x].question + "\n"
         }
