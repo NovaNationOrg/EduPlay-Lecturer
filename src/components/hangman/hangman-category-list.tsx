@@ -3,6 +3,8 @@ import { db } from "../../database/db"
 import { useState } from "react"
 import { toast } from "sonner"
 import HMQuestionItem from "./hangman-category-question"
+import { motion, AnimatePresence } from 'framer-motion';
+import MotionLI from "./hangman-list-item"
 
 interface HMCategoryItemsProps{
     list_id:number
@@ -33,16 +35,18 @@ export default function HMCategoryItems({list_id,category,category_number}:HMCat
     if((questionItems == undefined || questionItems.length==0) && localStorage.getItem(game_code+"isPopulated"+category_number)=="true"){
       const populatedCount = Number(localStorage.getItem("_hm_populated_count"))
       localStorage.setItem(game_code+"populated_count",(populatedCount-1).toString())
+      localStorage.setItem(game_code+"isPopulated"+category_number,"false")
     } 
 
     if((questionItems != undefined &&  questionItems.length!=0) && localStorage.getItem(game_code+"isPopulated"+category_number)=="false"){
       const populatedCount = Number(localStorage.getItem("_hm_populated_count"))
       localStorage.setItem(game_code+"populated_count",(populatedCount+1).toString())
+      localStorage.setItem(game_code+"isPopulated"+category_number,"true")
     }
 
     const populated = (questionItems != undefined && questionItems.length!=0)
     localStorage.setItem(game_code+"isPopulated"+category_number,String(populated))
-    
+
     
     function createItem(item_id:number,question:string){
         return(
@@ -51,6 +55,10 @@ export default function HMCategoryItems({list_id,category,category_number}:HMCat
     }
 
     function addQuestion(){
+      if(newQuestion==""){
+        toast.info("Please enter a question",{id:"question-info-toast"})
+        return
+      }
         db.hangmanItems.add({
           question:newQuestion,
           category_id:list_id,
@@ -71,21 +79,42 @@ export default function HMCategoryItems({list_id,category,category_number}:HMCat
     toast.success("Category Updated",{id:"category-update-toast"})
   }
 
+  function removeCategory(category_id:number){
+      db.hangmanCategories.delete(category_id)
+      db.hangmanCategories.bulkDelete(categoryIdList)//Fix this 
+      toast.error("Category Deleted")
+  }
+
     return (
         <div className="category-list">
-            <input type="text" placeholder="Category" defaultValue={category} onChange={(e) => updateCategory(e.target.value)}
-             onKeyUp={(ev) => {
-                if (ev.key === 'Enter') {
-                  handleCategoryUpdate()
-                }}}/>
-            {questionItems}
-            <input value={newQuestion} type="text" placeholder="Enter a new question" onChange ={(e) => updateNewQuestionValue(e.target.value)}
-            onKeyUp={(ev) => {
-                if (ev.key === 'Enter') {
-                  addQuestion()
-                }
-              }}
-            />
+            <ul className = 'hangman-questions-list'>
+            <AnimatePresence mode="popLayout">
+              <MotionLI key ={`hangman-question-category`+list_id} >
+                <div>
+                  <input type="text" placeholder="Category" defaultValue={category} onChange={(e) => updateCategory(e.target.value)}
+                    onKeyUp={(ev) => {
+                    if (ev.key === 'Enter') 
+                      handleCategoryUpdate() 
+                    }}/>
+                    <a onClick={() => {removeCategory(list_id)}}>-</a>
+                </div>
+              </MotionLI>
+            
+              { 
+                categoryItems?.map(item =>(
+                   <MotionLI key ={item.id.toString()} >
+                  {createItem(item.id, item.question)}
+                  </MotionLI>))
+              }
+              <MotionLI key ={`hangman-new-question`+list_id} >
+                <input value={newQuestion} type="text" placeholder="Enter a new question" onChange ={(e) => updateNewQuestionValue(e.target.value)}
+                onKeyUp={(ev) => {
+                    if (ev.key === 'Enter')  
+                      addQuestion()
+                    }}/>
+              </MotionLI>
+            </AnimatePresence>
+             </ul>
         </div>
     )
 }
