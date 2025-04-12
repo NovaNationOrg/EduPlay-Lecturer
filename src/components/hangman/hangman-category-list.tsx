@@ -53,7 +53,6 @@ export default function HMCategoryItems({list_id,category,category_number, trigg
     if(questionItems==undefined)
       triggerParent(category_number)
 
-    localStorage.setItem(game_code+"isPopulated"+category_number,String(populated))
 
     
     function createItem(item_id:number,question:string){
@@ -88,12 +87,17 @@ export default function HMCategoryItems({list_id,category,category_number, trigg
   }
 
   function removeCategory(category_id:number){
-      console.log(game_code+"isPopulated"+category_number)
       db.hangmanCategories.delete(category_id)
-      db.hangmanCategories.bulkDelete(categoryIdList)//Fix this 
+      const numCategories = categoryItems?categoryItems.length:0
+      for(let i=0;i <numCategories ;i++){
+        db.hangmanItems.delete(categoryItems![i].id)
+      }
       localStorage.removeItem(game_code+"isPopulated"+category_number)
       toast.error("Category Deleted")
-  }
+  } 
+  if(category_number <= Number(localStorage.getItem(game_code+"num_categories")))
+    localStorage.setItem(game_code+"isPopulated"+category_number,String(populated))
+
 
     return (
         <div className="category-list">

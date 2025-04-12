@@ -1,12 +1,20 @@
 
 import { useEffect, useState } from 'react'
-import { db } from "../database/db"
-import { JeopardyGame } from '../database/interfaces/jeopardy'
 import "../styles/jeopardy/qrPage.css"
 import QrCodeGenerator from "../components/qr-codes"
 import { managePayloads } from '../components/payload-manager'
+import { db } from '../database/db'
 
-
+async function addGameEntry(){
+  const date = new Date();
+  const game_code = localStorage.getItem("game_code")!
+  const game_id = localStorage.getItem(game_code+"game_id")
+  await db.gameList.add({
+    game_code: game_code,
+    game_id: game_id!,
+    date: date
+})
+}
 function clearLocalStorage(){
     const game_code = localStorage.getItem("game_code")
     const first_load = localStorage.getItem("first_load")
@@ -19,6 +27,7 @@ function clearLocalStorage(){
     localStorage.removeItem(game_code+"populated_count")
     localStorage.removeItem(game_code+"num_categories")
     localStorage.removeItem("first_load")
+    addGameEntry()
 }
 
 async function gatherQrData() {
