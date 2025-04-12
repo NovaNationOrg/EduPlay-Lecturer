@@ -3,6 +3,7 @@ import {toast} from "sonner"
 import { deleteJeopardyGame } from "../database/scripts/jeopardy-import";
 
 export function handleDraft(game_code:string){
+    localStorage.setItem("game_code",game_code!)
     if(Number(localStorage.getItem(game_code+"populated_count")) == 0)
         initialiseStorage(game_code)
     else
@@ -22,7 +23,6 @@ function prepareGame(game_code:string){
 }
 
 function initialiseStorage(game_code:string){
-    localStorage.setItem("game_code",game_code)
     localStorage.setItem(game_code+"game_id",game_code+generateUUID())
     localStorage.setItem(game_code+"populated_count","0")
 }

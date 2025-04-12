@@ -14,7 +14,7 @@ function Header ({headerText, gameClass }: HeaderProps) {
             <div className="left">
                 <Link to = "/"><FontAwesomeIcon className="left-arrow" icon={faArrowLeft} /></Link>
             </div>
-            <div className="header-title">
+            <div className={`header-title ${gameClass}-header-title`}>
                 <div className={gameClass}> {headerText} </div>
             </div>  
         </div>
