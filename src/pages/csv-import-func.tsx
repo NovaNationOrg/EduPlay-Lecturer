@@ -85,8 +85,6 @@ export default function GameSelectionCSVProcessor() {
       }
 
       const { result } = evt.target;
-        let records;
-
       switch(gameId){
         case "_jp_":
           processJeopardyFile(result,setStatus,setCsvData,setGameID)

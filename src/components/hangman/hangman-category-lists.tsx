@@ -1,10 +1,10 @@
 import { useLiveQuery } from "dexie-react-hooks"
 import { db } from "../../database/db"
 import HMCategoryItems from "./hangman-category-list"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { generateDraftToast } from "../draft-handler"
 import { toast } from "sonner"
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { useNavigate } from "react-router-dom"
 import MotionLI from "./hangman-list-item"
 

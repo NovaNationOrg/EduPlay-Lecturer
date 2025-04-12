@@ -3,7 +3,7 @@ import { db } from "../../database/db"
 import { useState } from "react"
 import { toast } from "sonner"
 import HMQuestionItem from "./hangman-category-question"
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import MotionLI from "./hangman-list-item"
 
 interface HMCategoryItemsProps{
