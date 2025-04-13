@@ -11,7 +11,7 @@ import MotionLI from "./hangman-list-item"
 export function gameReady(category_count:number){
     const game_code = localStorage.getItem("game_code")
     for(let i=1;i <= category_count ; i++){
-        if(localStorage.getItem(game_code+"isPopulated"+i) == "false"){
+        if(localStorage.getItem(game_code+"isPopulated"+i) == "false"|| localStorage.getItem(game_code+"isPopulated"+i) == null){
             return false
         }
     }
@@ -31,8 +31,15 @@ export default function HMCategoryLists(){
 
     let categoryCount = categoryLists ? categoryLists.length : 0
 
+    const [numCategories,updateNumCategories] = useState(categoryCount)
+
     function buttonRefresh(){
-        enactReadyTrigger(readyTrigger + 0.001)
+        try {
+            enactReadyTrigger(readyTrigger + 0.001)
+            sessionStorage.removeItem("do-trigger")
+        } catch (error) {
+            console.log(error)
+        }
     }
    
  
@@ -56,7 +63,9 @@ export default function HMCategoryLists(){
             category_number:categoryCount?categoryCount+1:1
         })
         toast.success("Category Added",{id:"category-added-toast"})
+        sessionStorage.setItem("do-trigger","true")
         updateNewCategoryValue("")
+        updateNumCategories(numCategories+1)
     }
 
     const navigate = useNavigate();
@@ -66,7 +75,20 @@ export default function HMCategoryLists(){
        navigate("/qr-page")
    }
 
+   useEffect(()=>{
+    buttonRefresh()
+   },[numCategories])
+
     
+
+    function renderNeeded() {
+        if(sessionStorage.getItem("do-trigger")!=null){
+            sessionStorage.removeItem("do-trigger")
+            buttonRefresh()
+            return true
+        }
+    return false
+    }
 
     return (
         <div>
@@ -98,7 +120,7 @@ export default function HMCategoryLists(){
             </div>
 
             {
-                gameReady(categoryCount) == true && categoryCount!=0 && ( //Fix conditional rednering to actually work here
+                gameReady(numCategories) == true && numCategories!=0 && renderNeeded() == false && ( //Fix conditional rednering to actually work here
                     <button className="hangman-ready-button" onClick={()=>{handleTransition()}}>Generate Code</button>
                 )   
             }
