@@ -50,8 +50,6 @@ export default function HMCategoryItems({list_id,category,category_number, trigg
     }
 
     const populated = (questionItems != undefined && questionItems.length!=0)
-    // if(sessionStorage.getItem("do-trigger")!=null)
-    //   triggerParent(category_number)
     
     function createItem(item_id:number,question:string){
         return(
