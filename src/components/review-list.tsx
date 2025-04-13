@@ -1,22 +1,19 @@
 import { useLiveQuery } from "dexie-react-hooks"
 import { JSX, useEffect, useState } from "react"
-import { db } from "../src/database/db";
-import { JeopardyGame } from "../src/database/interfaces/jeopardy";
-import leftArrow from "../assets/images/jeopardy/left-arrow.png";
-import rightArrow from "../assets/images/jeopardy/right-arrow.png";
+import { db } from "../database/db";
+import { JeopardyGame } from "../database/interfaces/jeopardy";
+import leftArrow from "../../assets/images/jeopardy/left-arrow.png";
+import rightArrow from "../../assets/images/jeopardy/right-arrow.png";
 
 export default function ListData() {
 
     const [currentPage, setCurrentPage] = useState<number>(Number(sessionStorage.getItem("review-page")) || 1);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [category, setCategory] = useState<JeopardyGame | undefined>(undefined);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     const jpLists: JeopardyGame[][] = [[]]
     let categoryData: JeopardyGame[] | undefined
     const game_id = localStorage.getItem("_jp_game_id")!
     for (let i = 0; i <= 5; i++) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         const num = i + 1
 
         categoryData = useLiveQuery(() =>

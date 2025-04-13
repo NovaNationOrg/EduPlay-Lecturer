@@ -1,0 +1,41 @@
+.hangman-questions-list, .hangman-question-item{
+    list-style: none;
+
+}
+
+.hangman-question-item{
+    display: flex;
+    flex-direction: row;
+}
+.hangman-questions-list{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.hangman-list-area{
+    overflow-x: scroll;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+
+}
+
+.category-list-container{
+    display: flex;
+    width: 50vw;
+    height:50vh;
+    gap: 20px;
+
+}
+
+.hangman-ready-button{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+

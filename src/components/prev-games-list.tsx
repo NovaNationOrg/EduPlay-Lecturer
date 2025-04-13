@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
-import { db } from '../src/database/db';
+import { db } from '../database/db';
 import { PreviousGameCard } from './prev-games-card';
-import "./../src/styles/previous-games.css"
+import "../styles/previous-games.css"
 
 
 export function PreviousGamesList(){

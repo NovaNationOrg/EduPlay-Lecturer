@@ -1,4 +1,4 @@
-import "../src/styles/jeopardy/jeopardy.css"
+import "../styles/jeopardy/jeopardy.css"
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -14,7 +14,7 @@ function Header ({headerText, gameClass }: HeaderProps) {
             <div className="left">
                 <Link to = "/"><FontAwesomeIcon className="left-arrow" icon={faArrowLeft} /></Link>
             </div>
-            <div className="header-title">
+            <div className={`header-title ${gameClass}-header-title`}>
                 <div className={gameClass}> {headerText} </div>
             </div>  
         </div>

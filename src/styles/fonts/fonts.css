@@ -7,3 +7,28 @@
     font-family: "Risque";
     src: url("Risque/Risque-Regular.ttf");
 }
+
+@font-face {
+    font-family: "Stick";
+    src: url("Stick/Stick-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Twiggy";
+    src: url("twiggy-font/Twiggy-2KPv.otf");
+}
+
+@font-face {
+    font-family: "Incantation";
+    src: url("incantation-font/Incantation-vnlD.ttf");
+}
+
+@font-face {
+    font-family:"Wood" ;
+    src: url("wood-font/Wood-3n3G.ttf");
+}
+
+@font-face {
+    font-family: "StickFigure" ;
+    src: url("stick-figures-font/StickFigures-ppeO.ttf");
+}

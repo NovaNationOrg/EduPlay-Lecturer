@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import Header from "../../components/header.tsx"
 import { motion, AnimatePresence } from "framer-motion"
 import Modal from "../../components/modal.tsx"
-import ReviewModal from '../../components/review-modal';
-import ListData from '../../components/review-list';
+import ReviewModal from '../../components/review-modal.tsx';
+import ListData from '../../components/review-list.tsx';
 import { Toaster } from 'sonner';
 import { generateDraftToast } from '../../components/draft-handler.tsx';
 

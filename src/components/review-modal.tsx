@@ -16,7 +16,7 @@ const ReviewModal: React.FC<ModalProps> = ({ isOpen, handleClose, children }) =>
 
     function handleTransition() {
         localStorage.setItem("first_load", "true")
-        navigate("/original")
+        navigate("/qr-page")
     }
 
     return (

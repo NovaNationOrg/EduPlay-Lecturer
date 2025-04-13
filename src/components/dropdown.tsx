@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { db } from "../src/database/db";
+import { db } from "../database/db";
 // import { JeopardyGame } from "../src/database/interfaces/jeopardy";
 
 interface DropdownComponentProps {

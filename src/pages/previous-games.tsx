@@ -1,4 +1,4 @@
-import { PreviousGamesList } from './../../components/prev-games-list';
+import { PreviousGamesList } from '../components/prev-games-list';
 
 export type Jeopardy = {
     id: string;

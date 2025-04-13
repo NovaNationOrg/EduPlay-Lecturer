@@ -1,19 +1,14 @@
 import { Jeopardy } from "../../pages/csv-import-func";
-// import {toast } from 'react-toastify';
 import { db } from "../db";
 
 const date = new Date();
-// const generateToast = (toastMessage: string, toastIO: string) => {
-//    toast(toastMessage, {
-//    toastId: toastIO
-//     });
-//   };
+
 export async function addJeopardyGame(jeopardyContent: Jeopardy[],gameID:string) {
 
     let category_num = 0
     await db.gameList.add({
         game_code: "_jp_",
-        game_id: "jp" + gameID,
+        game_id: "_jp_" + gameID,
         date: date
     })
 
@@ -24,14 +19,14 @@ export async function addJeopardyGame(jeopardyContent: Jeopardy[],gameID:string)
         await db.jeopardyData.add({
             question: jeopardyContent[i].question,
             answer: jeopardyContent[i].answer,
-            game_id: "jp" + gameID,
+            game_id: "_jp_" + gameID,
             theme: jeopardyContent[i].category,
             points: (i % 5) * 100,
             category_num: category_num
         })
 
-
     }
+    localStorage.setItem("game_code","_jp_")
 
 }
 

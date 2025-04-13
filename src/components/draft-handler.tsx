@@ -1,8 +1,9 @@
-import {generateUUID} from "../components/uuid-generator";
+import {generateUUID} from "./uuid-generator";
 import {toast} from "sonner"
-import { deleteJeopardyGame } from "../src/database/scripts/jeopardy-import";
+import { deleteJeopardyGame } from "../database/scripts/jeopardy-import";
 
 export function handleDraft(game_code:string){
+    localStorage.setItem("game_code",game_code!)
     if(Number(localStorage.getItem(game_code+"populated_count")) == 0)
         initialiseStorage(game_code)
     else
@@ -18,11 +19,12 @@ function prepareGame(game_code:string){
         localStorage.removeItem(game_code+"isPopulated" + (i+1))
     }
     initialiseStorage(game_code)
+    window.location.reload()
 }
 
 function initialiseStorage(game_code:string){
-    localStorage.setItem("game_code",game_code)
     localStorage.setItem(game_code+"game_id",game_code+generateUUID())
+    localStorage.setItem(game_code+"populated_count","0")
 }
 
 function dismissToast(){
