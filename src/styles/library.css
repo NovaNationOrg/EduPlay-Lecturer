@@ -4,6 +4,7 @@ html, body, div.container{
 	height: 100%;
 	margin: 0;
 	padding: 0;
+    font-family: "IBM Plex";
 }
 
 
@@ -22,35 +23,36 @@ a:hover {
 
 
 div.container {
-  display:grid;
-  grid-template-rows: 1fr 9fr;
-  grid-template-columns: 1fr 7fr;
-  grid-gap: 10px;
+    display:grid;
+    grid-template-rows: auto;  
+    grid-template-columns: 1fr 7fr;
+    grid-gap: 10px;
 }
 
 div.header {
   grid-column: 2/3;
-  grid-row: 2/3;
-  grid-gap: 0px;
+  grid-row: 2/2;
+  text-align: center;
 }
 
 div.categories{
     grid-column: 2/3;
-    grid-row: 3/4;
+    grid-row: 3/3;
     text-align: center;
 }
 
 div.game-container {
   display: flex;
   grid-column: 2/3;
-  grid-row: 3/4;
-  padding-top: 70px;
+  grid-row: 4/6;
   text-align: center;
+  margin-top: -250px;
 }
 
 div.menu {
   grid-column: 1/2;
   grid-row: 3/4;
+  text-align: center;
 }
 
 
@@ -61,7 +63,7 @@ h1, h2, h3, h4 {
 div.game {
   display: grid;
   grid-template-columns: repeat(4, auto);
-  grid-template-rows: repeat(5, 150px);
+  grid-template-rows: repeat(4, 150px);
   grid-gap: 20px 10px;
   margin: 10px;
 }
@@ -76,9 +78,10 @@ div.game {
     font-size: 20px;
     border-radius:20px;
     padding: 50px 50px;
-    background-color: #1C1C1C;
-    border-style: dashed;
-    border-color: #474747;
+    background-color: #0f0e0e;
+    border-style: double;
+    border-color: #232323;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
   } 
 
 .button-container{
@@ -99,11 +102,13 @@ div.game {
 ._jp_-button{
     background: linear-gradient(135deg, rgba(30, 58, 138, 0.2), rgba(147, 51, 234, 0.4));
     font-family: "Fontdiner Swanky";
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
 
 ._hm_-button {
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,105,0.4453431030615371) 35%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,105,0.4453431030615371) 35%, rgb(0, 213, 255) 100%);
     font-family: "Wood";
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
 
 /* Hover Stylings */
@@ -116,11 +121,14 @@ div.game {
     background: linear-gradient(101deg, rgba(2,0,36,1) 0%, rgba(9,121,105,0.4453431030615371) 35%, rgba(0,212,255,1) 100%);
     border: 1px solid rgba(0,212,255,1);
 }
-
+.topnav{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
 .topnav input[type=text] {
     padding: 6px;
-    margin-top: 8px;
-    margin-right: 16px;
     border-radius: 30px;
     font-size: 17px;
     background-color: #282828;
@@ -146,15 +154,14 @@ div.game {
 body {
     display: flex;
     flex-direction: column;
-    background-color: #181818;
-    min-height: 100vh;
+    background: linear-gradient(to bottom, #0a1115, #0c1c24, #0a0f11);
+
 }
 
 header {
     height: fit-content;
     width: 100vw;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 1);
 }
 
 main {
@@ -163,7 +170,6 @@ main {
 
 .container {
     flex-grow: 1;
-    background-color: #181818;
     font-family: "Inter", serif;
     font-weight: bold;
     color: #e6f0ff;
@@ -171,7 +177,6 @@ main {
 
 footer {
     color: #fff;
-    background-color: #000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -282,7 +287,7 @@ h1 {
 }
 
 /* Modal BUtton Stylings */
-.library-modal-button, .sidebar-button{
+.library-modal-button{
     width: 100%;
     padding: 0.75rem 1.5rem;
     border-radius: 9999px;
@@ -291,17 +296,31 @@ h1 {
     transition: background-color 0.2s;
     font-size: 1rem;
 }
-._jp_-modal-button, .sidebar-button {
+._jp_-modal-button{
     border: 1px solid #a855f7;
     color: #c084fc;
 }
-
+ .sidebar-button {
+        width: 20%;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        background: transparent;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        font-size: 1rem;
+        border: 1px solid #035471;
+        color: #a7c2cb;
+ }
 ._hm_-modal-button {
     border: 1px solid #0e4a85;
     color: #7da2fa;
 }
 
-._jp_-modal-button:hover, .sidebar-button:hover {
+.sidebar-button:hover {
+    background-color: rgba(57, 87, 165, 0.2);
+    border-color: #1283ac;
+}
+._jp_-modal-button:hover {
     background-color: rgba(168, 85, 247, 0.2);
 }
 
@@ -321,13 +340,13 @@ h1 {
 }
 
 /* Modal Title Stylings*/
-._jp_-game-title , ._hm_-game-title{
+.game-title {
     font-size: 2.25rem;
-    font-size: "30px";
-    font-family : "Fontdiner Swanky";
     font-weight: bold;
     margin: 0;
+    
 }
+
 
 ._jp_-game-title {
     font-family : "Fontdiner Swanky";
@@ -350,6 +369,7 @@ h1 {
     color: #d1d5db;
     line-height: 1.5;
     margin: 0;
+    font-size: 1.45vw;
 }
 
 .game-meta {
@@ -376,9 +396,11 @@ img {
     margin-right: 20px;
     margin-bottom: 0px;
     align-items: center;
+    
 }
 p {
     margin-top: 0px;
     margin-left: 20px;
     margin-right: 20px;
 }
+

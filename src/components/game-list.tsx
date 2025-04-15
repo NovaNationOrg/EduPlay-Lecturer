@@ -1,14 +1,15 @@
 import {JSX, useState} from 'react'
 import { GameMapping } from './game-mapping'
-import GameModal from '../pages/gamemodal'
+import GameModal from './library/gamemodal'
 
 
 
 
-function mapGame(gameinfo:string,game_code:string){
+export function mapGame(gameinfo:string,game_code:string){
     const gameArray = gameinfo.split("|")
-    const [isModalOpen, setModalOpen] = useState(false)
     
+        const [isModalOpen, setModalOpen] = useState(false)
+
     const closeModal = () => handleClose()
     const openModal = () => setModalOpen(true)
 
@@ -37,7 +38,6 @@ function mapGame(gameinfo:string,game_code:string){
 
 export default function GameList(){
     const gameListing:JSX.Element[] = []
-   
   
     const keyList = Object.keys(GameMapping)
 

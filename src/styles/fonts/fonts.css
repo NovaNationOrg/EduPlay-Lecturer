@@ -32,3 +32,7 @@
     font-family: "StickFigure" ;
     src: url("stick-figures-font/StickFigures-ppeO.ttf");
 }
+@font-face {
+    font-family: "IBM Plex";
+    src: url("ibm-plex-font/IBMPlexSerif-Regular.ttf")
+}

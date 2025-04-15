@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import {handleDraft} from "../components/draft-handler"
+import {handleDraft} from "../draft-handler"
+
 interface GameModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -48,7 +49,7 @@ const GameModal: React.FC<GameModalProps> = ({
           </div>
           <div className="modal-right">
             <h2
-              className={`${gameTheme}-game-title`}
+              className={`game-title ${gameTheme}-game-title`}
             >
               {gameTitle}
             </h2>
