@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import Modal from "../../components/modal.tsx"
 import ReviewModal from '../../components/review-modal.tsx';
 import ListData from '../../components/review-list.tsx';
-import { Toaster } from 'sonner';
 import { generateDraftToast } from '../../components/draft-handler.tsx';
 
 const jeopardy_grid = [
@@ -51,7 +50,6 @@ function Jeopardy() {
         exit={{opacity:0}}
         >
             <Header headerText="Jeopardy" gameClass="jeopardy" />
-            <Toaster richColors position="top-right" />
             <main>
                 <div className="jeopardy-game-container">
                     <div className="jeopardy-category-grid">

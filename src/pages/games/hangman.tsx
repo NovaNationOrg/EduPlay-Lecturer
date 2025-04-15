@@ -1,4 +1,3 @@
-import { Toaster } from "sonner";
 import HMCategoryLists from "../../components/hangman/hangman-category-lists";
 import "../../styles/hangman/hangman.css"
 import Header from "../../components/header";
@@ -17,6 +16,6 @@ export default function Hangman(){
 
             <Toaster richColors position="top-right"/>
             <HMCategoryLists />
-        
+  
         </motion.div>)
 }
