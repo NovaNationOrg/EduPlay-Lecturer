@@ -108,7 +108,6 @@ export default function GameSelectionCSVProcessor() {
         animate  ={{opacity:1}}
         exit={{opacity:0}}
         >
-      <Toaster richColors position="top-right" />
       <div className="controls">
         <div className="select-container">
           <label htmlFor="select-game">Select game:</label>

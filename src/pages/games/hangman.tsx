@@ -14,7 +14,6 @@ export default function Hangman(){
         >
         <Header headerText="Hangman" gameClass="hangman" />
 
-            <Toaster richColors position="top-right"/>
             <HMCategoryLists />
   
         </motion.div>)
