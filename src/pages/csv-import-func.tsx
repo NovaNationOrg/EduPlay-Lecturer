@@ -3,7 +3,7 @@ import { parse } from "csv-parse/browser/esm/sync";
 import { addJeopardyGame } from "../database/scripts/jeopardy-import";
 import { Link } from "react-router-dom";
 import {generateUUID} from "../components/uuid-generator";
-import { Toaster , toast} from "sonner";
+import { toast} from "sonner";
 import "./../styles/csv-import.css"; 
 import { addHangmanGame } from "../database/scripts/hangman/hangman-import";
 
@@ -102,7 +102,6 @@ export default function GameSelectionCSVProcessor() {
 
   return (
     <div className="game-csv">
-      <Toaster richColors position="top-right" />
 
       <div className="controls">
         <div className="select-container">
