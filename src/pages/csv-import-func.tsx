@@ -6,6 +6,7 @@ import {generateUUID} from "../components/uuid-generator";
 import { Toaster , toast} from "sonner";
 import "./../styles/csv-import.css"; 
 import { addHangmanGame } from "../database/scripts/hangman/hangman-import";
+import { motion } from "framer-motion"
 
 
 export type Jeopardy = {
@@ -101,7 +102,12 @@ export default function GameSelectionCSVProcessor() {
   };
 
   return (
-    <div className="game-csv">
+       <motion.div
+       className="game-csv"
+        initial = {{opacity:0}}
+        animate  ={{opacity:1}}
+        exit={{opacity:0}}
+        >
       <Toaster richColors position="top-right" />
 
       <div className="controls">
@@ -176,7 +182,7 @@ export default function GameSelectionCSVProcessor() {
         </>
 
       )}
-    </div>
+    </motion.div>
 
   );
 

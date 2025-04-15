@@ -45,7 +45,11 @@ function Jeopardy() {
     },[])
 
     return (
-        <>
+        <motion.div
+        initial = {{opacity:0}}
+        animate  ={{opacity:1}}
+        exit={{opacity:0}}
+        >
             <Header headerText="Jeopardy" gameClass="jeopardy" />
             <Toaster richColors position="top-right" />
             <main>
@@ -100,7 +104,7 @@ function Jeopardy() {
                         : <div></div>
                 }
             </main>
-        </>
+        </motion.div>
     )
 }
 

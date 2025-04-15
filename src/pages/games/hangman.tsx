@@ -2,16 +2,21 @@ import { Toaster } from "sonner";
 import HMCategoryLists from "../../components/hangman/hangman-category-lists";
 import "../../styles/hangman/hangman.css"
 import Header from "../../components/header";
+import { motion } from "framer-motion"
 
 
 
 export default function Hangman(){
   
-    return(<>
+    return( <motion.div
+       initial = {{opacity:0}}
+        animate  ={{opacity:1}}
+        exit={{opacity:0}}
+        >
         <Header headerText="Hangman" gameClass="hangman" />
 
-        <Toaster richColors position="top-right"/>
-        <HMCategoryLists />
+            <Toaster richColors position="top-right"/>
+            <HMCategoryLists />
         
-    </>)
+        </motion.div>)
 }

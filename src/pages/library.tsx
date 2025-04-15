@@ -4,6 +4,8 @@ import "./../styles/library.css";
 import Library from "/assets/images/bookshelf.png"
 import Home from "/assets/images/house.png"
 import GameList from "../components/game-list";
+import { motion } from "framer-motion"
+
 
 
 
@@ -11,7 +13,13 @@ const GameComponent: React.FC = () => {
   sessionStorage.clear()
 
   return (
-    <div className="container">
+    <motion.div className="container"
+ 
+     initial={{ x: 300, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: -300, opacity: 0 }}
+     transition={{ duration: 0.75, ease: "backOut" , type:"tween"}}
+    >
       <div className="header">
         <div className="topnav">
           <input type="text" placeholder="Search..." />
@@ -39,15 +47,16 @@ const GameComponent: React.FC = () => {
       <div className="menu">
         <br />
         <hr />
-                <Link  to={"/home"}>
+        <Link  to={"/"}>
 
         <img src={Home} alt="Image" width={40} height={40} />
         <p>Home</p>
         </Link>
         <br />
+        <Link to ={"/library"}>
         <img src={Library} alt="Image" />
         <p>Library</p>
-
+        </Link>
         <br />
         <hr />
         <br />
@@ -59,7 +68,7 @@ const GameComponent: React.FC = () => {
           <GameList />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

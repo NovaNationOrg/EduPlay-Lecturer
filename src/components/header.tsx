@@ -12,7 +12,7 @@ function Header ({headerText, gameClass }: HeaderProps) {
     return (
         <div className={`${gameClass}-header`}>
             <div className="left">
-                <Link to = "/"><FontAwesomeIcon className="left-arrow" icon={faArrowLeft} /></Link>
+                <Link to = "/library"><FontAwesomeIcon className="left-arrow" icon={faArrowLeft} /></Link>
             </div>
             <div className={`header-title ${gameClass}-header-title`}>
                 <div className={gameClass}> {headerText} </div>
