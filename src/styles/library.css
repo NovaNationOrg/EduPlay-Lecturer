@@ -2,9 +2,14 @@
 
 html, body, div.container{
 	height: 100%;
+    width: 100vw;
 	margin: 0;
 	padding: 0;
     font-family: "IBM Plex";
+    min-width: fit-content;
+    min-height: fit-content;
+    display: flex;
+    flex-direction: row;
 }
 
 
@@ -22,37 +27,71 @@ a:hover {
 }
 
 
-div.container {
-    display:grid;
-    grid-template-rows: auto;  
-    grid-template-columns: 1fr 7fr;
-    grid-gap: 10px;
-}
+
 
 div.header {
-  grid-column: 2/3;
-  grid-row: 2/2;
   text-align: center;
+  justify-content: center;
+  margin-top: 1.3vh;
 }
 
-div.categories{
-    grid-column: 2/3;
-    grid-row: 3/3;
+div.sub-menu{
+    margin-top: 1.2vh;
     text-align: center;
+    justify-content: center;
 }
 
+.sub-menu-buttons{
+    width: 55%;
+    justify-self: center;
+    justify-content: space-evenly;
+    max-width: 80%;
+    left: auto;
+    right: auto;
+    display:flex;
+    margin-bottom: 1.5vh;
+   
+}
+
+.sub-menu-button{
+    width: 100%;
+    padding: 1.5vh 3vw;
+    border-radius: 50px;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+    border: 1px solid #035471;
+    color: #a7c2cb;
+}
 div.game-container {
   display: flex;
-  grid-column: 2/3;
-  grid-row: 4/6;
+  align-self: center;
   text-align: center;
-  margin-top: -39.5vh;
+}
+
+.main-library-area{
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content-area{
+    display: flex;
+    flex:3.5;
+    flex-direction: column;
+    margin-right: 6vw;
 }
 
 div.menu {
-  grid-column: 1/2;
-  grid-row: 3/4;
+  height: 100vh;
+  width: 15vw;
   text-align: center;
+  flex:1
+}
+
+.menu-items{
+    margin-left: 9vw;
+    margin-top: 7.5vh;
 }
 
 
@@ -129,9 +168,9 @@ div.game {
     background-repeat: no-repeat;
 }
 .topnav{
-    margin-left: auto;
-    margin-right: auto;
     display: flex;
+    flex:1;
+    margin-top: 1;
     justify-content: center;
 }
 .topnav input[type=text] {
@@ -139,7 +178,9 @@ div.game {
     border-radius: 30px;
     font-size: 17px;
     background-color: #282828;
+    max-width: 55vw;
   }
+
   
 .topnav a, .topnav input[type=text] {
     display: flex;
@@ -323,7 +364,7 @@ h1 {
     color: #7da2fa;
 }
 
-.sidebar-button:hover {
+.sub-menu-button:hover {
     background-color: rgba(57, 87, 165, 0.2);
     border-color: #1283ac;
 }
