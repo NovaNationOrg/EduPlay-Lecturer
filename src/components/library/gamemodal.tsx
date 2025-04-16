@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import {handleDraft} from "../draft-handler"
+import {AnimatePresence, motion} from 'framer-motion'
 
 interface GameModalProps {
   isOpen: boolean;
@@ -33,6 +34,14 @@ const GameModal: React.FC<GameModalProps> = ({
   
   sessionStorage.setItem("current_game",gameTheme)
   return (
+      <AnimatePresence mode="wait">
+          <motion.div className="container"
+           initial={{ opacity: 0 }}
+           animate={{ x: 0, opacity: 1 }}
+           exit={{opacity: 1}}
+           transition={{ duration: 0.5, ease: "backOut" , type:"tween"}}
+          >
+
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <button className="close-button" onClick={onClose}>
@@ -74,6 +83,8 @@ const GameModal: React.FC<GameModalProps> = ({
         </div>
       </div>
     </div>
+  </motion.div>
+    </AnimatePresence>
   );
 };
 

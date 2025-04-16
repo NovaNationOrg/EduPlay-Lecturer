@@ -100,14 +100,14 @@ export default function HMCategoryItems({list_id,category,category_number, trigg
             <ul className = 'hangman-questions-list'>
             <AnimatePresence mode="popLayout">
               <MotionLI key ={`hangman-question-category`+list_id} >
-                <div>
+                <div className="hangman-item">
                   <input type="text" placeholder="Category" defaultValue={category} onChange={(e) => updateCategory(e.target.value)}
                     onKeyUp={(ev) => {
                     if (ev.key === 'Enter') 
                       handleCategoryUpdate() 
                     }}/>
                     { category_number == Number(localStorage.getItem(game_code+"num_categories")) &&
-                      <a onClick={() => {removeCategory(list_id)}}>-</a>
+                      <a onClick={() => {removeCategory(list_id)}}> - </a>
                     }
                 </div>
               </MotionLI>
