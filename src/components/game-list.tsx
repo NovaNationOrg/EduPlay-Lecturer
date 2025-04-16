@@ -1,7 +1,6 @@
 import {JSX, useState} from 'react'
 import { GameMapping } from './game-mapping'
 import GameModal from './library/gamemodal'
-import { faV } from '@fortawesome/free-solid-svg-icons'
 
 
 

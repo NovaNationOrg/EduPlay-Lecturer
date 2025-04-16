@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./../styles/library.css"; 
-import Library from "/assets/images/bookshelf.png"
-import Home from "/assets/images/house.png"
 import GameList from "../components/game-list";
 import HomeMenu from "./../components/home-menu";
 import { motion } from "framer-motion"
