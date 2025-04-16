@@ -4,8 +4,6 @@ import Backdrop from "./backdrop";
 import DropdownComponent from './dropdown';
 import { db } from "../database/db";
 import {toast} from 'sonner'
-import { useLiveQuery } from "dexie-react-hooks"
-import { JeopardyGame } from "../database/interfaces/jeopardy";
 import { deleteJeopardyCategory } from "../database/scripts/jeopardy-import";
 
 /* Interfaces for use */
