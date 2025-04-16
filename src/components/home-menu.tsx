@@ -7,7 +7,7 @@ import "./../styles/library.css";
 
 export default function HomeMenu() {
     return (
-    <div>
+    <div className="menu-items">
         <br />
         <hr />
         <Link  to={"/"}>

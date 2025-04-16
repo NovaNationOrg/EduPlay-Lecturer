@@ -27,36 +27,40 @@ const HomeComponent: React.FC = () => {
  
   return (
     <motion.div 
-    className="home-container"  
+    className="container"  
       initial={{ x: 300, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: -300, opacity: 0 }}
      transition={{ duration: 0.75, ease: "backOut" , bounce:1, bounceStiffness: 10}}
     >
-      <div className="home-header">
-        <div className="home-topnav">
-            <h1> EduPlay </h1>
-        </div>
+    
+      <div className="menu">
+        <HomeMenu/>
       </div>
-
+  
+   <div className="main-content-area">
+      <div className="header">
+          <div className="topnav">
+          <h1> EduPlay </h1>
+          </div>
+      </div>
+  
+      <div className="main-library-area">
       <div className="home-categories">
 
-        <h2>  Welcome to EduPlay! </h2>
-        <hr></hr>
-        <br/>
-        <p> EduPlay was built by a group of final year students, with the guidance of our great supervisors. 
-            We hope you enjoy your time here</p>
-        <hr></hr>
-        <br/>
-        <p> Regards,</p>
-        <p> The EduPlay team</p>
+<h2>  Welcome to EduPlay! </h2>
+<hr></hr> 
+<br/>
+<p> EduPlay was built by a group of final year students, with the guidance of our great supervisors. 
+    We hope you enjoy your time here</p>
+<hr></hr>
+<br/>
+<p> Regards,</p>
+<p> The EduPlay team</p>
 
-      </div>
+</div>
 
-      <div className="home-menu">
-       <HomeMenu/>
-      </div>
-      <div className="home-featured">
+<div className="home-featured">
         <div className="home">
             <h2> Featured Game: </h2>
             <div className="featured-game">
@@ -64,6 +68,12 @@ const HomeComponent: React.FC = () => {
             </div>
         </div>
       </div>
+      
+        </div>
+        </div>
+
+     
+     
 </motion.div>
   );
 };
