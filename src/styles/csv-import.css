@@ -99,6 +99,8 @@ hr {
 
 
 .data-table-container {
+    overflow-y: scroll;
+    max-height: 65vh;
     overflow-x: auto;
     margin-top: 2rem;
     background-color: #121226;

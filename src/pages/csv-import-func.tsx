@@ -7,6 +7,7 @@ import { toast} from "sonner";
 import "./../styles/csv-import.css"; 
 import { addHangmanGame } from "../database/scripts/hangman/hangman-import";
 import { motion } from "framer-motion"
+import Header from "../components/header";
 
 
 export type Jeopardy = {
@@ -108,6 +109,8 @@ export default function GameSelectionCSVProcessor() {
         animate  ={{opacity:1}}
         exit={{opacity:0}}
         >
+        <Header headerText='Import Files' gameClass='generic-header'/>
+
       <div className="controls">
         <div className="select-container">
           <label htmlFor="select-game">Select game:</label>
