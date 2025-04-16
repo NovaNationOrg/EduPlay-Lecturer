@@ -45,6 +45,7 @@ function handleFavorites() {
     newFavouritesList = favouritesList == favouritesList.replace(new RegExp("\\|"+game_code!), "") ? favouritesList.replace(new RegExp(game_code!+"\\|"), "") : favouritesList.replace(new RegExp("\\|"+game_code), "")
     newFavouritesList = favouritesList == newFavouritesList ? favouritesList.replace(new RegExp(game_code!),""): newFavouritesList
     toast.error("Game removed from favourites", {id: "removed-favourites-toast"})
+    sessionStorage.setItem("removed-status","active")
   }
   localStorage.setItem("favourites", newFavouritesList);
 }
