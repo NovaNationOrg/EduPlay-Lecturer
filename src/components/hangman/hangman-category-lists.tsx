@@ -1,12 +1,13 @@
 import { useLiveQuery } from "dexie-react-hooks"
 import { db } from "../../database/db"
-import HMCategoryItems from "./hangman-category-list"
+import HMCategoryItems from "./hangman-category-items"
 import { useEffect, useState } from "react"
 import { generateDraftToast } from "../draft-handler"
 import { toast } from "sonner"
 import { AnimatePresence } from 'framer-motion';
 import { useNavigate } from "react-router-dom"
 import MotionLI from "./hangman-list-item"
+
 
 export function gameReady(category_count:number){
     const game_code = localStorage.getItem("game_code")
@@ -82,7 +83,7 @@ export default function HMCategoryLists(){
                 }
                 </AnimatePresence>
                 <MotionLI>
-                <div>
+                <div className="hangman-item">
                     <input value = {newCategory} onChange ={(e) => updateNewCategoryValue(e.target.value)} type="text" placeholder="Add new Category" 
                     onKeyUp={(ev) => {
                         if (ev.key === 'Enter') {
@@ -90,7 +91,7 @@ export default function HMCategoryLists(){
                         }
                     }}
                     />
-                    <a onClick={addCategory}>+</a>
+                    <a onClick={addCategory}> + </a>
                 </div>
                 </MotionLI>
                 
