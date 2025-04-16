@@ -4,8 +4,6 @@ import Backdrop from "./backdrop";
 import DropdownComponent from './dropdown';
 import { db } from "../database/db";
 import {toast} from 'sonner'
-import { useLiveQuery } from "dexie-react-hooks"
-import { JeopardyGame } from "../database/interfaces/jeopardy";
 import { deleteJeopardyCategory } from "../database/scripts/jeopardy-import";
 
 /* Interfaces for use */
@@ -39,16 +37,6 @@ const dropIn = {
 const Modal: React.FC<ModalProps> = ({ handleClose }) => {
   
   const [category, updateCategory] = useState("")
-  let questionAnswerData: JeopardyGame[] | undefined
-  if (localStorage.getItem("_jp_isPopulated") == "true") {
-    try {
-   
-      questionAnswerData = useLiveQuery(() => db.jeopardyData.where("[game_id+theme]").equals([localStorage.getItem("_jp_game_id")!, sessionStorage.getItem("curr-category")!]).toArray())
-      console.log(questionAnswerData)
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   const updateItem = (index: number, field: 'question' | 'answer', value: string) => {
     const newItems = [...items];

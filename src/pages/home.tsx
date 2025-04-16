@@ -1,7 +1,5 @@
 import "./../styles/home.css"; 
-import { Link } from "react-router-dom";
-import Library from "/assets/images/bookshelf.png"
-import Home from "/assets/images/house.png"
+import HomeMenu from "./../components/home-menu";
 import { motion } from "framer-motion"
 import { mapGame } from "../components/game-list";
 import { GameMapping } from "../components/game-mapping";
@@ -56,20 +54,7 @@ const HomeComponent: React.FC = () => {
       </div>
 
       <div className="home-menu">
-        <br />
-        <hr />
-        
-        <img src={Home} alt="Image" width={40} height={40} />
-        <p>Home</p>
-        <br />
-        <Link  to={"/Library"}>
-        <img src={Library} alt="Image" />
-        <p>Library</p>
-        </Link>
-        <br />
-        <hr />
-        <br />
-        <p>Favourites</p>
+       <HomeMenu/>
       </div>
       <div className="home-featured">
         <div className="home">

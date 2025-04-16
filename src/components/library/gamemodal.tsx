@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import {handleDraft} from "../draft-handler"
 import {AnimatePresence, motion} from 'framer-motion'
+import {toast} from "sonner"
+
 
 interface GameModalProps {
   isOpen: boolean;
@@ -20,6 +22,32 @@ function setGameCode(){
 
 }
 
+function isFavourite(){
+  const game_code = sessionStorage.getItem("current_game")
+  const regex = new RegExp(game_code!)
+
+  const favouritesList = localStorage.getItem("favourites") ? localStorage.getItem("favourites") : "";
+
+  return favouritesList!.search(regex) > -1 ? true : false
+}
+
+function handleFavorites() {
+  const game_code = sessionStorage.getItem("current_game")
+  const favouritesList = localStorage.getItem("favourites") ? localStorage.getItem("favourites")! : "";
+  let newFavouritesList
+  if (!favouritesList.includes(game_code!)) {
+    newFavouritesList = favouritesList == "" ? favouritesList + game_code : favouritesList + "|" + game_code;
+    toast.success("Game add to favourites", {id: "added-favourites-toast"})
+  } else {
+    
+    newFavouritesList = favouritesList == favouritesList.replace(new RegExp("\\|"+game_code!), "") ? favouritesList.replace(new RegExp(game_code!+"\\|"), "") : favouritesList.replace(new RegExp("\\|"+game_code), "")
+    newFavouritesList = favouritesList == newFavouritesList ? favouritesList.replace(new RegExp(game_code!),""): newFavouritesList
+    toast.error("Game removed from favourites", {id: "removed-favourites-toast"})
+    sessionStorage.setItem("removed-status","active")
+  }
+  localStorage.setItem("favourites", newFavouritesList);
+}
+
 const GameModal: React.FC<GameModalProps> = ({ 
   isOpen, 
   onClose, 
@@ -29,8 +57,15 @@ const GameModal: React.FC<GameModalProps> = ({
   time,
   gameTheme
 }) => {
-    
+  
+  const [refresh,triggerRefresh] = useState(false)
+  
   if (!isOpen) return null;
+
+  function udpateStatus(){
+    handleFavorites()
+    triggerRefresh(!refresh)
+  }
   
   sessionStorage.setItem("current_game",gameTheme)
   return (
@@ -54,7 +89,10 @@ const GameModal: React.FC<GameModalProps> = ({
                 Play Now
               </button>
             </Link>
-            <button className={`library-modal-button ${gameTheme}-modal-button`}>Add to Favourites</button>
+            {isFavourite() ? 
+              <button className={`library-modal-button ${gameTheme}-modal-button`} onClick={ udpateStatus }>Remove from Favourites</button> : 
+              <button className={`library-modal-button ${gameTheme}-modal-button`} onClick={ udpateStatus }>Add to Favourites</button>
+            }
           </div>
           <div className="modal-right">
             <h2

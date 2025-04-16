@@ -8,7 +8,7 @@ import GameModal from './library/gamemodal'
 export function mapGame(gameinfo:string,game_code:string){
     const gameArray = gameinfo.split("|")
     
-        const [isModalOpen, setModalOpen] = useState(false)
+    const [isModalOpen, setModalOpen] = useState(false)
 
     const closeModal = () => handleClose()
     const openModal = () => setModalOpen(true)
@@ -19,7 +19,10 @@ export function mapGame(gameinfo:string,game_code:string){
 
     function handleClose(){
         setModalOpen(false)
-        sessionStorage.removeItem("current_game")
+        if(sessionStorage.getItem("numFavourites") == "1" && sessionStorage.getItem("removed-status")=="active"){
+            window.location.reload()
+            sessionStorage.removeItem("removed-status")
+        }
     }
 
 
@@ -27,7 +30,7 @@ export function mapGame(gameinfo:string,game_code:string){
     const gameElement = (
         <div key={game_title + ":" + game_code} className='button-container'> 
             <button onClick={openModal} className={`library-game ${game_code}-button`}>
-            <div className= {`${game_code}-grid-item`}> {game_title}! </div>
+                <div className= {`${game_code}-grid-item`}> {game_title}! </div>
             </button>
             <GameModal isOpen={isModalOpen}onClose={closeModal} gameTitle={game_title} gameDescription={gameArray[1]} category={gameArray[2]} time={`${gameArray[3]} mins`} gameTheme= {game_code} />
         </div>
@@ -35,27 +38,44 @@ export function mapGame(gameinfo:string,game_code:string){
     return {gameElement,handleKeyDown}
 }   
 
+interface GameListingProps{
+    favouriteScreen : boolean
+}
 
-export default function GameList(){
+export default function GameList({favouriteScreen}:GameListingProps):JSX.Element{
     const gameListing:JSX.Element[] = []
   
-    const keyList = Object.keys(GameMapping)
+    const keyList = favouriteScreen ? localStorage.getItem("favourites")?.split("|") : Object.keys(GameMapping)
+
+    const filler = favouriteScreen ? "NOT ADDED" : "COMING SOON"
+    if(favouriteScreen){
+        
+        const favCount = sessionStorage.getItem("numFavourites")? Number(sessionStorage.getItem("numFavourites")) : -1
+
+        if ((favCount != -1 && keyList!=null) && (keyList.length < favCount)){
+            window.location.reload()
+            sessionStorage.removeItem("removed-status")
+        }
+            sessionStorage.setItem("numFavourites", keyList?.length.toString()!)
+    }
 
     let i=0
-    while(i < keyList.length){
-        const gameKey = keyList[i] as keyof typeof GameMapping
-        const gameElement= mapGame(GameMapping[gameKey],gameKey)
-        gameListing.push(gameElement.gameElement)
-        i++
-    }
+    
+    if (keyList && keyList[0] != "")
+        while(i < keyList.length){
+            const gameKey = keyList[i] as keyof typeof GameMapping
+            const gameElement= mapGame(GameMapping[gameKey],gameKey)
+            gameListing.push(gameElement.gameElement)
+            i++
+        }
    
-
-    const comingSoon = [...Array(16-i)].map((_, index) => (
+    
+    const fillerCards = [...Array(16-i)].map((_, index) => (
         <div key={index} className="grid-item">
-          <div>COMING SOON</div>
+          <div>{filler}</div>
         </div>
       ))
 
-    return gameListing.concat(comingSoon)
+    return keyList ? <>{gameListing.concat(fillerCards)}</> : <>{fillerCards}</>
 
 }

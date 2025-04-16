@@ -40,6 +40,10 @@
     text-align: center;
 }
 
+.generic-header{
+    font-size: 3.2em;
+}
+
 .left {
     position: absolute;
     left: 40px;

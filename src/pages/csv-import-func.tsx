@@ -7,6 +7,7 @@ import { toast} from "sonner";
 import "./../styles/csv-import.css"; 
 import { addHangmanGame } from "../database/scripts/hangman/hangman-import";
 import { motion } from "framer-motion"
+import Header from "../components/header";
 
 
 export type Jeopardy = {
@@ -108,6 +109,8 @@ export default function GameSelectionCSVProcessor() {
         animate  ={{opacity:1}}
         exit={{opacity:0}}
         >
+        <Header headerText='Import Files' gameClass='generic-header'/>
+
       <div className="controls">
         <div className="select-container">
           <label htmlFor="select-game">Select game:</label>
@@ -218,7 +221,7 @@ function processJeopardyFile(result:string | ArrayBuffer,setStatus:React.Dispatc
   addJeopardyGame(recordsWithId,gameID);
   setGameID(gameID)
   toast.success(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, {id:"success-process"});
-  console.log(`Parsed CSV data for Jeopardy:`, recordsWithId);
+
 }
 
   catch (error) {
@@ -257,7 +260,6 @@ function processHangmanFile(result:string | ArrayBuffer,setStatus:React.Dispatch
     addHangmanGame(recordsWithId,gameID);
     setGameID(gameID)
     toast.success(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, {id:"success-process"});
-    console.log(`Parsed CSV data for Jeopardy:`, recordsWithId);
   }
 
     catch (error) {

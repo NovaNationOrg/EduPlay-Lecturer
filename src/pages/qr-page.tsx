@@ -5,6 +5,7 @@ import QrCodeGenerator from "../components/qr-codes"
 import { managePayloads } from '../components/payload-manager'
 import { db } from '../database/db'
 import { motion } from "framer-motion"
+import Header from '../components/header'
 
 async function addGameEntry(){
   const date = new Date();
@@ -54,7 +55,7 @@ function QrPage() {
         animate  ={{opacity:1}}
         exit={{opacity:0}}
     >
-      <h1 className='qr-title'>Scan QR Code(s) To Play</h1>
+      <Header headerText='Scan QR Code(s) To Play' gameClass='generic-header'/>
       <div className='qr-grid'>
         <QrCodeGenerator payload={question} />
       </div>
