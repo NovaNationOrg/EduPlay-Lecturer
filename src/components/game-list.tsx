@@ -10,7 +10,6 @@ export function mapGame(gameinfo:string,game_code:string){
     
     const [isModalOpen, setModalOpen] = useState(false)
 
-    console.log("asddsa")
     const closeModal = () => handleClose()
     const openModal = () => setModalOpen(true)
 

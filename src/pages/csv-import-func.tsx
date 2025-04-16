@@ -221,7 +221,7 @@ function processJeopardyFile(result:string | ArrayBuffer,setStatus:React.Dispatc
   addJeopardyGame(recordsWithId,gameID);
   setGameID(gameID)
   toast.success(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, {id:"success-process"});
-  console.log(`Parsed CSV data for Jeopardy:`, recordsWithId);
+
 }
 
   catch (error) {
@@ -260,7 +260,6 @@ function processHangmanFile(result:string | ArrayBuffer,setStatus:React.Dispatch
     addHangmanGame(recordsWithId,gameID);
     setGameID(gameID)
     toast.success(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, {id:"success-process"});
-    console.log(`Parsed CSV data for Jeopardy:`, recordsWithId);
   }
 
     catch (error) {

@@ -28,8 +28,6 @@ function isFavourite(){
 
   const favouritesList = localStorage.getItem("favourites") ? localStorage.getItem("favourites") : "";
 
-  console.log(favouritesList)
-  console.log( favouritesList!.search(regex))
   return favouritesList!.search(regex) > -1 ? true : false
 }
 
@@ -64,7 +62,6 @@ const GameModal: React.FC<GameModalProps> = ({
   
   if (!isOpen) return null;
 
-  console.log(isOpen)
   function udpateStatus(){
     handleFavorites()
     triggerRefresh(!refresh)
