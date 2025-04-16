@@ -21,3 +21,19 @@
     background-position: 50%;  
     border: 1px solid #ff13f0;
 }
+
+._hm_-prev-card{
+    background: linear-gradient(#030a28,#01bee2);  
+    background-size: 1px 150px;
+    transition: all .5s ease-out;  
+    border-radius: 10px;  
+    border: 1px solid #000;  
+    cursor:pointer;  
+    margin: 30px;
+    padding:30px;
+}
+
+._hm_-prev-card:hover {
+    background-position: 50%;  
+    border: 1px solid #008fac;
+}

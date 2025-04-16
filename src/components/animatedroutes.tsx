@@ -7,6 +7,7 @@ import gameRoutes from "../routes/game-routes";
 import CSV from "../pages/csv-import-func";
 
 import {AnimatePresence } from "framer-motion"
+import Favourites from "../pages/favourites";
 
 export default function AnimatedRoutes(){
     const location = useLocation()
@@ -21,6 +22,7 @@ export default function AnimatedRoutes(){
           <Route path="CSV" element={<CSV />} />
           <Route path="PreviousGames" element={<Prev_Games />} />
           <Route path="Library" element={<Library/>}/>
+          <Route path="Favourites" element={<Favourites/>}/>
         </Route>
       </Routes>
       </AnimatePresence>

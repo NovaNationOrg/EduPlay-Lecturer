@@ -1,20 +1,13 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./../styles/library.css"; 
-import Library from "/assets/images/bookshelf.png"
-import Home from "/assets/images/house.png"
-import GameList from "../components/game-list";
 import HomeMenu from "./../components/home-menu";
+import GameList from "../components/game-list";
 import { motion } from "framer-motion"
 
 
-
-
-const GameComponent: React.FC = () => {
-  sessionStorage.clear()
-
-  return (
-    <motion.div className="container"
+export default function Favourites() {
+    return (
+        <motion.div className="container"
  
      initial={{ x: 300, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
@@ -42,23 +35,18 @@ const GameComponent: React.FC = () => {
             Previous Games
           </button>
         </Link>
-
       </div>
 
-      <div className="menu">
+    <div className="menu">
         <HomeMenu/>
-      </div>
-
+    </div>
       <div className="game-container">
         <div className="game">
-          <GameList favouriteScreen={false} />
+          <GameList favouriteScreen={true} />
         </div>
       </div>
     </motion.div>
-  );
-};
-
-export default GameComponent;
+    );
 
 
-
+}

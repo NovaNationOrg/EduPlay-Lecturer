@@ -7,7 +7,7 @@ import { HMCategoryItemIntf } from "./interfaces/hangman/hangman-category-item";
 const db = new Dexie('EduPlayDB') as Dexie & {
     gameList: EntityTable<Game, 'gameNum'>;
     jeopardyData: EntityTable<JeopardyGame, 'id'>;
-
+    
     hangmanCategories: EntityTable<HMCategoryListIntf, 'id'>
     hangmanItems: EntityTable<HMCategoryItemIntf, 'id'>
 }
