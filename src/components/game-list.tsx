@@ -22,7 +22,7 @@ export function mapGame(gameinfo:string,game_code:string){
         setModalOpen(false)
         if(sessionStorage.getItem("numFavourites") == "1" && sessionStorage.getItem("removed-status")=="active"){
             window.location.reload()
-            sessionStorage.removeItemItem("removed-status")
+            sessionStorage.removeItem("removed-status")
         }
     }
 
@@ -55,7 +55,7 @@ export default function GameList({favouriteScreen}:GameListingProps):JSX.Element
 
         if ((favCount != -1 && keyList!=null) && (keyList.length < favCount)){
             window.location.reload()
-            sessionStorage.removeItemItem("removed-status")
+            sessionStorage.removeItem("removed-status")
         }
             sessionStorage.setItem("numFavourites", keyList?.length.toString()!)
     }
