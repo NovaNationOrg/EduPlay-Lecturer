@@ -28,14 +28,11 @@ a:hover {
 }
 
 .home-header {
-    grid-column: 2/3;
-    grid-row: 2/2;
     text-align: center;
 }
 
 .home-categories {
-    grid-column: 2/3;
-    grid-row: 3/3;
+    margin-top: 1vh;
     text-align: center;
     background-color: #0a1115;
     border-radius: 10px;

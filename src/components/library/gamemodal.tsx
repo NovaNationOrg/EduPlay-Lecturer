@@ -70,7 +70,7 @@ const GameModal: React.FC<GameModalProps> = ({
   sessionStorage.setItem("current_game",gameTheme)
   return (
       <AnimatePresence mode="wait">
-          <motion.div className="container"
+          <motion.div 
            initial={{ opacity: 0 }}
            animate={{ x: 0, opacity: 1 }}
            exit={{opacity: 1}}
