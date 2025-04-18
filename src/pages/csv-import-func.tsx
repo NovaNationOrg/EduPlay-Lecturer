@@ -1,10 +1,13 @@
 import { ChangeEvent, useState } from "react";
 import { parse } from "csv-parse/browser/esm/sync";
-import { ToastContainer, toast } from 'react-toastify';
 import { addJeopardyGame } from "../database/scripts/jeopardy-import";
 import { Link } from "react-router-dom";
-import {generateUUID} from "../../components/uuid-generator";
-
+import {generateUUID} from "../components/uuid-generator";
+import { toast} from "sonner";
+import "./../styles/csv-import.css"; 
+import { addHangmanGame } from "../database/scripts/hangman/hangman-import";
+import { motion } from "framer-motion"
+import Header from "../components/header";
 
 
 export type Jeopardy = {
@@ -14,36 +17,37 @@ export type Jeopardy = {
   answer: string;
 };
 
+export type Hangman = {
+  id: string;
+  category: string;
+  question: string;
+  answer:string
+};
+
 type Game = {
   id: string;
   name: string;
 };
 
-
-
 export default function GameSelectionCSVProcessor() {
-  const [csvData, setCsvData] = useState<Jeopardy[]>([]);
+  const [csvData, setCsvData] = useState<Jeopardy[]| Hangman[]>([]);
   const [, setFilename] = useState("");
   const [status, setStatus] = useState<'initial' | 'success' | 'fail' | 'invalid_count'>('initial');
   const [selectedGame, setSelectedGame] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
   const [gameId,setGameID] = useState("")
 
-
   function prepareCode(){
-    sessionStorage.setItem("game_id","jp"+gameId)
+    let game_code = localStorage.getItem("game_code")
+    localStorage.setItem(game_code+"game_id",game_code+gameId)
   }
 
   const gameOptions: Game[] = [
-    { id: "game1", name: "Jeopardy" },
+    { id: "_jp_", name: "Jeopardy" },
+    {id: "_hm_", name: "Hangman" }
 
   ];
 
-  const generateToast = (toastMessage: string, toastIO: string) => {
-    toast(toastMessage, {
-      toastId: toastIO
-    });
-  };
 
   const handleGameChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const gameId = e.target.value;
@@ -68,7 +72,7 @@ export default function GameSelectionCSVProcessor() {
 
     }
     else {
-      generateToast("Please select a game type first", "error-game-selection");
+      toast.warning("Please select a game type first", {id:"error-game-selection"});
     }
   };
 
@@ -78,61 +82,34 @@ export default function GameSelectionCSVProcessor() {
     reader.onload = (evt) => {
       if (!evt?.target?.result) {
         setStatus('fail');
-        generateToast("Failed to read file contents", "error-file-read");
+        toast.error("Failed to read file contents", {id:"error-file-read"});
         return;
       }
 
-      try {
-        const { result } = evt.target;
-        let records;
-
-        if (gameId === "game1") {
-          records = parse(result as string, {
-            columns: ["category", "question", "answer"],
-            delimiter: ",",
-            trim: true,
-            skip_empty_lines: true,
-            from_line: 2
-          });
+      const { result } = evt.target;
+      switch(gameId){
+        case "_jp_":
+          processJeopardyFile(result,setStatus,setCsvData,setGameID)
+          break;
+        case "_hm_":
+          processHangmanFile(result,setStatus,setCsvData,setGameID)
+          break;
+          
         }
-
-        const required_records = 30;
-
-        const recordsWithId = records.map((record: any, index: number) => ({
-          id: (index + 1).toString(),
-          ...record
-        }));
-
-        if (recordsWithId.length !== required_records) {
-          setStatus('invalid_count');
-          generateToast(`CSV must contain exactly ${required_records} records (6 categories × 5 questions). Found: ${recordsWithId.length}`, "error-record-count");
-          return;
-        }
-
-        setCsvData(recordsWithId);
-        setStatus('success');
-        const gameID = generateUUID()
-        addJeopardyGame(recordsWithId,gameID);
-        setGameID(gameID)
-        generateToast(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, "success-process");
-        console.log(`Parsed CSV data for ${gameId}:`, recordsWithId);
-
-      }
-
-      catch (error) {
-        console.error("Error parsing CSV:", error);
-        setStatus('fail');
-        generateToast("Failed to parse CSV file. Please check the format and try again.", "error-parse");
-
-      }
+        
     };
 
     reader.readAsText(fileToProcess);
   };
 
   return (
-    <div className="game-csv">
-      <ToastContainer />
+       <motion.div
+       className="game-csv"
+        initial = {{opacity:0}}
+        animate  ={{opacity:1}}
+        exit={{opacity:0}}
+        >
+        <Header headerText='Import Files' gameClass='generic-header'/>
 
       <div className="controls">
         <div className="select-container">
@@ -164,7 +141,7 @@ export default function GameSelectionCSVProcessor() {
             />
           </label>
           {status =="success" &&
-            <Link to ="/original">
+            <Link to ="/qr-page">
             <button onClick={prepareCode}>Generate Code</button>
             </Link>
           }
@@ -190,7 +167,12 @@ export default function GameSelectionCSVProcessor() {
                     <td> {row.id}</td>
                     <td>{row.category}</td>
                     <td>{row.question}</td>
-                    <td>{row.answer}</td>
+                    {
+                      row.answer && 
+                      <td>{row.answer}</td>
+
+                    }
+
                   </tr>
                 ))}
               </tbody>
@@ -201,8 +183,90 @@ export default function GameSelectionCSVProcessor() {
         </>
 
       )}
-    </div>
+    </motion.div>
 
   );
 
 }
+
+function processJeopardyFile(result:string | ArrayBuffer,setStatus:React.Dispatch<React.SetStateAction<"initial" | "success" | "fail" | "invalid_count">>,
+  setCsvData:React.Dispatch<React.SetStateAction<Jeopardy[] | Hangman[]>>, setGameID: React.Dispatch<React.SetStateAction<string>>) {
+
+  try {
+
+  let records = parse(result as string, {
+    columns: ["category", "question", "answer"],
+    delimiter: ",",
+    trim: true,
+    skip_empty_lines: true,
+    from_line: 2
+  });
+
+  const required_records = 30;
+
+  const recordsWithId = records.map((record: any, index: number) => ({
+    id: (index + 1).toString(),
+    ...record
+  }));
+
+  if (recordsWithId.length !== required_records) {
+    setStatus('invalid_count');
+    toast.warning(`CSV must contain exactly ${required_records} records (6 categories x 5 questions). Found: ${recordsWithId.length}`, {id:"error-record-count"});
+    return;
+  }
+
+  setCsvData(recordsWithId as Jeopardy[]);
+  setStatus('success');
+  const gameID = generateUUID()
+  addJeopardyGame(recordsWithId,gameID);
+  setGameID(gameID)
+  toast.success(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, {id:"success-process"});
+
+}
+
+  catch (error) {
+  console.error("Error parsing CSV:", error);
+  setStatus('fail');
+  toast.error("Failed to parse CSV file. Please check the format and try again.", {id:"error-parse"});
+
+}
+
+
+
+}
+function processHangmanFile(result:string | ArrayBuffer,setStatus:React.Dispatch<React.SetStateAction<"initial" | "success" | "fail" | "invalid_count">>,
+  setCsvData:React.Dispatch<React.SetStateAction<Jeopardy[] | Hangman[]>>, setGameID: React.Dispatch<React.SetStateAction<string>>) {
+
+    try {
+
+    let records = parse(result as string, {
+      columns: ["category", "question"],
+      delimiter: ",",
+      trim: true,
+      skip_empty_lines: true,
+      from_line: 2
+    });
+
+
+    const recordsWithId = records.map((record: any, index: number) => ({
+      id: (index + 1).toString(),
+      ...record
+    }));
+
+
+    setCsvData(recordsWithId as Hangman[]);
+    setStatus('success');
+    const gameID = generateUUID()
+    addHangmanGame(recordsWithId,gameID);
+    setGameID(gameID)
+    toast.success(`Successfully created game with ${recordsWithId.length} questions for Jeopardy`, {id:"success-process"});
+  }
+
+    catch (error) {
+    console.error("Error parsing CSV:", error);
+    setStatus('fail');
+    toast.error("Failed to parse CSV file. Please check the format and try again.", {id:"error-parse"});
+
+}
+}
+

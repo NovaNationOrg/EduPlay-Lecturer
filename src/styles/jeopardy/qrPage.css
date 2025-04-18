@@ -9,6 +9,8 @@
 }
 
 .qr-grid{
+    overflow-y: scroll;
+    max-height: 85vh;
     display: grid;
     grid-template-columns: 40vw 40vw;
     gap: 1.3vw;

@@ -1,0 +1,57 @@
+.hangman-questions-list, .hangman-question-item{
+    list-style: none;
+
+}
+
+.hangman-question-item{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.hangman-questions-list{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.hangman-list-area{
+    overflow-x: scroll;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+
+}
+
+.category-list-container{
+    display: flex;
+    width: 70vw;
+    height:50vh;
+    gap: 40px;
+
+}
+
+.hangman-ready-button{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input {
+    text-align: center;
+    border-radius: 10px;
+    padding: 8px 12px;
+    height: 5vh;
+    font-size: 15px;
+    border: 1px solid #73e8ff;
+}
+
+.hangman-item{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.hangman-question-item > a {
+    align-self: center;
+}
